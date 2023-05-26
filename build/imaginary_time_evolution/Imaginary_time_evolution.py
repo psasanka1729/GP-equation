@@ -102,7 +102,8 @@ xs = np.linspace(x_minimum,x_maximum,N)*(10**(-6)) # m
 
 OMEGA = 1
 # Initial guess.
-psi_initial = (((M*OMEGA/(PI*H_BAR)))**(1/4))*np.exp(-(M*OMEGA/(2*H_BAR))*xs**2) #(1/np.sqrt(N))*np.ones(N)
+psi_initial = np.ones(N)
+#psi_initial = (((M*OMEGA/(PI*H_BAR)))**(1/4))*np.exp(-(M*OMEGA/(2*H_BAR))*xs**2) #(1/np.sqrt(N))*np.ones(N)
 psi_initial = psi_initial/np.linalg.norm(psi_initial)    
 
 def imaginary_time_evolution(initial_guess, iteration):
@@ -142,7 +143,7 @@ def imaginary_time_evolution(initial_guess, iteration):
 # In[59]:
 
 
-duration = 10**(6)
+duration = 10**(5)
 psi_imaginary_time_evolved = imaginary_time_evolution(psi_initial,duration)
 
 
