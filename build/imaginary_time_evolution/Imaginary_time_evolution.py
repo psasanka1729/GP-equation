@@ -143,7 +143,7 @@ def imaginary_time_evolution(initial_guess, iteration):
 # In[59]:
 
 
-duration = 10**(5)
+duration = 10**(7)
 psi_imaginary_time_evolved = imaginary_time_evolution(psi_initial,duration)
 
 
