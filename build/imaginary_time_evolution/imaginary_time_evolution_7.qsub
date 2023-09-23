@@ -9,7 +9,7 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-EXEC=Imaginary_time_evolution.py
+EXEC=ground-state-source-well-atomtronic-transistor.py
 HELPER="potential_landscape.txt"
 
 cd $LOCAL_DIR/$RUN_NAME
