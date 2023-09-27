@@ -248,7 +248,7 @@ def wavefunction_t(total_time):
 # In[451]:
 
 
-time_evolved_wavefunction = wavefunction_t(100*10**(-3))
+#time_evolved_wavefunction = wavefunction_t(100*10**(-3))
 
 
 # In[435]:
@@ -271,6 +271,7 @@ drain_atom_number = []
 
 import sys
 time_t = float(sys.argv[1])
+time_t = time_t*10**(-3)
 
 wavefunction_time_t = wavefunction_t(time_t)
 np.save("wavefunction_"+str(time_t)+".npy",wavefunction_t)
@@ -281,7 +282,7 @@ drain_atom_number = number_of_atom(wavefunction_time_t,source_well_length+gate_w
                                             ,source_well_length+gate_well_length+drain_well_length)
 
 f = open("number_of_atoms.txt","w")
-f.write(str(source_atom_number)+"\t"+str(gate_atom_number)+"\t"+str(drain_atom_number)+"\n")
+f.write(str(time_t)+"\t"+str(source_atom_number)+"\t"+str(gate_atom_number)+"\t"+str(drain_atom_number)+"\n")
 
 f.close()
 # In[ ]:

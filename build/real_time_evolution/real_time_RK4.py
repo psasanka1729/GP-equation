@@ -4,11 +4,11 @@
 # In[418]:
 
 
-import math
+#import math
 import numpy as np
-from math import sqrt
-import matplotlib.pyplot as plt
-from scipy import fftpack
+#from math import sqrt
+#import matplotlib.pyplot as plt
+#from scipy import fftpack
 import scipy.sparse
 from scipy.sparse import csr_matrix
 
@@ -273,7 +273,8 @@ def number_of_atom(wavefunction,a,b):
 #drain_atom_number = []
 
 import sys
-time_t = float(sys.argv[1])*10**(-3)
+time_t = float(sys.argv[1])
+time_t = time_t*10**(-3)
 
 wavefunction_time_t = wavefunction_t(time_t)
 np.save("wavefunction_"+str(time_t)+".npy",wavefunction_t)
