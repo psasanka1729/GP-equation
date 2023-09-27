@@ -1,0 +1,203 @@
+commit 9fcd911bce7069e44d7d434aedaf98a8bfd66c63
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Tue Sep 26 19:56:45 2023 -0500
+
+    rk4 code cluster
+
+commit 94e0fcbeef56b8a237589c17131ebce11b176f34
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Tue Sep 26 19:56:14 2023 -0500
+
+    cluster backup
+
+commit 37faef73d831785f1096e563e5ee106a0d37bcd5
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri Sep 22 21:48:42 2023 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit d34a21b8a6358db650ef83881cce0e18765b144b
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Sep 21 22:01:57 2023 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 4daf684c223d518316c3503d60ed8010b8e4d148
+Merge: f4e6b4e 326f9c4
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Sep 21 21:59:40 2023 -0500
+
+    Merge https://github.com/psasanka1729/GP-equation into main
+
+commit 326f9c4317a9987b18908cc3ec24384f549bbaf5
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Sep 21 21:59:28 2023 -0500
+
+    ground state using imaginary time evolution
+
+commit f4e6b4ea713d164c4223d5b3199764abecdc7bd0
+Merge: fdabbda 2926f87
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu Sep 21 21:55:13 2023 -0500
+
+    Merge https://github.com/psasanka1729/GP-equation into main
+    
+    This is a commit from github
+
+commit 2926f872afe4e31278913b91ac65966940620f97
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Sep 20 16:30:21 2023 -0500
+
+    correct ground state in source well
+
+commit 1bdc60e26dcc4f708f1fba9c8d0c37c0e0fd18ec
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Fri Sep 8 15:51:55 2023 -0500
+
+    Add files via upload
+
+commit 32989ab975b534b5583f3a01871b355ef95407c9
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Aug 31 15:27:07 2023 -0500
+
+    real time evolution in source and gate well
+
+commit 3b2e85281530f3b7af4b27389d6de72d2c29b21a
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Fri Jul 14 15:37:25 2023 -0500
+
+    perturbation theory of gate well
+    
+    perturbation theory is applied to the gate well to obtain the energy eigenvalues to plot the energy difference plot to see which energy levels couple
+
+commit 0b2f35e568837b5bbe579252fe801ee2a8ca6b6d
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jul 12 14:24:53 2023 -0500
+
+    ground state and energy is obtained
+
+commit 251222e657e64296261c36dd5847b47c4ca0dd8a
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jul 12 12:11:14 2023 -0500
+
+    correct ground state for harmonic oscillator
+
+commit 79a34cc35a7a80fcc4e7f786536db2a469046643
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Jul 6 12:21:32 2023 -0500
+
+    correction in fft
+    
+    The Fourier frequency of zero must be in the first position in the k (momentum) array. This is the convention while defining the FFT, otherwise, fftshift has to be used and the ground state energy does not come out correct.
+
+commit c0944a10061cfae55141942315cf89482668c5c3
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Jun 29 14:22:09 2023 -0500
+
+    ground state of the gate well
+
+commit 9ce17a7b037cbd45a6dc607fcbe0cfe1a6af06c8
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Jun 29 13:57:25 2023 -0500
+
+    ground state wavefunction with transistor potential
+
+commit 93b5cdf09c88e7f9fa7c852deafffa9f474ca842
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Jun 29 11:12:31 2023 -0500
+
+    correct ground state energy of the QHO
+
+commit e779497ae7767058bb35736e54ba8bd200a54850
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Tue Jun 20 14:44:23 2023 -0500
+
+    ITE for quantum harmonic oscillator
+
+commit b2deabaf9497fd318470d5cea02bc3a02fc7364e
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jun 14 11:08:36 2023 -0500
+
+    Units adjusted
+    
+    Natural units are used to match the solution to the quantum harmonic oscillator and solved for the ground state of the gate well.
+
+commit 41736ed5ea92a5b85f3828ecdf02e53dc877765a
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Mon Jun 12 14:56:51 2023 -0500
+
+    minimum of potential is shifted
+    
+    The length of the gate well array is made a power of two and the minimum of the gate well potential is shifted to position zero.
+
+commit fdabbdaeee19fda4a57895acecbfd3b62f00f8e4
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri May 26 12:23:57 2023 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit bfe411f919aa0066c3ee86a5db8c3d0e5cd0b35b
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri May 26 11:17:11 2023 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 871f9ee29bcfa7365b2cc10794af5ec064a4397c
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri May 26 11:08:37 2023 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 4ca8d2be2afa6b5d28f8d18baed8e3de8e3c8ca5
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu May 25 15:10:31 2023 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 966b6d6b29344830ac2a52f136157b8d84537fbe
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Thu May 25 09:58:38 2023 -0500
+
+    code running on cluster
+
+commit 785e69ee8dbad6aee9cb44670864f7e2cbc7d0d1
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu May 25 09:48:07 2023 -0500
+
+    potential landscape of the transistor
+
+commit 5f565598c169df6f509d4495ba6c3740d3340395
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu May 25 09:47:43 2023 -0500
+
+    code for cluster
+
+commit 3d9a7157fdaeb7fb5be68dced6ac319d8c3d82bd
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed May 24 22:13:39 2023 -0500
+
+    potential and wavefunction plot together
+
+commit 6d597a49d305e9f6383c9ea80945130005b3ea2e
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed May 24 21:52:22 2023 -0500
+
+    works
+
+commit 22a062011a090851ae8eea3e22d71c90839e2093
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed May 24 11:07:53 2023 -0500
+
+    potential landscape included in the code
+
+commit 2882b5e626b396497a177221df289837e1b03308
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sat May 20 12:50:55 2023 -0500
+
+    gives ground state of harmonic oscillator
+
+commit c9ad4368317287da495e0f3b5e0d0e8246cfdc47
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sat May 20 12:50:19 2023 -0500
+
+    Initial commit
