@@ -18,7 +18,7 @@ from scipy.sparse import csr_matrix
 # In[419]:
 
 
-ground_state_position,initial_ground_state_wavefunction= np.loadtxt("fixed_ground_state_wavefunction_source_well.txt", delimiter = '\t', unpack=True)
+ground_state_position,initial_ground_state_wavefunction= np.loadtxt("ground_state_wavefunction_source_well_8_50000.txt", delimiter = '\t', unpack=True)
 
 # # Transistor potential
 
