@@ -10,7 +10,7 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 mkdir -p $SCRATCH_DIR
 
 EXEC=real_time_RK4.py
-HELPER="potential_landscape.txt" "ground_state_wavefunction_source_well.txt"
+HELPER="potential_landscape.txt, ground_state_wavefunction_source_well.txt"
 
 cd $LOCAL_DIR/$RUN_NAME
 cp $EXEC $SCRATCH_DIR/
