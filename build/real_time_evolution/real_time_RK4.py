@@ -230,7 +230,7 @@ def dpsi_dt(t,psi):
 
 
 t0 = 0.0
-dt = 10**(-7)
+dt = 10**(-8)
 def wavefunction_t(total_time):
     psi_0 = np.complex64(initial_ground_state_wavefunction)
     psi_0 = normalize_x(psi_0)

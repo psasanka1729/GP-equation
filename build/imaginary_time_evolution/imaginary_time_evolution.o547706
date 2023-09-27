@@ -42,3 +42,24 @@ Launcher: Task 3 running job 4 on compute-2-1-1 (bash imaginary_time_evolution_3
 Launcher: Task 1 running job 2 on compute-2-1-1 (bash imaginary_time_evolution_1.qsub)
 Launcher: Task 9 running job 10 on compute-2-1-1 (bash imaginary_time_evolution_9.qsub)
 Launcher: Task 15 running job 16 on compute-2-1-1 (bash imaginary_time_evolution_15.qsub)
+Removing files
+Launcher: Job 16 completed in 396731 seconds.
+Launcher: Task 15 done. Exiting.
+Removing files
+Launcher: Job 7 completed in 397150 seconds.
+Launcher: Task 6 done. Exiting.
+Removing files
+Launcher: Job 5 completed in 397423 seconds.
+Launcher: Task 4 done. Exiting.
+Removing files
+Launcher: Job 14 completed in 397552 seconds.
+Launcher: Task 13 done. Exiting.
+Removing files
+Launcher: Job 8 completed in 398772 seconds.
+Launcher: Task 7 done. Exiting.
+Removing files
+Launcher: Job 13 completed in 399677 seconds.
+Launcher: Task 12 done. Exiting.
+Removing files
+Launcher: Job 11 completed in 400240 seconds.
+Launcher: Task 10 done. Exiting.
