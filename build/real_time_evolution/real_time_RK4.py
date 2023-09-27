@@ -113,6 +113,9 @@ def extract_gate_well_potential(position,potential):
     well_potential = potential[np.where(position == well_position[0])[0][0]:np.where(position == well_position[-1])[0][0]+1]
     
     return [well_position,well_potential]
+
+gate_well_position  = extract_gate_well_potential(source_gate_drain_well_position,source_gate_drain_well_potential)[0]
+gate_well_potential = extract_gate_well_potential(source_gate_drain_well_position,source_gate_drain_well_potential)[1]
 # # Drain well potential
 
 # In[425]:
