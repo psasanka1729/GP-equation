@@ -230,7 +230,7 @@ def dpsi_dt(t,psi):
 
 
 t0 = 0.0
-dt = 10**(-8)
+dt = 10**(-7)
 def wavefunction_t(total_time):
     psi_0 = np.complex64(initial_ground_state_wavefunction)
     psi_0 = normalize_x(psi_0)
@@ -277,7 +277,7 @@ time_t = float(sys.argv[1])
 time_t = time_t*10**(-3)
 
 wavefunction_time_t = wavefunction_t(time_t)
-np.save("wavefunction_"+str(time_t)+".npy",wavefunction_t)
+np.save("wavefunction_"+str(time_t)+".npy",wavefunction_time_t)
 
 gate_atom_number = number_of_atom(wavefunction_time_t,source_well_length,source_well_length+gate_well_length)
 source_atom_number = number_of_atom(wavefunction_time_t,0,source_well_length)
