@@ -18,14 +18,14 @@ from scipy.sparse import csr_matrix
 # In[419]:
 
 
-ground_state_position,initial_ground_state_wavefunction= np.loadtxt("ground_state_wavefunction_source_well.txt", delimiter = '\t', unpack=True)
+ground_state_position,initial_ground_state_wavefunction= np.loadtxt("fixed_ground_state_wavefunction_source_well.txt", delimiter = '\t', unpack=True)
 
 # # Transistor potential
 
 # In[420]:
 
 
-position_landscape,potential_landscape= np.loadtxt("potential_landscape.txt", delimiter = '\t', unpack=True)
+position_landscape,potential_landscape= np.loadtxt("potential_landscape_original.txt", delimiter = '\t', unpack=True)
 def extract_source_and_gate_well_potential(position,potential):
     
     # Position where the gate well starts.
