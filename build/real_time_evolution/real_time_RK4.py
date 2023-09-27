@@ -230,7 +230,7 @@ def dpsi_dt(t,psi):
 
 
 t0 = 0.0
-dt = 10**(-8)
+dt = 10**(-7)
 def wavefunction_t(total_time):
     psi_0 = np.complex64(initial_ground_state_wavefunction)
     psi_0 = normalize_x(psi_0)
@@ -284,7 +284,7 @@ drain_atom_number = number_of_atom(wavefunction_time_t,source_well_length+gate_w
                                             ,source_well_length+gate_well_length+drain_well_length)
 
 f = open("number_of_atoms.txt","w")
-f.write(str(source_atom_number)+"\t"+str(gate_atom_number)+"\t"+str(drain_atom_number)+"\n")
+f.write(str(time_t)+"\t"+str(source_atom_number)+"\t"+str(gate_atom_number)+"\t"+str(drain_atom_number)+"\n")
 
 f.close()
 # In[ ]:

@@ -374,3 +374,80 @@ Removing files
 rm: cannot remove ‘real_time_RK4.py’: No such file or directory
 Launcher: Job 49 completed in 3729 seconds.
 Launcher: Task 48 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 50 completed in 3810 seconds.
+Launcher: Task 49 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 52 completed in 3868 seconds.
+Launcher: Task 51 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 51 completed in 3890 seconds.
+Launcher: Task 50 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 53 completed in 3974 seconds.
+Launcher: Task 52 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 55 completed in 4113 seconds.
+Launcher: Task 54 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 54 completed in 4127 seconds.
+Launcher: Task 53 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 56 completed in 4187 seconds.
+Launcher: Task 55 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 58 completed in 4342 seconds.
+Launcher: Task 57 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 57 completed in 4377 seconds.
+Launcher: Task 56 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 59 completed in 4403 seconds.
+Launcher: Task 58 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 61 completed in 4572 seconds.
+Launcher: Task 60 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 60 completed in 4586 seconds.
+Launcher: Task 59 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 62 completed in 4630 seconds.
+Launcher: Task 61 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 63 completed in 4806 seconds.
+Launcher: Task 62 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove ‘real_time_RK4.py’: No such file or directory
+Launcher: Job 64 completed in 4873 seconds.
+Launcher: Task 63 done. Exiting.
+Launcher: Done. Job exited without errors
+Job real_time_evolution complete
