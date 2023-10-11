@@ -1,3 +1,52 @@
+commit 7679abd6e2a8f01d2f72aba743bedc1c0bd14b4e
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Wed Oct 11 17:21:08 2023 -0500
+
+    Commit before run real_time_evolution
+
+commit 5f78a2384073d0ee425a1d68d678d5a9f14f9d2b
+Merge: 41c7aa4 2595f8f
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Wed Oct 11 16:00:05 2023 -0500
+
+    Merge https://github.com/psasanka1729/GP-equation into main
+
+commit 2595f8fd9275e7d367a88cb54c7013601f1ec2f6
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Oct 11 15:59:16 2023 -0500
+
+    uses new trapping frequencies
+
+commit 658193985dbe63c1b4d8b9a94e301e3e9ec827f0
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Oct 11 12:58:22 2023 -0500
+
+    backup code for rk4
+
+commit 11e7ee84fb3a6e03543e35e3e19cf95a226c3d39
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Oct 11 12:57:31 2023 -0500
+
+    backup code for rk4
+
+commit fcef2af0497f4586a9b5317b4379c53b99e2c66e
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Fri Oct 6 21:48:48 2023 -0500
+
+    plots drain well wavefunction in momentum space
+
+commit 977ba0451e214b0f9d44f7b3228facb7d56b911e
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Oct 5 12:57:47 2023 -0500
+
+    Add files via upload
+
+commit 87f4ec8df5e4502e24c14a0d5ce57d9f021a1e96
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Fri Sep 29 09:41:07 2023 -0500
+
+    ground state in source well
+
 commit 41c7aa4e2e589372bcd6dd20fb627d67a7806341
 Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
 Date:   Wed Sep 27 13:14:18 2023 -0500
