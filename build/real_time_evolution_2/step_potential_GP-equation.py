@@ -668,7 +668,7 @@ import sys
 #time_lst = [0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150]
 time_lst_index = int(sys.argv[1])
 #time_t = time_lst[time_lst_index]*10**(-3)
-time_t = time_lst_index*4.76
+time_t = time_lst_index*18.75
 time_evolved_wavefunction = wavefunction_t(time_t*10**(-3))
 
 np.save('time_evolved_wavefunction.npy', time_evolved_wavefunction)
@@ -733,7 +733,6 @@ def number_of_atom(wavefunction,a,b):
 
 
 # In[136]:
-
 
 #print("N_s = ",number_of_atom(time_evolved_wavefunction,source_well_start,source_well_end))
 #print("N_g = ",number_of_atom(time_evolved_wavefunction,gate_well_start,gate_well_end))
