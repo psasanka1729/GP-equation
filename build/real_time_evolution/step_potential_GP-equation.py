@@ -181,7 +181,7 @@ def step_barrier_between_wells(barrier_start, barrier_end, barrier_height):
     return barrier_position_arr,barrier_potential_arr
 
 source_well_bias_potential = 5
-source_well_start          = -20
+source_well_start          = -10
 source_well_end            = -6
 
 source_gate_barrier_start  = source_well_end
@@ -628,7 +628,7 @@ if external_potential is not None:
 # In[142]:
 
 
-gamma = 1.e-30
+gamma = 1.e-28
 atom_removal_term = gamma*np.tanh(source_gate_drain_well_position-20)
 #plt.plot(source_gate_drain_well_position,atom_removal_term)
 #plt.show()

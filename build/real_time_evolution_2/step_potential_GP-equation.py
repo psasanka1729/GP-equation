@@ -8,7 +8,7 @@ import os
 import math
 import numpy as np
 from math import sqrt
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from scipy import fftpack
 import scipy.sparse
 from scipy.sparse import csr_matrix
@@ -181,7 +181,7 @@ def step_barrier_between_wells(barrier_start, barrier_end, barrier_height):
     return barrier_position_arr,barrier_potential_arr
 
 source_well_bias_potential = 5
-source_well_start          = -10
+source_well_start          = -20
 source_well_end            = -6
 
 source_gate_barrier_start  = source_well_end
@@ -198,18 +198,41 @@ drain_well_start           = gate_drain_barrier_end
 drain_well_end             = 40
 
 
+SG_barrier_height = 20
+GD_barrier_height = 21
+
+# saving potential landscape data to a file for to used later
+transistor_landscape_file = open("transistor_landscape.txt","w")
+transistor_landscape_file.write(str("source_well_bias")+"\t"+str(source_well_bias_potential)+"\n"+
+		str("source_well_start")+"\t"+str(source_well_start)+"\n"+
+		str("source_well_end")+"\t"+str(source_well_end)+"\n"+
+		str("SG_start")+"\t"+str(source_gate_barrier_start)+"\n"+
+		str("SG_end")+"\t"+str(source_gate_barrier_end)+"\n"+
+		str("gate_well_bias")+"\t"+str(gate_bias_potential)+"\n"+
+		str("gate_well_start")+"\t"+str(gate_well_start)+"\n"+
+		str("gate_well_end")+"\t"+str(gate_well_end)+"\n"+
+		str("GD_start")+"\t"+str(gate_drain_barrier_start)+"\n"+
+		str("GD_end")+"\t"+str(gate_drain_barrier_end)+"\n"+
+		str("drain_well_start")+"\t"+str(drain_well_start)+"\n"+
+		str("drain_well_end")+"\t"+str(drain_well_end)+"\n"+
+		str("SG_barrier_height")+"\t"+str(SG_barrier_height)+"\n"+
+		str("GD_barrier_height")+"\t"+str(GD_barrier_height))
+
+transistor_landscape_file.close();
+
+
 source_well_position,source_well_potential = source_well(source_well_bias_potential,source_well_start,
             source_well_end)
 source_gate_barrier_position,source_gate_barrier_potential = step_barrier_between_wells(
                                                              source_gate_barrier_start,
-                                                             source_gate_barrier_end,30)
+                                                             source_gate_barrier_end,SG_barrier_height)
 
 gate_well_position_exp,gate_well_potential_exp = gate_well(gate_well_start,gate_well_end,
                                                            gate_bias_potential)
 
 gate_drain_barrier_position,gate_drain_barrier_potential = step_barrier_between_wells(
                                                         gate_drain_barrier_start,
-                                                        gate_drain_barrier_end,31)
+                                                        gate_drain_barrier_end,GD_barrier_height)
 drain_well_position,drain_well_potential   = drain_well(drain_well_start,drain_well_end)
 
 source_gate_drain_well_position = np.concatenate((source_well_position,
@@ -223,6 +246,11 @@ source_gate_drain_well_potential = np.concatenate((source_well_potential,
                 gate_well_potential_exp,
                 gate_drain_barrier_potential,
                 drain_well_potential));
+
+
+np.save("position_landscape.npy",source_gate_drain_well_position)
+np.save("potential_landscape.npy",source_gate_drain_well_potential)
+
 r"""
 # combining the position and potential arrays.
 source_gate_drain_well_position = np.concatenate(
@@ -285,6 +313,7 @@ plt.show()""";
 The potential is in kHz units. It is converted to SI units
 by multiplying 10^3 * h.
 """
+source_well_length = len(source_well_potential)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 external_potential = source_well_potential*(10**3)*2*PI*(H_BAR) # J
@@ -297,7 +326,7 @@ a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/Ph
 trap_frequency = 918
 trap_length = np.sqrt(H_BAR/(M*trap_frequency)) # m
 A = PI*trap_length**2
-N_atom = 100000
+N_atom = 20000
 g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
 
 
@@ -305,6 +334,7 @@ g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
 L  = len(xs)#(max(xs)-min(xs))
 # Increment in the space interval.
 dx = np.abs(xs[1]-xs[0])
+
 # Increment in momentum space interval.
 dk = (2*PI)/L
 
@@ -598,7 +628,7 @@ if external_potential is not None:
 # In[142]:
 
 
-gamma = 1.e-30
+gamma = 0.0
 atom_removal_term = gamma*np.tanh(source_gate_drain_well_position-20)
 #plt.plot(source_gate_drain_well_position,atom_removal_term)
 #plt.show()
@@ -608,7 +638,7 @@ atom_removal_term = gamma*np.tanh(source_gate_drain_well_position-20)
 
 
 def dpsi_dt(t,psi):
-    dpsi_dt = (-1j/H_BAR) * (H.dot(psi) + (g)*N_atom*(np.abs(psi)**2)*(psi) - atom_removal_term)
+    dpsi_dt = (-1j/H_BAR) * (H.dot(psi) + (g)*N_atom*(np.abs(psi)**2)*(psi) - atom_removal_term*psi)
     return dpsi_dt
 
 
@@ -616,7 +646,7 @@ def dpsi_dt(t,psi):
 
 
 t0 = 0.0
-dt = 10**(-6)
+dt = 10**(-8)
 def wavefunction_t(total_time):
     psi_0 = np.complex64(psi_ITE)
     psi_0 = normalize_x(psi_0)
@@ -635,18 +665,18 @@ def wavefunction_t(total_time):
     return psi_t
 
 import sys
-time_t = float(sys.argv[1])
-time_t = time_t*10**(-3)
-
+#time_lst = [0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150]
+time_lst_index = int(sys.argv[1])
+#time_t = time_lst[time_lst_index]*10**(-3)
+time_t = time_lst_index*4.76
 time_evolved_wavefunction = wavefunction_t(time_t*10**(-3))
 
-
+np.save('time_evolved_wavefunction.npy', time_evolved_wavefunction)
 # In[131]:
 
 
 
 # In[132]:
-
 
 gate_well_length           = len(gate_well_position_exp)
 source_gate_barrier_length = len(source_gate_barrier_position)
