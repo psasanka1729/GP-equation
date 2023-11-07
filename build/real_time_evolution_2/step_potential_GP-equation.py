@@ -326,7 +326,7 @@ a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/Ph
 trap_frequency = 918
 trap_length = np.sqrt(H_BAR/(M*trap_frequency)) # m
 A = PI*trap_length**2
-N_atom = 20000
+N_atom = 100000
 g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
 
 
@@ -646,7 +646,7 @@ def dpsi_dt(t,psi):
 
 
 t0 = 0.0
-dt = 10**(-8)
+dt = 10**(-7)
 def wavefunction_t(total_time):
     psi_0 = np.complex64(psi_ITE)
     psi_0 = normalize_x(psi_0)
