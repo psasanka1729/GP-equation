@@ -628,7 +628,7 @@ if external_potential is not None:
 # In[142]:
 
 
-gamma = 1.e-28
+gamma = 0.0
 atom_removal_term = gamma*np.tanh(source_gate_drain_well_position-20)
 #plt.plot(source_gate_drain_well_position,atom_removal_term)
 #plt.show()
