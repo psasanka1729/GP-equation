@@ -3,7 +3,7 @@
 #SBATCH --job-name=real_time_evolution
 #
 # Partition:
-#SBATCH --partition=CMT
+#SBATCH --partition=256h
 #
 # Processors:
 #SBATCH --ntasks=16
