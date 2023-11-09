@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[78]:
+# In[72]:
 
 
 import os
@@ -16,13 +16,12 @@ from scipy.sparse import csr_matrix
 
 # # Matplotlib plotting parameters
 
-# In[79]:
-
+# In[73]:
 
 
 # # Real atomtronic potential
 
-# In[80]:
+# In[74]:
 
 
 r"""
@@ -56,7 +55,7 @@ plt.show()""";
 
 # # Gate well potential
 
-# In[81]:
+# In[75]:
 
 
 r"""
@@ -87,7 +86,7 @@ f.set_figheight(8)
 plt.show()""";
 
 
-# In[82]:
+# In[76]:
 
 
 r"""
@@ -128,7 +127,7 @@ f.set_figheight(8)
 plt.show()""";   
 
 
-# In[83]:
+# In[77]:
 
 
 #gate_well_position_exp = np.array(reduced_density_positions)
@@ -138,7 +137,7 @@ plt.show()""";
 
 # # Defines the transistor potential
 
-# In[84]:
+# In[78]:
 
 
 def source_well(source_bias_voltage,
@@ -149,7 +148,7 @@ def source_well(source_bias_voltage,
     for x in source_position_arr:
         if  -60 <= x <= source_start:
             # barrier on the left of the source well
-            source_potential_arr.append(100)
+            source_potential_arr.append(1000)
         elif source_start <= x <= source_end:
             source_potential_arr.append(source_bias_voltage)
     return source_position_arr,np.array(source_potential_arr)
@@ -169,8 +168,8 @@ def drain_well(drain_start,
         if drain_start <= x <= drain_end:
             # the drain is at zero potential
             drain_potential_arr.append(0.0)
-        elif drain_end <= x <= 60:
-            drain_potential_arr.append(0)
+        elif drain_end <= x <= 40:
+            drain_potential_arr.append(1000)
     return drain_position_arr,np.array(drain_potential_arr)
 
 def step_barrier_between_wells(barrier_start, barrier_end, barrier_height):
@@ -180,7 +179,7 @@ def step_barrier_between_wells(barrier_start, barrier_end, barrier_height):
         barrier_potential_arr.append(barrier_height)
     return barrier_position_arr,barrier_potential_arr
 
-source_well_bias_potential = 5
+source_well_bias_potential = 20
 source_well_start          = -20
 source_well_end            = -6
 
@@ -195,11 +194,11 @@ gate_drain_barrier_start   = gate_well_end
 gate_drain_barrier_end     = -1
 
 drain_well_start           = gate_drain_barrier_end
-drain_well_end             = 40
+drain_well_end             = 30
 
 
-SG_barrier_height = 20
-GD_barrier_height = 21
+SG_barrier_height = 31
+GD_barrier_height = 32
 
 # saving potential landscape data to a file for to used later
 transistor_landscape_file = open("transistor_landscape.txt","w")
@@ -219,6 +218,7 @@ transistor_landscape_file.write(str("source_well_bias")+"\t"+str(source_well_bia
 		str("GD_barrier_height")+"\t"+str(GD_barrier_height))
 
 transistor_landscape_file.close();
+
 
 
 source_well_position,source_well_potential = source_well(source_well_bias_potential,source_well_start,
@@ -246,11 +246,6 @@ source_gate_drain_well_potential = np.concatenate((source_well_potential,
                 gate_well_potential_exp,
                 gate_drain_barrier_potential,
                 drain_well_potential));
-
-
-np.save("position_landscape.npy",source_gate_drain_well_position)
-np.save("potential_landscape.npy",source_gate_drain_well_potential)
-
 r"""
 # combining the position and potential arrays.
 source_gate_drain_well_position = np.concatenate(
@@ -268,10 +263,9 @@ source_gate_drain_well_potential = np.concatenate(
 
 
 
-
 # # Source well
 
-# In[85]:
+# In[79]:
 
 
 r"""
@@ -306,14 +300,13 @@ plt.show()""";
 
 # # Transistor parameters for code
 
-# In[86]:
+# In[80]:
 
 
 """
 The potential is in kHz units. It is converted to SI units
 by multiplying 10^3 * h.
 """
-source_well_length = len(source_well_potential)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 external_potential = source_well_potential*(10**3)*2*PI*(H_BAR) # J
@@ -326,7 +319,11 @@ a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/Ph
 trap_frequency = 918
 trap_length = np.sqrt(H_BAR/(M*trap_frequency)) # m
 A = PI*trap_length**2
-N_atom = 100000
+
+index = int(sys.argv[1])
+N_atom_lst = np.array([20,30,40,50,60,70,100,200,300,400,500,1000,1200,1500,2000,3000])*10**(3)
+N_atom = N_atom_lst[index]
+
 g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
 
 
@@ -334,7 +331,6 @@ g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
 L  = len(xs)#(max(xs)-min(xs))
 # Increment in the space interval.
 dx = np.abs(xs[1]-xs[0])
-
 # Increment in momentum space interval.
 dk = (2*PI)/L
 
@@ -349,7 +345,6 @@ def Hamiltonian_k(p):
 
 # H(x).
 def Hamiltonian_x(x,psi):
-    #g = 0
     return V_external(x)+N_atom*g_source*np.abs(psi)**2
 
 # Momentum space discretization.
@@ -362,7 +357,7 @@ def psi_0(x):
 
 # # Imaginary time evolution code
 
-# In[87]:
+# In[81]:
 
 
 r"""
@@ -415,33 +410,66 @@ def imaginary_time_evolution(dt,total_iterations):
     psi_k = normalize_k(psi_k)
         
     return psi_x
+psi_ITE = imaginary_time_evolution(10**(-6),10000)
 
 
 # # Plot
 
-# In[88]:
+# In[82]:
 
 
+r"""
 #time_step = 
 psi_ITE = imaginary_time_evolution(10**(-6),10000)
+# Create some mock data
+t = xs/(1.e-6)
+data1 = np.abs(psi_ITE)**2*dx
+data2 = source_well_potential
+
+fig, ax1 = plt.subplots()
+
+color = "tab:red"
+ax1.set_xlabel(r"Position, $\mu $ m")
+ax1.set_ylabel(r"$\psi_{0}$", color=color)
+ax1.plot(t, data1, color=color)
+ax1.tick_params(axis='y', labelcolor=color)
+#ax1.axvline(-3.7, color='green',label = "SG boundary")
+#plt.legend()
+ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+
+color = "tab:blue"
+ax2.set_ylabel(r"Potential, kHz ", color=color)  # we already handled the x-label with ax1
+ax2.plot(t, data2, color=color,linewidth = 3)
+ax2.tick_params(axis="y", labelcolor=color)
+fig.set_figwidth(15)
+fig.set_figheight(7)
+fig.tight_layout()  # otherwise the right y-label is slightly clipped
+#import os
+#path = "/Users/sasankadowarah/atomtronics/plots"
+#os.chdir(path)
+#plt.savefig("ITE_ground_state_2_9_500000.jpg", dpi=600)
+plt.show()""";
 
 
-# In[89]:
+# In[83]:
 
 
+source_well_length = len(source_well_potential)
 
 
-
-# In[90]:
-
+# In[84]:
 
 
-# In[91]:
+r"""
+chemical_potential = source_well_potential*10**3*2*PI*H_BAR+g_source*N_atom*np.abs(psi_ITE)**2
+plt.plot(source_well_position,chemical_potential/(10**3*2*PI*H_BAR))
+plt.plot(source_well_position,source_well_potential,color="red",linewidth = 6.1)
+plt.show()""";
 
 
 # # Gate well
 
-# In[92]:
+# In[85]:
 
 
 r"""
@@ -479,7 +507,7 @@ plt.show()""";
 
 # # Drain well
 
-# In[93]:
+# In[86]:
 
 
 r"""
@@ -516,7 +544,7 @@ plt.show()""";
 
 # # Real time evolution
 
-# In[94]:
+# In[87]:
 
 
 """
@@ -544,19 +572,6 @@ dx = np.abs(xs[1]-xs[0])
 # Increment in momentum space interval.
 dk = (2*PI)/L
 
-# Trapping frequency of the harmionic oscillator.
-def V_external(x):
-    return external_potential
-
-
-# H(k)
-def Hamiltonian_k(p):
-    return p**2/(2*M)
-
-# H(x).
-def Hamiltonian_x(x,psi):
-    #g = 0
-    return V_external(x)+N_atom*g*np.abs(psi)**2
 
 # Momentum space discretization.
 k = np.hstack([np.arange(0,N/2), np.arange(-N/2,0)])*dk
@@ -594,6 +609,20 @@ for i in range(N):
     elif xs[i]/(1.e-6)>=drain_well_start:
         g[i] = g_drain
 
+# Trapping frequency of the harmionic oscillator.
+def V_external(x):
+    return external_potential
+
+
+# H(k)
+def Hamiltonian_k(p):
+    return p**2/(2*M)
+
+# H(x).
+def Hamiltonian_x(x,psi):
+    #g = 0
+    return V_external(x)+N_atom*g*np.abs(psi)**2
+
 def normalize_x(wavefunction_x):
     return wavefunction_x/(np.sqrt(np.sum(np.abs(wavefunction_x)**2)*dx))
 
@@ -603,7 +632,7 @@ while len(psi_ITE) < N:
 
 # # Runge-Kutta algorithm
 
-# In[95]:
+# In[88]:
 
 
 # Laplace Operator (Finite Difference)
@@ -613,28 +642,24 @@ D2 = scipy.sparse.diags([1, -2, 1],
 H = - (H_BAR**2/(2*M)) * D2
 
 
-# In[96]:
+# In[89]:
 
 
 if external_potential is not None:
     H += scipy.sparse.spdiags(external_potential,0,N,N)
 
 
-# In[111]:
+# In[90]:
 
 
-
-
-# In[142]:
-
-
-gamma = 1.e-28
-atom_removal_term = gamma*np.tanh(source_gate_drain_well_position-20)
+gamma_power = 28
+gamma = 0#10**(-gamma_power)
+atom_removal_term = gamma*np.tanh(source_gate_drain_well_position-10)
 #plt.plot(source_gate_drain_well_position,atom_removal_term)
 #plt.show()
 
 
-# In[129]:
+# In[91]:
 
 
 def dpsi_dt(t,psi):
@@ -642,12 +667,22 @@ def dpsi_dt(t,psi):
     return dpsi_dt
 
 
-# In[130]:
+# In[92]:
+
+
+
+
+
+# ## Runge kutta with snapshots of atom density at a few fixed times
+
+# In[ ]:
 
 
 t0 = 0.0
-dt = 10**(-7)
+dt = 10**(-8)
+number_of_snapshots = 10
 def wavefunction_t(total_time):
+    import os
     psi_0 = np.complex64(psi_ITE)
     psi_0 = normalize_x(psi_0)
     psi_t = psi_0
@@ -662,184 +697,47 @@ def wavefunction_t(total_time):
 
         psi_t = psi_t + 1/6 * (k1 + 2 * k2 + 2 * k3 + k4)
         t = t + dt
+     
+    
+        snapshot_time_lst = np.linspace(t0,total_time,number_of_snapshots)        
+        for snapshots in snapshot_time_lst:
+            if np.abs(t - snapshots) < dt:
+                np.save("wavefunction_time_"+str(N_atom)+"_"+str(np.around(snapshots*10**(3),2))+".npy",psi_t)
+
     return psi_t
-
-import sys
-#time_lst = [0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150]
-time_lst_index = int(sys.argv[1])
-#time_t = time_lst[time_lst_index]*10**(-3)
-time_t = time_lst_index*18.75
-time_evolved_wavefunction = wavefunction_t(time_t*10**(-3))
-
-np.save('time_evolved_wavefunction.npy', time_evolved_wavefunction)
-# In[131]:
-
-
-
-# In[132]:
-
-gate_well_length           = len(gate_well_position_exp)
-source_gate_barrier_length = len(source_gate_barrier_position)
-gate_drain_barrier_length  = len(gate_drain_barrier_position)
-drain_well_position        = xs[source_well_length
-                             +source_gate_barrier_length
-                             +gate_well_length
-                             +gate_drain_barrier_length:]/(1.e-6);
-drain_well_wavefunction = time_evolved_wavefunction[source_well_length
-                                                    +source_gate_barrier_length
-                                                    +gate_well_length
-                                                    +gate_drain_barrier_length:];
-
-
-# In[133]:
-
-
-N_source = N_atom*np.sum(np.abs(time_evolved_wavefunction[0:
-            len(source_well_position)+len(source_gate_barrier_position)])**2)*dx
-N_gate   = N_atom*np.sum(np.abs(time_evolved_wavefunction[
-            len(source_well_position)+len(source_gate_barrier_position):
-            len(source_well_position)+len(source_gate_barrier_position)+
-            len(gate_well_position_exp)+len(gate_drain_barrier_position)])**2)*dx
-N_drain   = N_atom*np.sum(np.abs(time_evolved_wavefunction[
-            len(source_well_position)+len(source_gate_barrier_position)+
-            len(gate_well_position_exp)+len(gate_drain_barrier_position):
-            len(source_well_position)+len(source_gate_barrier_position)+
-            len(gate_well_position_exp)+len(gate_drain_barrier_position)+
-            len(drain_well_position)])**2)*dx
-
-
-f = open("number_of_atoms.txt","w")
-f.write(str(time_t)+"\t"+str(N_source)+"\t"+str(N_gate)+"\t"+str(N_drain)+"\n")
-
-f.close()
-# In[134]:
-
-
-
-
-# In[135]:
-
-
-r"""
-def number_of_atom(wavefunction,a,b):
-    a_location_in_wavefunction_arr = np.where(np.abs(source_gate_drain_well_position-a) <1.e-1)[0][0]
-    b_location_in_wavefunction_arr = np.where(np.abs(source_gate_drain_well_position-b) <1.e-1)[0][0]
-    return N_atom*np.sum(np.abs(wavefunction[a_location_in_wavefunction_arr:
-                                             b_location_in_wavefunction_arr])**2)*dx
-
-#source_well_length = len(source_well_position)
-#gate_well_length = len(gate_well_position_exp)
-#drain_well_length = len(drain_well_position)""";
-
-
-# In[136]:
-
-
-#print("N_s = ",number_of_atom(time_evolved_wavefunction,source_well_start,source_well_end))
-#print("N_g = ",number_of_atom(time_evolved_wavefunction,gate_well_start,gate_well_end))
-#print("N_d = ",number_of_atom(time_evolved_wavefunction,drain_well_start,gate_well_end))
-
-
-# # Atoms in the each well
-
-# In[137]:
-
-
-r"""
-gate_atom_number = []
-source_atom_number = []
-drain_atom_number = []
-time_lst = [t0,10*10**(-3),15*10**(-3),20*10**(-3),22.5*10**(-3),25*10**(-3),27.5*10**(-3),30*10**(-3),
-           40*10**(-3),50*10**(-3),60*10**(-3),70*10**(-3),100*10**(-3)]
-for time in time_lst:
-    wavefunction_time_t = wavefunction_t(time)
-    gate_atom_number.append(number_of_atom(wavefunction_time_t,source_well_length,source_well_length
-                                           +gate_well_length))
-    source_atom_number.append(number_of_atom(wavefunction_time_t,0,source_well_length))
-    drain_atom_number.append(number_of_atom(wavefunction_time_t,source_well_length+gate_well_length
-                                            ,source_well_length+gate_well_length+drain_well_length));""";
-
-
-# In[138]:
-
-
-r"""
-f = plt.figure()
-#plt.plot(np.array(time_lst)/(10**(-3)),source_atom_number,label = r"$N_{\rm source}$",linewidth = 3,color = "red")
-#plt.plot(np.array(time_lst)/(10**(-3)),gate_atom_number,label = r"$N_{\rm gate}$",linewidth = 3,color = "green")
-plt.plot(np.array(time_lst)/(10**(-3)),drain_atom_number,label = r"$N_{\rm drain}$",linewidth = 3,color = "blue")
-
-plt.xlabel(r"Miliseconds, $ms$")
-plt.ylabel(r"Number of atoms")
-plt.legend()
-f.set_figwidth(12)
-f.set_figheight(8)
-#path = "/Users/sasankadowarah/atomtronics/plots"
-#os.chdir(path)
-#plt.savefig("number_of_atoms.png", dpi=300)
-plt.show()""";
-
-
-# In[139]:
-
-
-r"""
-f = plt.figure()
-plt.plot(np.array(time_lst)/(10**(-3)),source_atom_number,label = r"$N_{\rm source}$",
-         linewidth = 3,color = "red")
-plt.xlabel(r"Miliseconds, $ms$")
-plt.ylabel(r"Number of atoms")
-plt.legend()
-plt.scatter(np.array(time_lst)/(10**(-3)),source_atom_number,label = "",s = 210,color = "red")
-f.set_figwidth(12)
-f.set_figheight(8)
-plt.gcf().subplots_adjust(left=0.2)
-path = "/Users/sasankadowarah/atomtronics/plots"
-os.chdir(path)
-plt.savefig("N_source.jpg", dpi=300)
-plt.show()""";
-
-
-# In[140]:
-
-
-r"""
-f = plt.figure()
-plt.plot(np.array(time_lst)/(10**(-3)),gate_atom_number,label = r"$N_{\rm gate}$",
-         linewidth = 3,color = "green")
-plt.xlabel(r"Miliseconds, $ms$")
-plt.ylabel(r"Number of atoms")
-plt.legend()
-plt.scatter(np.array(time_lst)/(10**(-3)),gate_atom_number,label = "",s = 210,color = "green")
-f.set_figwidth(12)
-f.set_figheight(8)
-path = "/Users/sasankadowarah/atomtronics/plots"
-os.chdir(path)
-plt.savefig("N_gate.jpg", dpi=300)
-plt.show()""";
-
-
-# In[141]:
-
-
-r"""
-f = plt.figure()
-plt.plot(np.array(time_lst)/(10**(-3)),drain_atom_number,label = r"$N_{\rm drain}$",
-         linewidth = 3,color = "blue")
-plt.xlabel(r"Miliseconds, $ms$")
-plt.ylabel(r"Number of atoms")
-plt.legend()
-plt.scatter(np.array(time_lst)/(10**(-3)),drain_atom_number,label = "",s = 210,color = "blue")
-f.set_figwidth(12)
-f.set_figheight(8)
-path = "/Users/sasankadowarah/atomtronics/plots"
-os.chdir(path)
-plt.savefig("N_drain.jpg", dpi=300)
-plt.show()""";
+time_t = 100*10**(-3) # s
+time_evolved_wavefunction = wavefunction_t(time_t)
 
 
 # In[ ]:
 
+
+snapshot_time_lst = np.around(np.linspace(t0,time_t,number_of_snapshots)*10**(3),2)
+np.save("snapshot_time_lst.npy",snapshot_time_lst)
+
+
+# # Density of atoms as a function of time
+
+# In[ ]:
+
+# In[25]:
+  
+
+
+# ## Saves the heatmap of the wavefunction as a funcion of time
+
+# In[ ]:
+
+
+# # Heatmap of atom density
+
+# In[ ]:
+
+
+# In[49]:
+
+
+# In[94]:
 
 
 
