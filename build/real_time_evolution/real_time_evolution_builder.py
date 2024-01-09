@@ -4,7 +4,7 @@ import subprocess
 import numpy
 import os
 
-partition_info=['CMT',16] # = [partition,ncores]
+partition_info=['gpu-preempt',16] # = [partition,ncores]
 # partition_info=['debug',16] # = [partition,ncores]
 time_str='7-00:00:00'
 project_name=os.getcwd().split('/')[-3]
@@ -41,21 +41,21 @@ template_contents=open(template_file,'r').read()
 
 vnum=0
 
-for L in xrange(16):
-	qsub_file=template_file.replace('.template','_'+str(vnum)+'.qsub')
-	fout=open(qsub_file,'w')
+for L in range(16):
+    qsub_file=template_file.replace('.template','_'+str(vnum)+'.qsub')
+    fout=open(qsub_file,'w')
 
-	contents=template_contents.replace('###',str(vnum))
-        contents=contents.replace('*project*',project_name)
-	contents=contents.replace('*111*',str(L))
-	out_file_base='data_'+str(L)+'_*lll*.out'
-	contents=contents.replace('*111*',out_file_base.replace('*lll*','python'))
-	vmap_file.write(str(vnum)+'\t'+str(L)+'\n')
-	task_file.write('bash real_time_evolution_'+str(vnum)+'.qsub\n')
-	fout.write(contents)
-	fout.close()
+    contents=template_contents.replace('###',str(vnum))
+    contents=contents.replace('*project*',project_name)
+    contents=contents.replace('*111*',str(L))
+    out_file_base='data_'+str(L)+'_*lll*.out'
+    contents=contents.replace('*111*',out_file_base.replace('*lll*','python'))
+    vmap_file.write(str(vnum)+'\t'+str(L)+'\n')
+    task_file.write('bash real_time_evolution_'+str(vnum)+'.qsub\n')
+    fout.write(contents)
+    fout.close()
 	
-	vnum+=1
+    vnum+=1
 	
 
 n_nodes=int(numpy.ceil(float(vnum)/partition_info[1]))
