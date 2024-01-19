@@ -9,7 +9,7 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-EXEC=step_potential_GP-equation.py #real_time_RK4.py
+EXEC=step_potential_code.py #real_time_RK4.py
 #HELPER_1="ground_state_wavefunction_source_well_2_9_500000.txt" 
 #HELPER_2="potential_landscape_original.txt"
 
