@@ -1,3 +1,35 @@
+commit a166a5b32d2dd8210d6b2a5da10e2f6bd8b416c5
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jan 18 21:41:23 2024 -0600
+
+    Commit before run real_time_evolution
+
+commit 870e7010f4c7181e6fd5928b8ac23b67d14d7df6
+Merge: 6fb9c29 1cbea99
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jan 18 21:35:18 2024 -0600
+
+    Merge https://github.com/psasanka1729/GP-equation
+
+commit 1cbea9915b450b8daed5c92d02de0208384b7bb4
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Jan 18 21:35:08 2024 -0600
+
+    dimensionless code for cluster
+
+commit 6fb9c29015048d2ab777f40b2cad2fdb71763f90
+Merge: 8a040a8 05e4991
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jan 18 21:32:59 2024 -0600
+
+    Merge https://github.com/psasanka1729/GP-equation
+
+commit 05e4991e67e1709a68392dbcad37bae100b09284
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Jan 18 21:29:47 2024 -0600
+
+    dimensionless code running GP equation
+
 commit 8a040a8c442937966075e7f5cdd409d62ea6589c
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Tue Jan 9 14:14:14 2024 -0600
