@@ -1,6 +1,5 @@
 # %%
 # import os
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import fftpack
@@ -32,17 +31,16 @@ print(x_s)
 epsilon = (H_BAR/(M*omega_x*x_s**2))
 print(epsilon)
 delta   = (g_source*N_atom*(x_s**2))/(a_0**3*H_BAR*omega_x)
-print(delta)
 
 # %% [markdown]
 # ## Source well potential
 
 # %%
 # number of discretized intervals in the position array
-N = 2**12 # choose a power of two to make things simpler for fast Fourier transform
+N = 2**17 # choose a power of two to make things simpler for fast Fourier transform
 
 # barrier height outside the trap.
-infinite_barrier_height = 10**7*10**3*2*PI*H_BAR
+infinite_barrier_height = 10**5*10**3*2*PI*H_BAR
 
 
 position_start = -41*1.e-6/x_s # m
@@ -80,7 +78,8 @@ for i in range(N_barrier_to_source_start,N_source_start_to_source_end):
 N_source_well_end_to_position_end = N_source_start_to_source_end + int(abs(position_end-source_well_end)/dx)
 for i in range(N_source_start_to_source_end,N_source_well_end_to_position_end):
     potential_arr[i] = infinite_barrier_height    
-  
+
+f = plt.figure()    
 
 # changing potential into dimensionless unit
 potential_arr = potential_arr/(epsilon*M*omega_x**2*x_s**2)
@@ -153,21 +152,24 @@ psi_initial = np.ones(N)
 psi_initial = normalize_x(psi_initial) 
 
 # wavefunction is evolved in imaginary time to get the ground state
-final_time_SI = 0.1
+final_time_SI = 0.01
 time_step_SI  = -1j*10**(-8)   
 final_time = omega_x*final_time_SI
 time_step = omega_x*time_step_SI
 psi_ITE = time_split_suzukui_trotter(psi_initial,potential_arr,time_step,final_time);
 #print("Normalization of the wavefucntion = ",np.sqrt(np.sum(np.abs(psi_ITE)**2)*dx) )
 
-# %
+np.save("ground_state_source_well.npy",psi_ITE)
+# %%
 
 # %%
+
 
 # %% [markdown]
 # # transistor potential landscape
 
 # %%
+x_s
 
 # %%
 # height of the infinite barrier in the source and the drain well.
@@ -244,6 +246,8 @@ for i in range(N_drain_start_to_drain_well_end,N_drain_end_to_barrier):
 # making the potential dimensionless       
 #source_gate_drain_well_potential = source_gate_drain_well_potential/(epsilon*M*omega_x**2*x_s**2)   
 
+# %%
+
 
 # %% [markdown]
 # # time split to evolve the wavefunction in real time
@@ -259,9 +263,10 @@ psi_initial_for_full_potential = psi_ITE
 while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
+time_lst_index = int(sys.argv[1])    
+time_lst = np.linspace(0,160,16)
 
-
-final_time_SI = float(sys.argv[1])*10**(-3)
+final_time_SI = time_lst[time_lst_index]*10**(-3)
 time_step_SI  = 10**(-8)  
 # time is made dimensionless  
 final_time = omega_x*final_time_SI
@@ -270,25 +275,19 @@ time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_fo
                                         source_gate_drain_well_potential,
                                         time_step,final_time)
 
-np.save("psi_t_time_split.npy",time_evolved_wavefunction_time_split)
+np.save("time_evolved_full_potential_time_split.npy",time_evolved_wavefunction_time_split)
 
 # %%
 D2 = scipy.sparse.diags([1, -2, 1], 
                         [-1, 0, 1],
                         shape=(source_gate_drain_well_position.size, source_gate_drain_well_position.size)) / dx**2
-
 # kinetic part of the Hamiltonian
 Hamiltonian = - (epsilon/2) * D2
-
-# dimensionless external potential added to the Hamiltonian
-#if source_gate_drain_well_potential is not None:
-#    Hamiltonian += scipy.sparse.spdiags(source_gate_drain_well_potential/(epsilon*M*omega_x**2*x_s**2),0,N,N)
 
 def dpsi_dt(t,psi):
     return -1j*(Hamiltonian.dot(psi) + 
                 (source_gate_drain_well_potential/(epsilon*M*omega_x**2*x_s**2))*psi + 
                 delta*epsilon**(3/2)*np.abs(psi)**2*psi)
-
 
 psi_0 = np.complex64(psi_initial_for_full_potential)
 psi_0 = normalize_x(psi_0)
@@ -302,45 +301,7 @@ sol = scipy.integrate.solve_ivp(dpsi_dt,
                                 y0 = psi_0, 
                                 t_eval = t_eval,
                                 method="RK45")
-
-np.save("psi_t_scipy_rk4.npy",sol[:,-1])
-
-t0 = 0.0
-time_step_SI  = 10**(-9)    
-time_step = omega_x*time_step_SI
-def wavefunction_t(total_time):
-    # initial wavefunction
-    psi_0 = np.complex64(psi_initial_for_full_potential)
-    psi_0 = normalize_x(psi_0)
-    dt = time_step
-    psi_t = psi_0
-    t = t0
-    
-    number_of_iterations = int(total_time/dt)
-    print("Number of iterations = ",number_of_iterations)
-    
-    for _ in range(number_of_iterations):   
-        
-        k1 = dt * dpsi_dt(t, psi_t)
-        k2 = dt * dpsi_dt(t + dt/2, psi_t + k1/2)
-        k3 = dt * dpsi_dt(t + dt/2, psi_t + k2/2)
-        k4 = dt * dpsi_dt(t + dt, psi_t + k3)
-
-        psi_t = psi_t + 1/6 * (k1 + 2 * k2 + 2 * k3 + k4)
-        t = t + dt
-        
-    return psi_t
-
-# %%
-time_evolved_wavefunction_rk4 = wavefunction_t(final_time)
-
-np.save("psi_t_rk4.npy",time_evolved_wavefunction_rk4)
-
-
-# %% [markdown]
-# ## RK4 of scipy
-
-# %%
+np.save("time_evolved_full_potential_rk45.npy",sol.y[:,-1])
 
 
 # %% [markdown]
