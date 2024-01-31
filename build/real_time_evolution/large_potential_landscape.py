@@ -1,5 +1,6 @@
 # %%
 # import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import fftpack
@@ -153,7 +154,7 @@ psi_initial = normalize_x(psi_initial)
 
 # wavefunction is evolved in imaginary time to get the ground state
 final_time_SI = 0.01
-time_step_SI  = -1j*10**(-8)   
+time_step_SI  = -1j*10**(-7)   
 final_time = omega_x*final_time_SI
 time_step = omega_x*time_step_SI
 psi_ITE = time_split_suzukui_trotter(psi_initial,potential_arr,time_step,final_time);
