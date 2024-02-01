@@ -255,7 +255,7 @@ for i in range(N_drain_start_to_drain_well_end,N_drain_end_to_barrier):
 
 # %%
 # momentum space discretization
-k = np.hstack([np.arange(0,N/2), np.arange(-N/2,0)])*dk
+k = np.hstack([np.arange(0,N/2), np.arange(-N/2+1,0)])*dk
     
 E_k = k**2*epsilon/2
 
