@@ -21,7 +21,7 @@ omega_x = trap_frequency
 trap_length = np.sqrt(H_BAR/(M*trap_frequency)) # m
 A = PI*trap_length**2 # m*m
 
-N_atom = 40000
+N_atom = 20000
 
 # interaction strength in the source well.
 g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
@@ -38,21 +38,21 @@ delta   = (g_source*N_atom*(x_s**2))/(a_0**3*H_BAR*omega_x)
 
 # %%
 # number of discretized intervals in the position array
-N = 2**17 # choose a power of two to make things simpler for fast Fourier transform
+N = 2**15 # choose a power of two to make things simpler for fast Fourier transform
 
 # barrier height outside the trap.
 infinite_barrier_height = 10**5*10**3*2*PI*H_BAR
 
 
-position_start = -41*1.e-6/x_s # m
-position_end   = 41*1.e-6/x_s # m
+position_start = -11*1.e-6/x_s # m
+position_end   = 11*1.e-6/x_s # m
 
 dx = (position_end-position_start)/N
 
 source_well_bias_potential = 0*10**3*2*PI*H_BAR
 
-source_well_start          = -40*1.e-6/x_s # m
-source_well_end            =  40*1.e-6/x_s # m
+source_well_start          = -10*1.e-6/x_s # m
+source_well_end            =  10*1.e-6/x_s # m
 
 position_arr  = np.linspace(position_start,position_end,N)
 
@@ -176,29 +176,29 @@ x_s
 # height of the infinite barrier in the source and the drain well.
 infinite_barrier_height = 10**6*10**3*2*PI*H_BAR
 
-position_start = -41*1.e-6/x_s # this must be same as the position start used earlier in the source well
-position_end   = 100*1.e-6/x_s # right end of the transistor potential
+position_start = -11*1.e-6/x_s # this must be same as the position start used earlier in the source well
+position_end   = 30*1.e-6/x_s # right end of the transistor potential
 
 # dx must be constant throught the code
 N = int((position_end-position_start)/dx) # number of points in the discretized position
 print(" Number of divisions in position, N = ",N,"\n")
 
 source_well_bias_potential = 0       # must be same as the source well used earlier
-source_well_start          = -40*1.e-6/x_s # must be same as the source well used earlier
-source_well_end            = 40*1.e-6/x_s # must be same as the source well used earlier
+source_well_start          = -10*1.e-6/x_s # must be same as the source well used earlier
+source_well_end            = 10*1.e-6/x_s # must be same as the source well used earlier
 
 source_gate_barrier_start  = source_well_end
-source_gate_barrier_end    = 44*1.e-6/x_s
+source_gate_barrier_end    = 12*1.e-6/x_s
 
 gate_bias_potential        = 0
 gate_well_start            = source_gate_barrier_end
-gate_well_end              = 64*1.e-6/x_s
+gate_well_end              = 17*1.e-6/x_s
 
 gate_drain_barrier_start   = gate_well_end
-gate_drain_barrier_end     = 68*1.e-6/x_s
+gate_drain_barrier_end     = 19*1.e-6/x_s
 
 drain_well_start           = gate_drain_barrier_end
-drain_well_end             = 98*1.e-6/x_s
+drain_well_end             = 28*1.e-6/x_s
 
 SG_barrier_height = 32*10**3*2*PI*H_BAR
 GD_barrier_height = 31*10**3*2*PI*H_BAR
@@ -265,7 +265,7 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 time_lst_index = int(sys.argv[1])    
-time_lst = np.linspace(0,160,16)
+time_lst = np.linspace(0,100,16)
 
 final_time_SI = time_lst[time_lst_index]*10**(-3)
 time_step_SI  = 10**(-8)  
