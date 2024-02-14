@@ -9,8 +9,8 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-EXEC=ground-state-source-well-atomtronic-transistor.py
-HELPER="potential_landscape.txt"
+EXEC=atomtronics_time_split_RK4.py #ground-state-source-well-atomtronic-transistor.py
+HELPER="alan_potential_landscape.txt"
 
 cd $LOCAL_DIR/$RUN_NAME
 cp $EXEC $SCRATCH_DIR/
