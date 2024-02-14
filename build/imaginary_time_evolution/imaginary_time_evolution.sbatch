@@ -3,7 +3,7 @@
 #SBATCH --job-name=imaginary_time_evolution
 #
 # Partition:
-#SBATCH --partition=Hassanipour
+#SBATCH --partition=cmt
 #
 # Processors:
 #SBATCH --ntasks=16
