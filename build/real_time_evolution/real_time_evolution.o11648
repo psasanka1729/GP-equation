@@ -163,3 +163,4 @@ Removing files
 rm: cannot remove 'atomtronics_time_split_RK4.py': No such file or directory
 Launcher: Job 22 completed in 102310 seconds.
 Launcher: Task 21 done. Exiting.
+slurmstepd: error: *** JOB 11648 ON compute-2-01-09 CANCELLED AT 2024-02-17T14:57:24 ***
