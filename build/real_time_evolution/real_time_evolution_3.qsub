@@ -9,8 +9,9 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-EXEC=dimensionless_step_potential_code.py #real_time_RK4.py
-#HELPER_1="alan_potential_landscape.txt" 
+#EXEC=dimensionless_step_potential_code.py #real_time_RK4.py
+EXEC=atomtronics_time_split_RK4.py
+HELPER_1="alan_potential_landscape.txt" 
 #HELPER_2="potential_landscape_original.txt"
 
 cd $LOCAL_DIR/$RUN_NAME

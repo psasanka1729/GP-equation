@@ -200,7 +200,7 @@ psi_initial = normalize_x(psi_initial)
 
 # wavefunction is evolved in imaginary time to get the ground state
 final_time_SI = 0.01
-time_step_SI  = -1j*10**(-7)   
+time_step_SI  = -1j*10**(-6)   
 final_time = omega_x*final_time_SI
 time_step = omega_x*time_step_SI
 psi_source_well_ITE = time_split_suzukui_trotter(psi_initial,source_well_potential,time_step,final_time);
@@ -248,7 +248,7 @@ time_lst = np.linspace(0,300,16)
 time_lst_index = int(sys.argv[1])
 final_time_SI = time_lst[time_lst_index]*10**(-3)
 
-time_step_SI  = 10**(-7)  
+time_step_SI  = 10**(-6)  
 # time is made dimensionless  
 final_time = omega_x*final_time_SI
 time_step = omega_x*time_step_SI
@@ -281,7 +281,7 @@ def dpsi_dt(t,psi):
                 delta*epsilon**(3/2)*np.abs(psi)**2*psi)
 
 t0 = 0.0
-time_step_SI  = 10**(-7)    
+time_step_SI  = 10**(-6)    
 time_step = omega_x*time_step_SI
 def wavefunction_t(total_time):
     # initial wavefunction

@@ -60,3 +60,4 @@ Launcher: Task 7 done. Exiting.
 Removing files
 Launcher: Job 9 completed in 167037 seconds.
 Launcher: Task 8 done. Exiting.
+slurmstepd: error: *** JOB 11650 ON compute-2-01-12 CANCELLED AT 2024-02-18T14:56:37 ***
