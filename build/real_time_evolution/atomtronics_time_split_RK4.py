@@ -245,7 +245,7 @@ psi_initial_for_full_potential = psi_source_well_ITE
 while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
-time_lst = np.linspace(0,5000,16)    
+time_lst = np.linspace(0,50,16)    
 time_index = int(sys.argv[1])
 
 final_time_SI = time_lst[time_index]*10**(-3)
