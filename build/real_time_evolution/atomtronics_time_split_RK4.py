@@ -19,7 +19,7 @@ omega_x = trap_frequency
 trap_length = np.sqrt(H_BAR/(M*trap_frequency)) # m
 A = PI*trap_length**2 # m*m
 
-N_atom = 4000
+N_atom = 10000
 
 # interaction strength in the source well.
 g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
@@ -145,7 +145,9 @@ def Hamiltonian_x(potential_array,psi): # H(x)
     return potential_array/(epsilon*M*omega_x**2*x_s**2)+delta*epsilon**(3/2)*np.abs(psi)**2
 
 # momentum space discretization.
-k = np.hstack([np.arange(0,N/2), np.arange(-N/2+1,0)])*dk
+k = np.hstack([np.arange(0,N/2), np.arange(-N/2,0)])*dk
+if len(k) != N:
+    k = np.hstack([np.arange(0,N/2), np.arange(-N/2+1,0)])*dk
 E_k = k**2*epsilon/2
 
 # Normalize the wavefunction in real space.
@@ -261,9 +263,9 @@ data0 = complete_transistor_position
 data1 = N_atom*np.abs(time_evolved_wavefunction_time_split)**2*dx
 data3 = complete_transistor_potential/(epsilon*M*omega_x**2*x_s**2)
 
-np.save("complete_transistor_potential_landscape.npy", data0)
+np.save("complete_transistor_position.npy", data0)
 np.save("real_time_evolution_time_split.npy", data1)
-np.save("dimentionless_complete_transistor_potential_landscape.npy", data3)
+np.save("dimentionless_complete_transistor_potential.npy", data3)
 # %%
 D2 = scipy.sparse.diags([1, -2, 1], 
                         [-1, 0, 1],
