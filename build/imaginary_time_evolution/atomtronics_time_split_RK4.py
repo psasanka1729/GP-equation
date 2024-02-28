@@ -19,7 +19,9 @@ omega_x = trap_frequency
 trap_length = np.sqrt(H_BAR/(M*trap_frequency)) # m
 A = PI*trap_length**2 # m*m
 
-N_atom = 4000
+
+atom_index = int(sys.argv[1])
+N_atom = 2000 + (10000-2000)*(atom_index/16)
 
 # interaction strength in the source well.
 g_source   = (4*PI*H_BAR**2*a_s)/(A*M)
@@ -244,11 +246,11 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 
-time_lst = np.linspace(0,300,16)
+time_lst = np.linspace(0,20,16)
 time_lst_index = int(sys.argv[1])
 final_time_SI = time_lst[time_lst_index]*10**(-3)
 
-time_step_SI  = 10**(-6)  
+time_step_SI  = 10**(-7)  
 # time is made dimensionless  
 final_time = omega_x*final_time_SI
 time_step = omega_x*time_step_SI
@@ -281,7 +283,7 @@ def dpsi_dt(t,psi):
                 delta*epsilon**(3/2)*np.abs(psi)**2*psi)
 
 t0 = 0.0
-time_step_SI  = 10**(-6)    
+time_step_SI  = 10**(-7)    
 time_step = omega_x*time_step_SI
 def wavefunction_t(total_time):
     # initial wavefunction
@@ -306,11 +308,11 @@ def wavefunction_t(total_time):
     return psi_t
 
 # %%
-#time_evolved_wavefunction_rk4 = wavefunction_t(final_time)
+time_evolved_wavefunction_rk4 = wavefunction_t(final_time)
 
-#data1 = N_atom*np.abs(time_evolved_wavefunction_rk4)**2*dx
+data1 = N_atom*np.abs(time_evolved_wavefunction_rk4)**2*dx
 
-#np.save("wavefunction_rk4.npy",data1)
+np.save("wavefunction_rk4.npy",data1)
 
 
 psi_0 = np.complex64(psi_initial_for_full_potential)
@@ -327,5 +329,5 @@ sol = scipy.integrate.solve_ivp(dpsi_dt,
                                 method="RK23")
 
 
-data1 = N_atom*np.abs(sol.y[:,-1])**2*dx
+data1 = np.abs(sol.y[:,-1])**2*dx
 np.save("wavefunction_rk4_scipy.npy",data1)
