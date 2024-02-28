@@ -56,11 +56,11 @@ original_transistor_position  = (original_transistor_position*1.e-6)/x_s
 original_transistor_potential = (original_transistor_potential*10**3*H_BAR)
 
 new_positions = replace_with_sum_of_nearest_neighbours(original_transistor_position)
-for i in range(1):
+for i in range(2):
     new_positions = replace_with_sum_of_nearest_neighbours(new_positions)
 
 new_potentials = replace_with_sum_of_nearest_neighbours(original_transistor_potential)
-for i in range(1):
+for i in range(2):
     new_potentials = replace_with_sum_of_nearest_neighbours(new_potentials)
 
 original_transistor_position = np.array(new_positions)
@@ -284,8 +284,8 @@ def dpsi_dt(t,psi):
                 delta*epsilon**(3/2)*np.abs(psi)**2*psi)
 
 t0 = 0.0
-#time_step_SI  = 10**(-8-time_exponent)    
-#time_step = omega_x*time_step_SI
+time_step_SI  = 10**(-8)    
+time_step = omega_x*time_step_SI
 def wavefunction_t(total_time):
     # initial wavefunction
     psi_0 = np.complex64(psi_initial_for_full_potential)
@@ -323,12 +323,12 @@ psi_t = psi_0
 t0 = 0.0
 #t_eval = np.arange(t0, final_time, dt)
 t_eval = np.linspace(t0,final_time,2)
-sol = scipy.integrate.solve_ivp(dpsi_dt, 
-                                t_span = [t0, final_time],
-                                y0 = psi_0, 
-                                t_eval = t_eval,
-                                method="RK23")
+#sol = scipy.integrate.solve_ivp(dpsi_dt, 
+#                                t_span = [t0, final_time],
+#                                y0 = psi_0, 
+#                                t_eval = t_eval,
+#                                method="RK23")
 
 
-data1 = np.abs(sol.y[:,-1])**2*dx
-np.save("wavefunction_rk4_scipy.npy",data1)
+#data1 = np.abs(sol.y[:,-1])**2*dx
+#np.save("wavefunction_rk4_scipy.npy",data1)
