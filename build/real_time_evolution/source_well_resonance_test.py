@@ -26,11 +26,14 @@ NUMBER_OF_ATOMS = 20000
 g_source   = (4*PI*H_BAR**2*a_s)/(CROSS_SECTIONAL_AREA*ATOM_MASS)
 a_0 = np.sqrt(H_BAR/(TRAP_FREQUENCY*ATOM_MASS))
 #x_s = a_0
-x_s = (4*np.pi*a_s*NUMBER_OF_ATOMS*a_0**4)**(1/5)    
+x_s = (4*np.pi*a_s*NUMBER_OF_ATOMS*a_0**4)**(1/5)
+np.save("x_s.npy", x_s)
 #print(x_s)
 epsilon = (H_BAR/(ATOM_MASS*OMEGA_X*x_s**2))
+np.save("epsilon.npy",epsilon)
 #print(epsilon)
 delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
+np.save("delta.npy",delta)
 #print(delta)
 
 # %% [markdown]
@@ -161,6 +164,8 @@ N = len(source_well_position)
 L  = np.abs((source_well_position[-1]-source_well_position[0]))
 
 dx = L/N
+
+np.save("dx.npy", dx)
 #print("dx (SI) = ", dx*x_s)
 
 dk = (2*PI)/L
@@ -288,7 +293,7 @@ final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential,
-                                        time_step,final_time,[t for t in range(30)])
+                                        time_step,final_time,[t for t in range(20)])
 
 # %%
 # plotting everything in SI units
