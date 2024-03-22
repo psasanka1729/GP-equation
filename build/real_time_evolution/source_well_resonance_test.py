@@ -220,7 +220,7 @@ def time_split_suzukui_trotter(initial_wavefunction,potential_array,dt,total_tim
             for snapshot_time in snapshots_lst:
                 if np.abs(np.around(time,3) - snapshot_time) < 1.e-10:
                     snapshots_lst.remove(snapshot_time) # removing the used time to avoid multiple entries
-                    np.save("time_evolved_wavefunction_"+str(time)+".npy",psi_x)
+                    np.save("time_evolved_wavefunction_"+str(np.around(time,3))+".npy",psi_x)
 
     psi_x = normalize_x(psi_x) # returns the normalized wavefunction
     
