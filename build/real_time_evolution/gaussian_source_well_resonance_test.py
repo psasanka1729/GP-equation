@@ -245,11 +245,6 @@ source_well_potential = complete_transistor_potential_SI[0:len(source_well_posit
 # converting the potential to SI units
 source_well_potential = source_well_potential
 
-dx = (position_end-position_start)/N
-np.save("dx.npy", dx)
-#print("dx (SI)= ", dx*x_s)  
-
-f = plt.figure()    
 plt.plot(source_well_position, source_well_potential,linewidth=3)
 plt.ylim([0,33*10**3*2*PI*H_BAR*1.02])
 ax = f.gca()
@@ -272,7 +267,7 @@ L  = np.abs((source_well_position[-1]-source_well_position[0]))
 
 dx = L/N
 #print("dx (SI) = ", dx*x_s)
-
+np.save("dx.npy",dx)
 dk = (2*PI)/L
 
 # Total Hamiltonian H = H(k) + H(x) = momentum space part + real space part
