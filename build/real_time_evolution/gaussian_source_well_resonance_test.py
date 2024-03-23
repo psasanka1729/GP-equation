@@ -225,8 +225,8 @@ plt.ylim([0,33*10**3*2*PI*H_BAR*1.02])
 plt.ylabel(r"Potential, $V(x)$",labelpad=10)
 plt.xlabel(r"Position, $x$",labelpad=10)
 fig.tight_layout(pad=1.0)
-path = "/Users/sasankadowarah/atomtronics/"
-os.chdir(path)
+#path = "/Users/sasankadowarah/atomtronics/"
+#os.chdir(path)
 np.save("transistor_position_gaussian.npy",  xs_SI)
 np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
 #plt.show()
