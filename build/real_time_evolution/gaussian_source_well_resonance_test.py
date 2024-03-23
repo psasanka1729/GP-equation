@@ -18,7 +18,7 @@ params = {'axes.titlesize': med,
           'xtick.labelsize': med ,
           'ytick.labelsize': med ,
           'figure.titlesize': med}
-plt.rcParams['text.usetex'] = True # need LaTeX. Change it to False if LaTeX is not installed in the system
+#plt.rcParams['text.usetex'] = True # need LaTeX. Change it to False if LaTeX is not installed in the system
 plt.rcParams.update(params)
 
 # %% [markdown]
