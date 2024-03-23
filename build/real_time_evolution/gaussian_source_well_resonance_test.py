@@ -240,24 +240,6 @@ source_well_position = complete_transistor_position[np.where((complete_transisto
 
 # %%
 source_well_potential = complete_transistor_potential_SI[0:len(source_well_position)]
-
-# %%
-# converting the potential to SI units
-source_well_potential = source_well_potential
-
-plt.plot(source_well_position, source_well_potential,linewidth=3)
-plt.ylim([0,33*10**3*2*PI*H_BAR*1.02])
-ax = f.gca()
-ax.axhline(0, color="green",linestyle="--",linewidth = 2)
-plt.xlabel(r"Position, $x$", labelpad = 20)
-plt.ylabel(r"Potential, $V_{\textrm{Source}}$", labelpad = 20)
-f.set_figwidth(10)
-f.set_figheight(6)
-#plt.show()
-
-# %% [markdown]
-# #### time split code
-
 # %%
 N = len(source_well_position)
 #print("N = ",N)
