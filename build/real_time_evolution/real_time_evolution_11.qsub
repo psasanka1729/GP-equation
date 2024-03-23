@@ -11,7 +11,8 @@ mkdir -p $SCRATCH_DIR
 
 #EXEC=dimensionless_step_potential_code.py #real_time_RK4.py
 #EXEC=atomtronics_time_split_RK4.py
-EXEC=source_well_resonance_test.py
+#EXEC=source_well_resonance_test.py
+EXEC=gaussian_source_well_resonance_test.py
 #HELPER_1="alan_potential_landscape.txt" 
 #HELPER_2="potential_landscape_original.txt"
 
