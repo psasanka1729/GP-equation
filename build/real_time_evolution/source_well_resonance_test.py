@@ -52,7 +52,7 @@ def right_tanh_function(xs, barrier_height, x_0, smoothness_control_parameter):
 
 infinite_barrier = 500  # kHz
 SG_barrier_height_kHz = 30   # kHz
-GD_barrier_height_kHz = 32   # kHz
+GD_barrier_height_kHz = 33   # kHz
 source_well_bias_potential_lst = [i for i in range(32)]
 source_well_bias_potential_index = int(sys.argv[1])
 source_well_bias_potential = source_well_bias_potential_lst[source_well_bias_potential_index]  # kHz
