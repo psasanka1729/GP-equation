@@ -104,7 +104,7 @@ def smooth_potential_well(position_array,
 
         return potential_well_arr*10**3*2*PI*H_BAR # Joule
 
-N = 2**14
+N = 2**12
 position_start = -30*1.e-6/x_s # micrometer
 position_end   = 60*1.e-6/x_s # micrometer
 
