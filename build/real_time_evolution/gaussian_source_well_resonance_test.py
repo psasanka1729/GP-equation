@@ -237,19 +237,12 @@ np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
 # %%
 complete_transistor_position = xs_SI/x_s
 source_well_position = complete_transistor_position[np.where((complete_transistor_position > position_start) & (complete_transistor_position < gate_well_start))]
-
-# %%
 source_well_potential = complete_transistor_potential_SI[0:len(source_well_position)]
-# %%
+
+L  = np.abs((source_well_position[-1]-source_well_position[0]))
 N = len(source_well_position)
-#print("N = ",N)
-
-# discretizing the momentum space
-#L  = np.abs((source_well_position[-1]-source_well_position[0]))
-
-dx = (complete_transistor_position[-1] - complete_transistor_position[0])/len(complete_transistor_position)
-#print("dx (SI) = ", dx*x_s)
-np.save("dx.npy",dx)
+dx = L/N
+np.save("dx1.npy",dx)
 dk = (2*PI)/L
 
 # Total Hamiltonian H = H(k) + H(x) = momentum space part + real space part
@@ -278,7 +271,7 @@ def time_split_suzukui_trotter(initial_wavefunction, potential_array, dt, total_
     psi_x = initial_wavefunction
     
     total_iterations = int(np.abs(total_time)/np.abs(dt))
-    print("Number of iterations =", total_iterations)
+    #print("Number of iterations =", total_iterations)
     
     for iteration in range(total_iterations):
 
@@ -324,15 +317,16 @@ time_step_SI  = -1j*10**(-7)
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 psi_source_well_ITE = time_split_suzukui_trotter(psi_initial,source_well_potential,time_step,final_time, [])
+np.save("source_well_ground_state.npy",psi_source_well_ITE)
 #print("Normalization of the wavefucntion = ",np.sqrt(np.sum(np.abs(psi_source_well_ITE)**2)*dx) )
 
 # %% [markdown]
 # #### plot ground state wavefunction  in the source well
 
 # %%
-data0 = source_well_position
-data1 = np.abs(psi_source_well_ITE)**2*dx
-data3 = source_well_potential#/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
+#data0 = source_well_position
+#data1 = np.abs(psi_source_well_ITE)**2*dx
+#data3 = source_well_potential#/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
 
 fig, ax1 = plt.subplots()
 
@@ -409,6 +403,9 @@ fig.tight_layout()
 
 # %%
 N = len(complete_transistor_position)
+L = np.abs((complete_transistor_position[-1]-complete_transistor_position[0]))
+dx = L/N
+np.save("dx2.npy",dx)
 # momentum space discretization
 k = np.hstack([np.arange(0,N/2), np.arange(-N/2,0)])*dk
     
