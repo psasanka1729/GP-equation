@@ -324,9 +324,9 @@ np.save("source_well_ground_state.npy",psi_source_well_ITE)
 # #### plot ground state wavefunction  in the source well
 
 # %%
-#data0 = source_well_position
-#data1 = np.abs(psi_source_well_ITE)**2*dx
-#data3 = source_well_potential#/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
+data0 = source_well_position
+data1 = np.abs(psi_source_well_ITE)**2*dx
+data3 = source_well_potential#/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
 
 fig, ax1 = plt.subplots()
 
