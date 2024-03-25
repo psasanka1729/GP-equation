@@ -150,19 +150,9 @@ source_well_potential = (source_well_potential+source_well_bias_potential)*10**3
 np.save("source_well_position.npy", source_well_position)
 np.save("source_well_potential.npy", source_well_potential)
 
-dx = (position_end-position_start)/N
-#print("dx (SI)= ", dx*x_s)  
-
-# %% [markdown]
-# #### time split code
-
-# %%
 N = len(source_well_position)
-#print("N = ",N)
-
 # discretizing the momentum space
 L  = np.abs((source_well_position[-1]-source_well_position[0]))
-
 dx = L/N
 
 np.save("dx.npy", dx)
@@ -261,12 +251,12 @@ np.save("ground_state_in_source_well.npy", psi_source_well_ITE)
 # #### chemical potential of the BEC
 
 # %%
-source_well_position_to_plot = complete_transistor_position[0:len(source_well_potential)]
-source_well_potential_to_plot = complete_transistor_potential[0:len(source_well_potential)]
+#source_well_position_to_plot = complete_transistor_position[0:len(source_well_potential)]
+#source_well_potential_to_plot = complete_transistor_potential[0:len(source_well_potential)]
 
-data0 = source_well_position_to_plot
-data1 = source_well_potential +g_source*NUMBER_OF_ATOMS*np.abs(psi_source_well_ITE/np.sqrt(x_s))**2
-data3 = source_well_potential 
+#data0 = source_well_position_to_plot
+#data1 = source_well_potential +g_source*NUMBER_OF_ATOMS*np.abs(psi_source_well_ITE/np.sqrt(x_s))**2
+#data3 = source_well_potential 
 
 # %% [markdown]
 # ### real time evolution in the complete transistor potential
@@ -276,6 +266,9 @@ data3 = source_well_potential
 
 # %%
 N = len(complete_transistor_position)
+L = np.abs((complete_transistor_position[-1]-complete_transistor_position[0]))
+dx = L/N
+np.save("dx_1.npy",dx)
 # momentum space discretization
 k = np.hstack([np.arange(0,N/2), np.arange(-N/2,0)])*dk
     
@@ -297,10 +290,10 @@ time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_fo
 
 # %%
 # plotting everything in SI units
-data0 = complete_transistor_position*x_s*1.e6
-data1 = np.abs(time_evolved_wavefunction_time_split)**2*dx
+#data0 = complete_transistor_position*x_s*1.e6
+#data1 = np.abs(time_evolved_wavefunction_time_split)**2*dx
 #data2 = np.abs(time_evolved_wavefunction_time_split)**2
-data3 = complete_transistor_potential#/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
+#data3 = complete_transistor_potential#/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
 
 #np.save("time_evolved_wavefunction_"+str(time)+".npy", time_evolved_wavefunction_time_split)
 

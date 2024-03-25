@@ -245,9 +245,9 @@ N = len(source_well_position)
 #print("N = ",N)
 
 # discretizing the momentum space
-L  = np.abs((source_well_position[-1]-source_well_position[0]))
+#L  = np.abs((source_well_position[-1]-source_well_position[0]))
 
-dx = L/N
+dx = (complete_transistor_position[-1] - complete_transistor_position[0])/len(complete_transistor_position)
 #print("dx (SI) = ", dx*x_s)
 np.save("dx.npy",dx)
 dk = (2*PI)/L
