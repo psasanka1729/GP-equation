@@ -172,16 +172,6 @@ if len(k) != N:
 E_k = k**2*epsilon/2
 
 # Normalize the wavefunction in real space.
-def normalize_x(wavefunction_x):
-    return wavefunction_x/(np.sqrt(np.sum(np.abs(wavefunction_x)**2)*dx))
-
-# Normalize the wavefunction in momentum space.
-def normalize_k(wavefunction_k):
-    return wavefunction_k/(np.sqrt(np.sum(np.abs(wavefunction_k)**2)*dk))
-
-    
-def time_split_suzukui_trotter(initial_wavefunction,potential_array,dt,total_time,snapshots_lst):    
-
     psi_k = fftpack.fft(initial_wavefunction)
     psi_x = initial_wavefunction
     
@@ -241,9 +231,9 @@ psi_source_well_ITE = time_split_suzukui_trotter(psi_initial,source_well_potenti
 # #### plot ground state wavefunction  in the source well
 
 # %%
-data0 = source_well_position
-data1 = np.abs(psi_source_well_ITE)**2*dx
-data3 = source_well_potential/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
+#data0 = source_well_position
+#data1 = np.abs(psi_source_well_ITE)**2*dx
+#data3 = source_well_potential/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
 
 np.save("ground_state_in_source_well.npy", psi_source_well_ITE)
 
@@ -388,6 +378,13 @@ time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_fo
 # #data1 = np.abs(sol.y[:,-1])**2*dx
 # data2 = np.abs(time_evolved_wavefunction_rk4**2)*dx
 # data3 = complete_transistor_potential/(epsilon*ATOM_MASS*OMEGA_X**2*x_s**2)
+# data4 = np.abs(time_evolved_wavefunction_time_split)**2*dx
+# fig, ax1 = plt.subplots()
+
+# ax1.set_xlabel(r"Position, $\tilde{x}$")
+# ax1.set_ylabel(r"$|\tilde{\psi}|^{2}$", color="tab:red")
+# #ax1.scatter(t, data1, color=color,s= 5,linewidth = 3,label=r"Time = ")
+# #ax1.plot(data0, data2, color="tab:red",linewidth = 3,label=r"Time split")
 # data4 = np.abs(time_evolved_wavefunction_time_split)**2*dx
 # fig, ax1 = plt.subplots()
 
