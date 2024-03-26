@@ -392,7 +392,7 @@ ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax1.set_xlim([-4,0])
-plt.gaussian_source_well_resonance_test.py.swpsavefig("chemical_potential_in_source_well_"+str(NUMBER_OF_ATOMS)+".jpg", dpi=300)
+plt.savefig("chemical_potential_in_source_well_"+str(NUMBER_OF_ATOMS)+".jpg", dpi=300)
 fig.tight_layout()
 
 # %% [markdown]
