@@ -392,7 +392,7 @@ ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax1.set_xlim([-4,0])
-plt..gaussian_source_well_resonance_test.py.swpsavefig("chemical_potential_in_source_well_"+str(NUMBER_OF_ATOMS)+".jpg", dpi=300)
+plt.gaussian_source_well_resonance_test.py.swpsavefig("chemical_potential_in_source_well_"+str(NUMBER_OF_ATOMS)+".jpg", dpi=300)
 fig.tight_layout()
 
 # %% [markdown]
@@ -438,7 +438,7 @@ ax1.set_xlabel(r"Position, $x (\mu m)$")
 ax1.set_ylabel(r"$|\psi(x)|^{2}$", color="tab:red", labelpad = 20)
 ax1.plot(data0, data1, color="tab:red",linewidth = 3.4)
 #plt.legend()
-ax1.tick_params(axis="y", labelcolor="tab:red")
+MXDxj6HzQFLi7vANyaax1.tick_params(axis="y", labelcolor="tab:red")
 ax2 = ax1.twinx()
 color = "tab:blue"
 ax2.plot(data0, data3, color=color,linewidth = 7)
