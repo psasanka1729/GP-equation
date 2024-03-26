@@ -173,7 +173,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = [i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(20,26,48),2)#[i for i in range(32)]
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
@@ -364,7 +364,6 @@ fig.tight_layout()
 data0 = source_well_position
 data1 = source_well_potential +g_source*NUMBER_OF_ATOMS*np.abs(psi_source_well_ITE/np.sqrt(x_s))**2
 data3 = source_well_potential 
-
 fig, ax1 = plt.subplots()
 
 ax1.set_xlabel(r"Position, $\tilde{x}$", labelpad=20)
