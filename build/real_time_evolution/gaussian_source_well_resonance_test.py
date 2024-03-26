@@ -418,7 +418,7 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 
-final_time_SI = 30*10**(-3)
+final_time_SI = 50*10**(-3)
 time_step_SI  = 10**(-8)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
