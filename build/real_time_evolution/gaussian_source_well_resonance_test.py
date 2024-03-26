@@ -43,11 +43,11 @@ g_source   = (4*PI*H_BAR**2*a_s)/(CROSS_SECTIONAL_AREA*ATOM_MASS)
 a_0 = np.sqrt(H_BAR/(TRAP_FREQUENCY*ATOM_MASS))
 #x_s = a_0
 x_s = (4*np.pi*a_s*NUMBER_OF_ATOMS*a_0**4)**(1/5)    
-print(x_s)
+#print(x_s)
 epsilon = (H_BAR/(ATOM_MASS*OMEGA_X*x_s**2))
-print(epsilon)
+#print(epsilon)
 delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
-print(delta)
+#print(delta)
 
 # %% [markdown]
 # #### Complete transistor potential
@@ -207,7 +207,7 @@ def gaussian_barrier(x, mu, SG_barrier_height, GD_barrier_height, sigma):
      # infinite barrier
      gaussian = np.where(x < -30, V_INFINITE_BARRIER, gaussian)
 
-     gaussian = np.where(x > (gate_well_end+drain_well_end)/2, right_tanh_function(xs, V_INFINITE_BARRIER, drain_well_end, 0.005), gaussian)
+     gaussian = np.where(x > (gate_well_end+drain_well_end)/2, right_tanh_function(xs, V_INFINITE_BARRIER, drain_well_end, 0.0005), gaussian)
      return gaussian
 
 fig, ax = plt.subplots()
@@ -392,7 +392,7 @@ ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax1.set_xlim([-4,0])
-plt.savefig("chemical_potential_in_source_well_"+str(NUMBER_OF_ATOMS)+".jpg", dpi=300)
+plt..gaussian_source_well_resonance_test.py.swpsavefig("chemical_potential_in_source_well_"+str(NUMBER_OF_ATOMS)+".jpg", dpi=300)
 fig.tight_layout()
 
 # %% [markdown]
@@ -419,13 +419,13 @@ while len(psi_initial_for_full_potential) < N:
     
 
 final_time_SI = 50*10**(-3)
-time_step_SI  = 10**(-8)  
+time_step_SI  = 10**(-7)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential*10**3*2*PI*H_BAR,
-                                        time_step, final_time, [t for t in range(30)])
+                                        time_step, final_time, [t for t in range(50)])
 
 # %%
 # plotting everything in SI units
