@@ -180,7 +180,7 @@ V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 V_INFINITE_BARRIER  = 500
 N = 2**12
 
-position_start      = -30
+position_start      = -20
 position_end        = 60
 # positions in SI units
 source_well_start   = -10
@@ -417,14 +417,14 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 
-final_time_SI = 40*10**(-3)
+final_time_SI = 30*10**(-3)
 time_step_SI  = 10**(-7)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential*10**3*2*PI*H_BAR,
-                                        time_step, final_time, [t for t in range(40)])
+                                        time_step, final_time, [t for t in range(30)])
 
 # %%
 # plotting everything in SI units
