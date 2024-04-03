@@ -173,7 +173,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = np.around(np.linspace(20,26,48),2)#[i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(20,27,112),2)#[i for i in range(32)]
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
@@ -417,14 +417,14 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 
-final_time_SI = 40*10**(-3)
+final_time_SI = 50*10**(-3)
 time_step_SI  = 10**(-8)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential*10**3*2*PI*H_BAR,
-                                        time_step, final_time, [t for t in range(40)])
+                                        time_step, final_time, [t for t in range(50)])
 
 # %%
 # plotting everything in SI units
