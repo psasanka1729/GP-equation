@@ -437,7 +437,7 @@ ax1.set_xlabel(r"Position, $x (\mu m)$")
 ax1.set_ylabel(r"$|\psi(x)|^{2}$", color="tab:red", labelpad = 20)
 ax1.plot(data0, data1, color="tab:red",linewidth = 3.4)
 #plt.legend()
-MXDxj6HzQFLi7vANyaax1.tick_params(axis="y", labelcolor="tab:red")
+ax1.tick_params(axis="y", labelcolor="tab:red")
 ax2 = ax1.twinx()
 color = "tab:blue"
 ax2.plot(data0, data3, color=color,linewidth = 7)
