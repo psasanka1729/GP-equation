@@ -173,7 +173,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = np.around(np.linspace(20,27,112),2)#[i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(21,24,96),2)#[i for i in range(32)]
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
