@@ -6,8 +6,8 @@
 #SBATCH --partition=gpu-preempt
 #
 # Processors:
-#SBATCH --ntasks=112
-#SBATCH --nodes=7
+#SBATCH --ntasks=96
+#SBATCH --nodes=6
 #
 # Wall clock limit:
 #SBATCH --time=7-00:00:00

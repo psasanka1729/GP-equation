@@ -1,0 +1,51 @@
+#!/usr/bin/bash
+# Template for ".qsub" files that will be run as batch files by slurm
+
+RUN_NAME=real_time_evolution
+PROJECT_NAME=GP-equation
+SCRATCH=$HOME/scratch
+SCRATCH_DIR=$SCRATCH/$RUN_NAME/b81
+LOCAL_DIR=$HOME/$PROJECT_NAME/build
+
+mkdir -p $SCRATCH_DIR
+
+#EXEC=dimensionless_step_potential_code.py #real_time_RK4.py
+#EXEC=atomtronics_time_split_RK4.py
+#EXEC=source_well_resonance_test.py
+EXEC=gaussian_source_well_resonance_test.py
+#HELPER_1="alan_potential_landscape.txt" 
+#HELPER_2="potential_landscape_original.txt"
+
+cd $LOCAL_DIR/$RUN_NAME
+cp $EXEC $SCRATCH_DIR/
+if [ ! -z "$HELPER_1" ] # Check that HELPER isn't empty
+then
+    cp $HELPER_1 $SCRATCH_DIR/
+fi
+#cd $SCRATCH_DIR/
+
+if [ ! -z "$HELPER_2" ]
+then
+	cp $HELPER_2 $SCRATCH_DIR/
+fi
+cd $SCRATCH_DIR
+
+{ time python ./$EXEC 81; } > temp.out 2> error.err
+
+if [ "$(pwd)" == $SCRATCH_DIR ]; then
+    echo "Removing files"
+    rm $EXEC
+    if [ ! -z "$HELPER_1" ] # Check that HELPER isn't empty
+    then
+	rm $HELPER_1
+    fi
+fi
+
+if [ "$(pwd)" == $SCRATCH_DIR ]; then
+    echo "Removing files"
+    rm $EXEC
+    if [ ! -z "$HELPER_2" ] # Check that HELPER isn't empty
+    then
+	rm $HELPER_2
+    fi
+fi
