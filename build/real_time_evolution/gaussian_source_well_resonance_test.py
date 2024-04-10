@@ -178,7 +178,7 @@ source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
 V_INFINITE_BARRIER  = 500
-N = 2**14
+N = 2**12
 
 position_start      = -20
 position_end        = 60
@@ -418,7 +418,7 @@ while len(psi_initial_for_full_potential) < N:
     
 
 final_time_SI = 50*10**(-3)
-time_step_SI  = 10**(-8)  
+time_step_SI  = 10**(-7)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
