@@ -177,7 +177,7 @@ source_well_bias_potential_lst = np.around(np.linspace(10,26,64),2)#[i for i in 
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
-V_INFINITE_BARRIER  = 500
+V_INFINITE_BARRIER  = 1000
 N = 2**12
 
 position_start      = -20
@@ -217,7 +217,7 @@ xs = np.linspace(position_start,position_end,N)
 # changing position to SI units
 xs_SI = xs*1.e-6
 # changing potential to SI units
-complete_transistor_potential = gaussian_barrier(xs,0,30,32,1.0)
+complete_transistor_potential = gaussian_barrier(xs,0,30,31,1.0)
 complete_transistor_potential_SI = complete_transistor_potential*10**3*2*PI*H_BAR
 plt.plot(xs_SI, complete_transistor_potential_SI, linewidth = 4)
 plt.axhline(y=0, color="k", linestyle='--')
