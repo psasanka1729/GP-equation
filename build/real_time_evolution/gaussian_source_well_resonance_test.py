@@ -239,6 +239,10 @@ complete_transistor_position = xs_SI/x_s
 source_well_position = complete_transistor_position[np.where((complete_transistor_position > position_start) & (complete_transistor_position < gate_well_start))]
 source_well_potential = complete_transistor_potential_SI[0:len(source_well_position)]
 
+np.save("source_well_position.npy",source_well_position)
+np.save("source_well_potential.npy",source_well_potential)
+
+
 L  = np.abs((source_well_position[-1]-source_well_position[0]))
 N = len(source_well_position)
 dx = L/N
@@ -365,6 +369,9 @@ data0 = source_well_position
 data1 = source_well_potential +g_source*NUMBER_OF_ATOMS*np.abs(psi_source_well_ITE/np.sqrt(x_s))**2
 data3 = source_well_potential 
 fig, ax1 = plt.subplots()
+
+np.save("chemical_potential_in_source_well.npy",data1)
+
 
 ax1.set_xlabel(r"Position, $\tilde{x}$", labelpad=20)
 ax1.set_ylabel(r"Chemical potential $\mu\; (J)$", color="tab:red", labelpad=20)
