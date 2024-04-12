@@ -177,7 +177,7 @@ source_well_bias_potential_lst = np.around(np.linspace(18,26,64),2)#[i for i in 
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
-V_INFINITE_BARRIER  = 1000
+V_INFINITE_BARRIER  = 500
 N = 2**12
 
 position_start      = -20
