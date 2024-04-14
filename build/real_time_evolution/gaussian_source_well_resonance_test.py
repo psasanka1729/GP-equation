@@ -173,12 +173,12 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = np.around(np.linspace(18,26,64),2)#[i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(18,26,48),2)#[i for i in range(32)]
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
 V_INFINITE_BARRIER  = 1000
-N = 2**12
+N = 2**13
 
 position_start      = -20
 position_end        = 60
