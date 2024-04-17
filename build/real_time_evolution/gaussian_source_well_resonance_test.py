@@ -173,20 +173,32 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = np.around(np.linspace(18,26,48),2)#[i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(20,27,48),2)#[i for i in range(32)]
+np.save("V_SS_lst.npy", source_well_bias_potential_lst)
+
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
-V_INFINITE_BARRIER  = 1000
-N = 2**13
+V_INFINITE_BARRIER  = 3000
+np.save("V_inf.npy", V_INFINITE_BARRIER)
+
+N = 2**12
+np.save("N.npy",N)
 
 position_start      = -20
 position_end        = 60
 # positions in SI units
-source_well_start   = -10
+source_well_start   = -15
 gate_well_start     = 0
 gate_well_end       = 4.8
 drain_well_end      = 50
+
+
+np.save("position_start.npy",position_start)
+np.save("position_end.npy",position_end)
+np.save("source_well_start.npy",source_well_start)
+np.save("gate_well_start.npy",gate_well_start)
+np.save("gate_well_end.npy",gate_well_end)
 
 def left_tanh_function(xs, barrier_height, x_0, smoothness_control_parameter):
                 return barrier_height/2 - barrier_height/2 * np.tanh((xs-x_0)/(barrier_height*smoothness_control_parameter))
@@ -202,12 +214,12 @@ def gaussian_barrier(x, mu, SG_barrier_height, GD_barrier_height, sigma):
      plataeu_x_cor =  (mu - sigma*np.sqrt(-np.log(V_SS/SG_barrier_height)))
 
      # bias potential in the source well
-     gaussian = np.where(x < plataeu_x_cor, V_INFINITE_BARRIER/2 - V_INFINITE_BARRIER/2 * np.tanh((xs-source_well_start)/(0.001*V_INFINITE_BARRIER)) + V_SS, gaussian)   
+     gaussian = np.where(x < plataeu_x_cor, V_INFINITE_BARRIER/2 - V_INFINITE_BARRIER/2 * np.tanh((xs-source_well_start)/(0.0005*V_INFINITE_BARRIER)) + V_SS, gaussian)   
 
      # infinite barrier
      gaussian = np.where(x < -30, V_INFINITE_BARRIER, gaussian)
 
-     gaussian = np.where(x > (gate_well_end+drain_well_end)/2, right_tanh_function(xs, V_INFINITE_BARRIER, drain_well_end, 0.0005), gaussian)
+     gaussian = np.where(x > (gate_well_end+drain_well_end)/2, right_tanh_function(xs, V_INFINITE_BARRIER, drain_well_end, 0.000005), gaussian)
      return gaussian
 
 fig, ax = plt.subplots()
@@ -217,7 +229,7 @@ xs = np.linspace(position_start,position_end,N)
 # changing position to SI units
 xs_SI = xs*1.e-6
 # changing potential to SI units
-complete_transistor_potential = gaussian_barrier(xs,0,30,31,1.0)
+complete_transistor_potential = gaussian_barrier(xs,0,30,32,1.0)
 complete_transistor_potential_SI = complete_transistor_potential*10**3*2*PI*H_BAR
 plt.plot(xs_SI, complete_transistor_potential_SI, linewidth = 4)
 plt.axhline(y=0, color="k", linestyle='--')
@@ -425,7 +437,7 @@ while len(psi_initial_for_full_potential) < N:
     
 
 final_time_SI = 50*10**(-3)
-time_step_SI  = 10**(-7)  
+time_step_SI  = 10**(-8)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
