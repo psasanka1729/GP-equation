@@ -173,7 +173,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = np.around(np.linspace(20,27,48),2)#[i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(21,27,80),2)#[i for i in range(32)]
 np.save("V_SS_lst.npy", source_well_bias_potential_lst)
 
 source_well_bias_potential_index = int(sys.argv[1])
@@ -182,7 +182,7 @@ V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 V_INFINITE_BARRIER  = 3000
 np.save("V_inf.npy", V_INFINITE_BARRIER)
 
-N = 2**12
+N = 2**13
 np.save("N.npy",N)
 
 position_start      = -20
@@ -329,7 +329,7 @@ psi_initial = normalize_x(psi_initial)
 
 # wavefunction is evolved in imaginary time to get the ground state
 final_time_SI = 1.e-2
-time_step_SI  = -1j*10**(-7)   
+time_step_SI  = -1j*10**(-8)   
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 psi_source_well_ITE = time_split_suzukui_trotter(psi_initial,source_well_potential,time_step,final_time, [])
@@ -436,14 +436,14 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 
-final_time_SI = 50*10**(-3)
+final_time_SI = 30*10**(-3)
 time_step_SI  = 10**(-8)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential*10**3*2*PI*H_BAR,
-                                        time_step, final_time, [t for t in range(50)])
+                                        time_step, final_time, [t for t in range(100)])
 
 # %%
 # plotting everything in SI units
