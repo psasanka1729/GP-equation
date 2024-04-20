@@ -443,7 +443,7 @@ final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential*10**3*2*PI*H_BAR,
-                                        time_step, final_time, [t for t in range(100)])
+                                        time_step, final_time, [t for t in range(50)])
 
 # %%
 # plotting everything in SI units
