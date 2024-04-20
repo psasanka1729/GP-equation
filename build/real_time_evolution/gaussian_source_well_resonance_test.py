@@ -173,7 +173,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = np.around(np.linspace(21,27,16*2),2)#[i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(21,27,16*3),2)#[i for i in range(32)]
 np.save("V_SS_lst.npy", source_well_bias_potential_lst)
 
 source_well_bias_potential_index = int(sys.argv[1])
@@ -182,7 +182,7 @@ V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 V_INFINITE_BARRIER  = 3000
 np.save("V_inf.npy", V_INFINITE_BARRIER)
 
-N = 2**13
+N = 2**14
 np.save("N.npy",N)
 
 position_start      = -20
@@ -328,7 +328,7 @@ psi_initial = np.ones(N)
 psi_initial = normalize_x(psi_initial) 
 
 # wavefunction is evolved in imaginary time to get the ground state
-final_time_SI = 1.e-2
+final_time_SI = 1.e-1
 time_step_SI  = -1j*10**(-8)   
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
