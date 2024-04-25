@@ -185,6 +185,7 @@ np.save("V_inf.npy", V_INFINITE_BARRIER)
 N = 2**14
 np.save("N.npy",N)
 
+"""
 position_start      = -20
 position_end        = 60
 # positions in SI units
@@ -193,12 +194,12 @@ gate_well_start     = 0
 gate_well_end       = 4.8
 drain_well_end      = 50
 
-
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
 np.save("source_well_start.npy",source_well_start)
 np.save("gate_well_start.npy",gate_well_start)
 np.save("gate_well_end.npy",gate_well_end)
+"""
 
 def left_tanh_function(xs, barrier_height, x_0, smoothness_control_parameter):
                 return barrier_height/2 - barrier_height/2 * np.tanh((xs-x_0)/(barrier_height*smoothness_control_parameter))
@@ -227,10 +228,18 @@ fig.set_figwidth(20)
 fig.set_figheight(6)
 xs = np.linspace(position_start,position_end,N)
 # changing position to SI units
+"""
 xs_SI = xs*1.e-6
 # changing potential to SI units
 complete_transistor_potential = gaussian_barrier(xs,0,30,32,1.0)
 complete_transistor_potential_SI = complete_transistor_potential*10**3*2*PI*H_BAR
+"""
+
+""" New potential used by Alan in experiment. """
+xs_SI = np.load("new_complete_transistor_position.npy")
+complete_transistor_potential_SI = np.load("new_complete_transistor_potential.npy")
+
+"""
 plt.plot(xs_SI, complete_transistor_potential_SI, linewidth = 4)
 plt.axhline(y=0, color="k", linestyle='--')
 plt.ylim([0,33*10**3*2*PI*H_BAR*1.02])
@@ -241,10 +250,13 @@ fig.tight_layout(pad=1.0)
 #os.chdir(path)
 np.save("transistor_position_gaussian.npy",  xs_SI)
 np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
-#plt.show()
+#plt.show()"""
 
 # %% [markdown]
 # #### Source well potential
+
+position_start = xs_SI[0]
+gate_well_start = 2.8*1.e-5
 
 # %%
 complete_transistor_position = xs_SI/x_s
