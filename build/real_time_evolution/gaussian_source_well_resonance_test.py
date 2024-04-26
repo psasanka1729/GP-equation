@@ -207,21 +207,56 @@ def left_tanh_function(xs, barrier_height, x_0, smoothness_control_parameter):
 def right_tanh_function(xs, barrier_height, x_0, smoothness_control_parameter):
                 return barrier_height/2 + barrier_height/2 * np.tanh((xs-x_0)/(barrier_height*smoothness_control_parameter))
 
+"""
+This function takes three points as input and returns the coefficients
+of the quadratic function passing through these points.
+"""
+def harmonic_well(x1,y1,x2,y2,x3,y3):
+     A = np.array([[x1**2, x1, 1],
+                   [x2**2, x2, 1],
+                   [x3**2, x3, 1]])
+     b = np.array([y1, y2, y3])
+     c1, c2, c3 = np.linalg.solve(A, b)
+     return c1, c2, c3
+
 def gaussian_barrier(x, mu, SG_barrier_height, GD_barrier_height, sigma):
 
-     gaussian = (SG_barrier_height*np.exp(-((x-gate_well_start)/sigma)**2) +
-                 GD_barrier_height*np.exp(-((x-gate_well_end)/sigma)**2))
+     def f(x, mu, barrier_height, sigma):
+          return barrier_height*np.exp(-((x-mu)/sigma)**2)
 
+     # gaussian = (single_gaussian_barrier(x, gate_well_start, SG_barrier_height, sigma) +
+     #            single_gaussian_barrier(x, gate_well_end, GD_barrier_height, sigma)) 
+
+     gaussian = (SG_barrier_height*np.exp(-((x-gate_well_start)/sigma)**2) +
+                GD_barrier_height*np.exp(-((x-gate_well_end)/sigma)**2))
+
+     # making the gate well harmonic
+     delta = 0.35
+     # f(x) = a*x^2 + b*x + c
+     p, q, r = harmonic_well(
+               gate_well_start + delta, f(gate_well_start + delta,gate_well_start, SG_barrier_height, sigma),
+               gate_well_end - delta, f(gate_well_end - delta, gate_well_end ,
+               GD_barrier_height, sigma),
+               (gate_well_start+gate_well_end)/2, 0)
+ 
+     gaussian = np.where((x > (gate_well_start + delta)) & (x < (gate_well_end-delta)),
+                p*xs**2 + q*xs + r, gaussian)
+
+     # corodinate where the source well intersects the SG barrier
      plataeu_x_cor =  (mu - sigma*np.sqrt(-np.log(V_SS/SG_barrier_height)))
 
      # bias potential in the source well
      gaussian = np.where(x < plataeu_x_cor, V_INFINITE_BARRIER/2 - V_INFINITE_BARRIER/2 * np.tanh((xs-source_well_start)/(0.0005*V_INFINITE_BARRIER)) + V_SS, gaussian)   
 
-     # infinite barrier
+     # infinite barrier at the left end of the source well
      gaussian = np.where(x < -30, V_INFINITE_BARRIER, gaussian)
 
-     gaussian = np.where(x > (gate_well_end+drain_well_end)/2, right_tanh_function(xs, V_INFINITE_BARRIER, drain_well_end, 0.000005), gaussian)
+     # infinite barrier at the end of the drain well
+     gaussian = np.where(x > (gate_well_end+drain_well_end)/2, right_tanh_function(xs, V_INFINITE_BARRIER, drain_well_end, 0.0005), gaussian)
+
      return gaussian
+
+ 
 
 fig, ax = plt.subplots()
 fig.set_figwidth(20)
