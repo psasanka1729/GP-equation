@@ -173,7 +173,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-source_well_bias_potential_lst = np.around(np.linspace(21,27,16*3),2)#[i for i in range(32)]
+source_well_bias_potential_lst = np.around(np.linspace(18,27,16*4),2)#[i for i in range(32)]
 np.save("V_SS_lst.npy", source_well_bias_potential_lst)
 
 source_well_bias_potential_index = int(sys.argv[1])
@@ -182,10 +182,9 @@ V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 V_INFINITE_BARRIER  = 3000
 np.save("V_inf.npy", V_INFINITE_BARRIER)
 
-N = 2**14
+N = 2**11
 np.save("N.npy",N)
 
-"""
 position_start      = -20
 position_end        = 60
 # positions in SI units
@@ -199,7 +198,6 @@ np.save("position_end.npy",position_end)
 np.save("source_well_start.npy",source_well_start)
 np.save("gate_well_start.npy",gate_well_start)
 np.save("gate_well_end.npy",gate_well_end)
-"""
 
 def left_tanh_function(xs, barrier_height, x_0, smoothness_control_parameter):
                 return barrier_height/2 - barrier_height/2 * np.tanh((xs-x_0)/(barrier_height*smoothness_control_parameter))
@@ -263,20 +261,12 @@ fig.set_figwidth(20)
 fig.set_figheight(6)
 xs = np.linspace(position_start,position_end,N)
 # changing position to SI units
-"""
 xs_SI = xs*1.e-6
 # changing potential to SI units
-complete_transistor_potential = gaussian_barrier(xs,0,30,32,1.0)
+complete_transistor_potential = gaussian_barrier(xs,0,30,32,0.9)
 complete_transistor_potential_SI = complete_transistor_potential*10**3*2*PI*H_BAR
-"""
 
-""" New potential used by Alan in experiment. """
-xs_SI = np.load("new_complete_transistor_position.npy")
-complete_transistor_potential_SI = np.load("new_complete_transistor_potential.npy")
 
-"""
-plt.plot(xs_SI, complete_transistor_potential_SI, linewidth = 4)
-plt.axhline(y=0, color="k", linestyle='--')
 plt.ylim([0,33*10**3*2*PI*H_BAR*1.02])
 plt.ylabel(r"Potential, $V(x)$",labelpad=10)
 plt.xlabel(r"Position, $x$",labelpad=10)
@@ -376,7 +366,7 @@ psi_initial = normalize_x(psi_initial)
 
 # wavefunction is evolved in imaginary time to get the ground state
 final_time_SI = 1.e-1
-time_step_SI  = -1j*10**(-8)   
+time_step_SI  = -1j*10**(-7)   
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 psi_source_well_ITE = time_split_suzukui_trotter(psi_initial,source_well_potential,time_step,final_time, [])
@@ -483,14 +473,14 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 
-final_time_SI = 30*10**(-3)
+final_time_SI = 50*10**(-3)
 time_step_SI  = 10**(-8)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential*10**3*2*PI*H_BAR,
-                                        time_step, final_time, [t for t in range(50)])
+                                        time_step, final_time, [t for t in range(0,50,1)])
 
 # %%
 # plotting everything in SI units
