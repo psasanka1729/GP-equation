@@ -284,7 +284,7 @@ position_start = xs_SI[0]
 
 # %%
 complete_transistor_position = xs_SI/x_s
-source_well_position = complete_transistor_position[np.where((complete_transistor_position > position_start) & (complete_transistor_position < gate_well_start))]
+source_well_position = complete_transistor_position[np.where((complete_transistor_position > position_start/x_s) & (complete_transistor_position < gate_well_start/x_s))]
 source_well_potential = complete_transistor_potential_SI[0:len(source_well_position)]
 
 np.save("source_well_position.npy",source_well_position)
