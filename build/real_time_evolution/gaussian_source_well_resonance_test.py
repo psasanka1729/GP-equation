@@ -182,7 +182,7 @@ V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 V_INFINITE_BARRIER  = 3000
 np.save("V_inf.npy", V_INFINITE_BARRIER)
 
-N = 2**11
+N = 2**13
 np.save("N.npy",N)
 
 position_start      = -20
@@ -473,7 +473,7 @@ while len(psi_initial_for_full_potential) < N:
     psi_initial_for_full_potential = np.hstack((psi_initial_for_full_potential,np.array([0])))
     
 
-final_time_SI = 50*10**(-3)
+final_time_SI = 25*10**(-3)
 time_step_SI  = 10**(-8)  
 # time is made dimensionless  
 final_time = OMEGA_X*final_time_SI
