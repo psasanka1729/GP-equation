@@ -281,7 +281,6 @@ np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
 # #### Source well potential
 
 position_start = xs_SI[0]
-gate_well_start = 2.8*1.e-5
 
 # %%
 complete_transistor_position = xs_SI/x_s
