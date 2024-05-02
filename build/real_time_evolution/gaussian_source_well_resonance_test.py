@@ -182,7 +182,7 @@ V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 V_INFINITE_BARRIER  = 3000
 np.save("V_inf.npy", V_INFINITE_BARRIER)
 
-N = 2**13
+N = 2**12
 np.save("N.npy",N)
 
 position_start      = -20
@@ -254,11 +254,6 @@ def gaussian_barrier(x, mu, SG_barrier_height, GD_barrier_height, sigma):
 
      return gaussian
 
- 
-
-fig, ax = plt.subplots()
-fig.set_figwidth(20)
-fig.set_figheight(6)
 xs = np.linspace(position_start,position_end,N)
 # changing position to SI units
 xs_SI = xs*1.e-6
@@ -266,23 +261,9 @@ xs_SI = xs*1.e-6
 complete_transistor_potential = gaussian_barrier(xs,0,30,32,0.9)
 complete_transistor_potential_SI = complete_transistor_potential*10**3*2*PI*H_BAR
 
-
-plt.ylim([0,33*10**3*2*PI*H_BAR*1.02])
-plt.ylabel(r"Potential, $V(x)$",labelpad=10)
-plt.xlabel(r"Position, $x$",labelpad=10)
-fig.tight_layout(pad=1.0)
-#path = "/Users/sasankadowarah/atomtronics/"
-#os.chdir(path)
 np.save("transistor_position_gaussian.npy",  xs_SI)
 np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
-#plt.show()"""
 
-# %% [markdown]
-# #### Source well potential
-
-position_start = xs_SI[0]
-
-# %%
 complete_transistor_position = xs_SI/x_s
 source_well_position = complete_transistor_position[np.where((complete_transistor_position > position_start/x_s) & (complete_transistor_position < gate_well_start/x_s))]
 source_well_potential = complete_transistor_potential_SI[0:len(source_well_position)]
