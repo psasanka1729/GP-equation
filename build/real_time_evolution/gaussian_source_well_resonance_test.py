@@ -182,7 +182,7 @@ V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 V_INFINITE_BARRIER  = 3000
 np.save("V_inf.npy", V_INFINITE_BARRIER)
 
-N = 2**12
+N = 2**14
 np.save("N.npy",N)
 
 position_start      = -20
@@ -460,7 +460,7 @@ final_time = OMEGA_X*final_time_SI
 time_step = OMEGA_X*time_step_SI
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential,
                                         complete_transistor_potential*10**3*2*PI*H_BAR,
-                                        time_step, final_time, [t for t in range(0,50,1)])
+                                        time_step, final_time, np.arange(0,25,0.1))
 
 # %%
 # plotting everything in SI units
