@@ -64,3 +64,4 @@ Launcher: Task 47 running job 48 on compute-2-03-02 (bash real_time_evolution_47
 Launcher: Task 21 running job 22 on compute-2-03-01 (bash real_time_evolution_21.qsub)
 Launcher: Task 17 running job 18 on compute-2-03-01 (bash real_time_evolution_17.qsub)
 Launcher: Task 34 running job 35 on compute-2-03-02 (bash real_time_evolution_34.qsub)
+slurmstepd: error: *** JOB 26844 ON compute-2-02-05 CANCELLED AT 2024-05-07T15:58:41 ***
