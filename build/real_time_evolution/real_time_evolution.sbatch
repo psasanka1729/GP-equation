@@ -3,11 +3,11 @@
 #SBATCH --job-name=real_time_evolution
 #
 # Partition:
-#SBATCH --partition=cmt
+#SBATCH --partition=cpu-preempt
 #
 # Processors:
-#SBATCH --ntasks=32
-#SBATCH --nodes=2
+#SBATCH --ntasks=16
+#SBATCH --nodes=1
 #
 # Wall clock limit:
 #SBATCH --time=7-00:00:00
