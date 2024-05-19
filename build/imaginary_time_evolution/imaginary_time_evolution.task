@@ -2,15 +2,15 @@ bash imaginary_time_evolution_0.qsub
 bash imaginary_time_evolution_1.qsub
 bash imaginary_time_evolution_2.qsub
 bash imaginary_time_evolution_3.qsub
-bash imaginary_time_evolution_4.qsub
-bash imaginary_time_evolution_5.qsub
-bash imaginary_time_evolution_6.qsub
-bash imaginary_time_evolution_7.qsub
-bash imaginary_time_evolution_8.qsub
-bash imaginary_time_evolution_9.qsub
-bash imaginary_time_evolution_10.qsub
-bash imaginary_time_evolution_11.qsub
-bash imaginary_time_evolution_12.qsub
-bash imaginary_time_evolution_13.qsub
-bash imaginary_time_evolution_14.qsub
-bash imaginary_time_evolution_15.qsub
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
