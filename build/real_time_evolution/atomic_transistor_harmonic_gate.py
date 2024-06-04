@@ -20,7 +20,7 @@ ATOM_MASS   = 1.4192261*10**(-25) # kg
 a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/PhysRevA.87.053614
 
 # Transistor trap parameters.
-TRAP_FREQUENCY = 2*PI*67 #918 # Hz
+TRAP_FREQUENCY = 2*PI*60 #918 # Hz
 OMEGA_X = TRAP_FREQUENCY
 TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
 CROSS_SECTIONAL_AREA = PI*TRAP_LENGTH**2 # m*m
@@ -43,7 +43,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 PI = np.pi
 H_BAR = 6.626*10**(-34)/(2*PI)
 
-N = 2**13
+N = 2**12
 
 source_well_bias_potential_lst = np.around(np.linspace(17,20,4),2)
 np.save("V_SS_lst.npy", source_well_bias_potential_lst)
@@ -51,15 +51,15 @@ np.save("V_SS_lst.npy", source_well_bias_potential_lst)
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
-V_INFINITE_BARRIER  = 20000 # In kHz units.
+V_INFINITE_BARRIER  = 100000 # In kHz units.
 
 # Position parameters in micrometers.
-position_start      = -40
+position_start      = -100
 position_end        = 200
 source_well_start   = -20
 gate_well_start     = 0
-gate_well_end       = 3.8
-drain_well_end      = 180
+gate_well_end       = 4.8
+drain_well_end      = 190
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -363,7 +363,7 @@ while len(psi_initial_for_full_potential_dimless) < N:
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
     
 
-final_time_SI = 40*10**(-3) # In seconds unit.
+final_time_SI = 30*10**(-3) # In seconds unit.
 time_step_SI  = 10**(-8)  # In seconds unit.
 
 # Time is made dimensionless.  
