@@ -51,12 +51,12 @@ np.save("V_SS_lst.npy", source_well_bias_potential_lst)
 source_well_bias_potential_index = int(sys.argv[1])
 V_SS = source_well_bias_potential_lst[source_well_bias_potential_index]
 
-V_INFINITE_BARRIER  = 100000 # In kHz units.
+V_INFINITE_BARRIER  = 10000 # In kHz units.
 
 # Position parameters in micrometers.
 position_start      = -100
 position_end        = 200
-source_well_start   = -20
+source_well_start   = -40
 gate_well_start     = 0
 gate_well_end       = 4.8
 drain_well_end      = 190
@@ -198,11 +198,21 @@ np.save("complete_transistor_potential_SI.npy", complete_transistor_potential)
 # Making the position array dimensionless.
 transistor_position_arr_dimless = position_arr/x_s
 
-# Extracting the source well position array.
-source_well_position_arr_dimless = transistor_position_arr_dimless[np.where((transistor_position_arr_dimless > position_start/x_s) & (transistor_position_arr_dimless < (gate_well_start)/x_s))]
-# Extracting the source well potential array.
-source_well_potential = complete_transistor_potential[0:len(source_well_position_arr_dimless)]
+""" Source well potential. """ 
+position_arr_temp = np.linspace(position_start,position_end,N)
+source_well_position_arr = position_arr_temp[0:np.where(position_arr_temp == gate_well_start)[0][0]+1]
+source_well_potential = np.zeros(len(source_well_position_arr))
+delta_left = 0.05
+delta_right = 0.05
 
+# Creating the source well.
+A = 0.02 # Increasing A results in increase in left side of the source well.
+B = 0.3 # Increasing B results in increase in width of the source well.
+initial_SG_barrier_height = 50
+#V_SS = 20.0
+source_well_potential = np.where(source_well_position_arr <= gate_well_start + delta_left, source_well_potential_function(source_well_position_arr, A,B, initial_SG_barrier_height - V_SS,V_SS), source_well_potential)
+source_well_position_arr_dimless = (source_well_position_arr*1.e-6)/x_s
+source_well_potential = source_well_potential*10**3*H_BAR
 np.save("source_well_position_dimless.npy", source_well_position_arr_dimless)
 np.save("source_well_potential.npy", source_well_potential)
 
