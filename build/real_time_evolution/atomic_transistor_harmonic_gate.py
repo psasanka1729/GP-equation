@@ -46,8 +46,6 @@ NUMBER_OF_ATOMS = 20000
 g_source   = (4*PI*H_BAR**2*a_s)/(CROSS_SECTIONAL_AREA*ATOM_MASS)
 a_0 = np.sqrt(H_BAR/(TRAP_FREQUENCY*ATOM_MASS))
 x_s = (4*np.pi*a_s*NUMBER_OF_ATOMS*a_0**4)**(1/5)    
-path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well/jupyter_notebook_data/"
-os.chdir(path)
 np.save("x_s.npy",x_s)
 epsilon = (H_BAR/(ATOM_MASS*OMEGA_X*x_s**2))
 delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)

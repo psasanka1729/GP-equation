@@ -3,7 +3,7 @@
 #SBATCH --job-name=real_time_evolution
 #
 # Partition:
-#SBATCH --partition=cpu-preempt
+#SBATCH --partition=cmt
 #
 # Processors:
 #SBATCH --ntasks=16
