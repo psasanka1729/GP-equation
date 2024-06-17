@@ -55,7 +55,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 # #### Transistor potential Gaussian barrier and harmonic gate well
 
 # %%
-N = 2**13
+N = 2**14
 
 #V_SS = 0.0 # In kHz units.
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
@@ -125,7 +125,7 @@ Input parameters: position_arr - an array of positions in micrometers,
 def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_barrier_height, gate_bias_potential,
      # These parameters control the width of the barriers and the smoothness of the transitions.
      SIGMA_1 = 0.6,
-     SIGMA_2 = 0.3,
+     SIGMA_2 = 0.8,
      SIGMA_3 = 0.6,
      SIGMA_4 = 1.0,
 
@@ -199,9 +199,10 @@ barrier_height_GD = 32 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-V_SS_lst = np.around(np.linspace(21,25,16),2)
-source_bias_index = int(sys.argv[1])
-source_bias = V_SS_lst[source_bias_index] 
+#V_SS_lst = np.around(np.linspace(21,25,16),2)
+#source_bias_index = int(sys.argv[1])
+#source_bias = V_SS_lst[source_bias_index] 
+source_bias = 25
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
