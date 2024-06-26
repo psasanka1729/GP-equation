@@ -55,7 +55,7 @@ delta   = (g_source*NUMBER_OF_ATOMS*(x_s**2))/(a_0**3*H_BAR*OMEGA_X)
 # #### Transistor potential Gaussian barrier and harmonic gate well
 
 # %%
-N = 2**14
+N = 2**13
 
 #V_SS = 0.0 # In kHz units.
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
