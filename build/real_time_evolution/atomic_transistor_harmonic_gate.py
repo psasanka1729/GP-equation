@@ -200,7 +200,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-V_SS_lst = np.around(np.linspace(21,25,5),2)
+V_SS_lst = np.around(np.linspace(17,22,5),2)
 source_bias_index = int(sys.argv[1])
 source_bias = V_SS_lst[source_bias_index] 
 #source_bias = 25
