@@ -38,10 +38,12 @@ a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/Ph
 # Transistor trap parameters.
 TRAP_FREQUENCY = 2*PI*70 #918 # Hz
 OMEGA_X = TRAP_FREQUENCY
+np.save("OMEGA_X.npy",OMEGA_X)
 TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
 CROSS_SECTIONAL_AREA = PI*TRAP_LENGTH**2 # m*m
 
 NUMBER_OF_ATOMS = 50000
+np.save("NUMBER_OF_ATOMS.npy", NUMBER_OF_ATOMS)
 
 # Interaction strength in the source well.
 g_source   = (4*PI*H_BAR**2*a_s)/(CROSS_SECTIONAL_AREA*ATOM_MASS)
