@@ -42,6 +42,7 @@ TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
 CROSS_SECTIONAL_AREA = PI*TRAP_LENGTH**2 # m*m
 
 NUMBER_OF_ATOMS = 50000
+np.save("NUMBER_OF_ATOMS.npy",NUMBER_OF_ATOMS)
 
 # Interaction strength in the source well.
 g_source   = (4*PI*H_BAR**2*a_s)/(CROSS_SECTIONAL_AREA*ATOM_MASS)
@@ -194,12 +195,12 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 31 # In kHz units.
+barrier_height_GD = 32 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = [19,20,21,22,23]
+source_bias_lst = [18,19,20,21,22]
 source_bias_index = int(sys.argv[1])
 source_bias = source_bias_lst[source_bias_index]
 
