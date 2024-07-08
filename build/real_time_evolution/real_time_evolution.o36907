@@ -63,3 +63,4 @@ Launcher: Job 14 completed in 0 seconds.
 Launcher: Task 13 done. Exiting.
 Launcher: Job 16 completed in 0 seconds.
 Launcher: Task 15 done. Exiting.
+slurmstepd-compute-2-01-10: error: *** JOB 36907 ON compute-2-01-10 CANCELLED AT 2024-07-08T09:15:40 ***

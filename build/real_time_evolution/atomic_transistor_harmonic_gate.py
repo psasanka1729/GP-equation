@@ -63,7 +63,7 @@ N = 2**13
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
 # Position parameters in micrometers.
-position_start      = -50
+position_start      = -100
 position_end        = 1000
 source_well_start   = -40
 gate_well_start     = 0
@@ -557,7 +557,7 @@ while len(psi_initial_for_full_potential_dimless) < N:
 #psi_initial_for_full_potential_dimless = psi_initial_for_full_potential_dimless+psi_initial_gate_well_dimless
 #print("Initial number of atoms in the gate well = ", np.sum(NUMBER_OF_ATOMS*np.abs(psi_initial_gate_well_dimless)**2)*dx_dimless)
 
-final_time_SI = 200*10**(-3) # In seconds unit.
+final_time_SI = 100*10**(-3) # In seconds unit.
 time_step_SI  = 10**(-7)  # In seconds unit.
 
 # Time is made dimensionless.  
