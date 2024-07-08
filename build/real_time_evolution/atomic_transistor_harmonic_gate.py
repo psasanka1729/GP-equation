@@ -19,8 +19,8 @@ params = {'axes.titlesize': med,
           'xtick.labelsize': med ,
           'ytick.labelsize': med ,
           'figure.titlesize': med}
-plt.rcParams["font.family"] = "Helvetica"
-plt.rcParams["font.serif"] = ["Helvetica Neue"]          
+#plt.rcParams["font.family"] = "Helvetica"
+#plt.rcParams["font.serif"] = ["Helvetica Neue"]          
 #plt.rcParams['text.usetex'] = True # need LaTeX. Change it to False if LaTeX is not installed in the system
 plt.rcParams.update(params)
 
