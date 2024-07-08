@@ -195,16 +195,19 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
-barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 32 # In kHz units.
+SG_GD_barrier_lst = [(31,30), (31,30.5),(31,31),(31,31.5),(31,32),(31,32.5)]
+
+barrier_height_index = int(sys.argv[1])
+barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
+barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-V_SS_lst = np.around(np.linspace(17,22,5),2)
-source_bias_index = int(sys.argv[1])
-source_bias = V_SS_lst[source_bias_index] 
+#V_SS_lst = # np.around(np.linspace(17,22,5),2)
+#source_bias_index = int(sys.argv[1])
+source_bias = 22 #V_SS_lst[source_bias_index] 
 #source_bias = 25
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
