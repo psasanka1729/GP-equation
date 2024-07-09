@@ -60,3 +60,35 @@ Launcher: Job 12 completed in 0 seconds.
 Launcher: Task 11 done. Exiting.
 Launcher: Task 5 running job 6 on compute-2-01-09 (bash real_time_evolution_5.qsub)
 Launcher: Task 0 running job 1 on compute-2-01-09 (bash real_time_evolution_0.qsub)
+Removing files
+Removing files
+rm: cannot remove 'atomic_transistor_harmonic_gate.py': No such file or directory
+Launcher: Job 6 completed in 1902 seconds.
+Launcher: Task 5 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'atomic_transistor_harmonic_gate.py': No such file or directory
+Launcher: Job 5 completed in 1927 seconds.
+Launcher: Task 4 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'atomic_transistor_harmonic_gate.py': No such file or directory
+Launcher: Job 4 completed in 1958 seconds.
+Launcher: Task 3 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'atomic_transistor_harmonic_gate.py': No such file or directory
+Launcher: Job 2 completed in 1994 seconds.
+Launcher: Task 1 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'atomic_transistor_harmonic_gate.py': No such file or directory
+Launcher: Job 3 completed in 2043 seconds.
+Launcher: Task 2 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'atomic_transistor_harmonic_gate.py': No such file or directory
+Launcher: Job 1 completed in 2025 seconds.
+Launcher: Task 0 done. Exiting.
+Launcher: Done. Job exited without errors
+Job real_time_evolution complete

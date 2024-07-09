@@ -61,12 +61,17 @@ N = 2**13
 #V_SS = 0.0 # In kHz units.
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
+
+gate_width_index = int(sys.argv[1])
+gate_well_width_lst = [2.8,3.8,4.8,5.8,6.8]
+gate_well_width = gate_well_width_lst[gate_width_index]
+
 # Position parameters in micrometers.
 position_start      = -50
 position_end        = 1000
 source_well_start   = -40
 gate_well_start     = 0
-gate_well_end       = 4.8
+gate_well_end       = gate_well_width
 drain_well_end      = 990
 
 np.save("position_start.npy",position_start)
@@ -200,9 +205,9 @@ barrier_height_GD = 32 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = [18,19,20,21,22]
-source_bias_index = int(sys.argv[1])
-source_bias = source_bias_lst[source_bias_index]
+#source_bias_lst = [18,19,20,21,22]
+#source_bias_index = int(sys.argv[1])
+source_bias = 22 #source_bias_lst[source_bias_index]
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
