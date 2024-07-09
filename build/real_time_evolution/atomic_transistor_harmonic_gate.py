@@ -63,7 +63,7 @@ N = 2**13
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
 # Position parameters in micrometers.
-position_start      = -100
+position_start      = -50
 position_end        = 1000
 source_well_start   = -40
 gate_well_start     = 0
