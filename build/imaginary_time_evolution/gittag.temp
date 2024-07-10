@@ -1,3 +1,30 @@
+commit fdecdf911edabf047fbe9484455fe4873e0cdf71
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Jul 10 14:21:28 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 8db381c983cd550d1310978791d48223eabf2fa5
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jul 10 14:16:03 2024 -0500
+
+    simulation of step like behavior of number of atoms
+
+commit 3321b4ccff74b40197bf23a888a11a50371346f3
+Merge: 818a25c 856ac9a
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jul 10 14:15:23 2024 -0500
+
+    Merge pull request #2 from psasanka1729/master
+    
+    merged before updating harmonic gate well code
+
+commit 856ac9add970d659c5c79eb47145457169c418ff
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Jul 10 14:14:29 2024 -0500
+
+    cluster backup
+
 commit 5d59a521da01aacf35bf6867bdeb705a01e7efa3
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Tue Jul 9 18:01:39 2024 -0500
@@ -111,6 +138,15 @@ Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Sun Jun 16 23:30:18 2024 -0500
 
     Commit before run imaginary_time_evolution
+
+commit 818a25c7fcb623d4fef202c66df22b048c097ce8
+Merge: 9379c3b 8e40c93
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Mon Jun 17 06:18:45 2024 +0200
+
+    Merge pull request #1 from psasanka1729/master
+    
+    Master
 
 commit 8e40c93eb4788627d58f37e9e76c26ab011c404c
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
