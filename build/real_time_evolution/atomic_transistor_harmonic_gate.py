@@ -19,8 +19,8 @@ params = {'axes.titlesize': med,
           'xtick.labelsize': med ,
           'ytick.labelsize': med ,
           'figure.titlesize': med}
-plt.rcParams["font.family"] = "Helvetica"
-plt.rcParams["font.serif"] = ["Helvetica Neue"]          
+#plt.rcParams["font.family"] = "Helvetica"
+#plt.rcParams["font.serif"] = ["Helvetica Neue"]          
 #plt.rcParams['text.usetex'] = True # need LaTeX. Change it to False if LaTeX is not installed in the system
 plt.rcParams.update(params)
 
@@ -38,10 +38,12 @@ a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/Ph
 # Transistor trap parameters.
 TRAP_FREQUENCY = 2*PI*70 #918 # Hz
 OMEGA_X = TRAP_FREQUENCY
+np.save("OMEGA_X.npy",OMEGA_X)
 TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
 CROSS_SECTIONAL_AREA = PI*TRAP_LENGTH**2 # m*m
 
-NUMBER_OF_ATOMS = 20000
+NUMBER_OF_ATOMS = 50000
+np.save("NUMBER_OF_ATOMS.npy", NUMBER_OF_ATOMS)
 
 # Interaction strength in the source well.
 g_source   = (4*PI*H_BAR**2*a_s)/(CROSS_SECTIONAL_AREA*ATOM_MASS)
@@ -125,7 +127,7 @@ Input parameters: position_arr - an array of positions in micrometers,
 def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_barrier_height, gate_bias_potential,
      # These parameters control the width of the barriers and the smoothness of the transitions.
      SIGMA_1 = 0.6,
-     SIGMA_2 = 0.3,
+     SIGMA_2 = 0.8,
      SIGMA_3 = 0.6,
      SIGMA_4 = 1.0,
 
@@ -193,15 +195,20 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
-barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 32 # In kHz units.
+SG_GD_barrier_lst = [(31,30), (31,30.5),(31,31),(31,31.5),(31,32),(31,32.5)]
+
+barrier_height_index = int(sys.argv[1])
+barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
+barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-V_SS_lst = np.around(np.linspace(21,25,16),2)
-source_bias_index = int(sys.argv[1])
-source_bias = V_SS_lst[source_bias_index] 
+
+#V_SS_lst = # np.around(np.linspace(17,22,5),2)
+#source_bias_index = int(sys.argv[1])
+source_bias = 22 #V_SS_lst[source_bias_index] 
+#source_bias = 25
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
@@ -553,7 +560,7 @@ while len(psi_initial_for_full_potential_dimless) < N:
 #psi_initial_for_full_potential_dimless = psi_initial_for_full_potential_dimless+psi_initial_gate_well_dimless
 #print("Initial number of atoms in the gate well = ", np.sum(NUMBER_OF_ATOMS*np.abs(psi_initial_gate_well_dimless)**2)*dx_dimless)
 
-final_time_SI = 200*10**(-3) # In seconds unit.
+final_time_SI = 100*10**(-3) # In seconds unit.
 time_step_SI  = 10**(-7)  # In seconds unit.
 
 # Time is made dimensionless.  
