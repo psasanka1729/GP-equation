@@ -9,7 +9,8 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-EXEC=atomic_transistor_harmonic_gate.py
+#EXEC=atomic_transistor_harmonic_gate.py
+EXEC=harmonic_well_step_current.py
 #EXEC=atomtronics_time_split_RK4.py #ground-state-source-well-atomtronic-transistor.py
 #HELPER="alan_potential_landscape.txt"
 
