@@ -71,11 +71,11 @@ gate_well_width = gate_well_width_lst[gate_width_index]
 
 # Position parameters in micrometers.
 position_start      = -60
-position_end        = 500
+position_end        = 1000
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = gate_well_width
-drain_well_end      = 490
+drain_well_end      = 990
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
