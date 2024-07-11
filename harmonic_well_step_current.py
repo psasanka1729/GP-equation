@@ -1,4 +1,5 @@
 # %%
+import sys
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -48,8 +49,6 @@ print("g_source = ",g_source)
 a_0 = np.sqrt(H_BAR/(TRAP_FREQUENCY*ATOM_MASS))
 print(4*PI*a_s*NUMBER_OF_ATOMS, "must be greater than ", np.sqrt(H_BAR/(TRAP_FREQUENCY*ATOM_MASS)))
 x_s = (4*np.pi*a_s*NUMBER_OF_ATOMS*a_0**4)**(1/5)    
-path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well/jupyter_notebook_data/"
-os.chdir(path)
 np.save("x_s.npy",x_s)
 #print("x_s = ",x_s)
 epsilon = (H_BAR/(ATOM_MASS*OMEGA_X*x_s**2))
@@ -66,13 +65,17 @@ N = 2**14
 #V_SS = 0.0 # In kHz units.
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
+gate_width_index = int(sys.argv[1])
+gate_well_width_lst = [2.8,3.8,4.8,5.8,6.8]
+gate_well_width = gate_well_width_lst[gate_width_index]
+
 # Position parameters in micrometers.
 position_start      = -60
-position_end        = 200
+position_end        = 500
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = 4.8#5.224731361650667
-drain_well_end      = 190
+gate_well_end       = gate_well_width
+drain_well_end      = 490
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -244,8 +247,6 @@ V_SS = source_bias
 source_well_potential = np.where(source_well_position_arr <= gate_well_start + delta_left, source_well_potential_function(source_well_position_arr, A,B, initial_SG_barrier_height - V_SS,V_SS), source_well_potential)
 # Making the position array dimensionless.
 transistor_position_arr_dimless = position_arr/x_s
-path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well/jupyter_notebook_data/"
-os.chdir(path)
 np.save("transistor_position_dimless.npy", transistor_position_arr_dimless)
 
 """ Extracting the source well position array from the original transistor potential."""
@@ -501,11 +502,11 @@ def time_split_suzukui_trotter(initial_wavefunction_dimless, potential_array, dt
 
 # %%
 # start with an initial state
-# psi_initial = np.ones(N)
-# psi_initial = normalize_x(psi_initial) 
+psi_initial_dimless = np.ones(N)*np.sqrt(x_s)
 
 # psi_initial_dimless = np.exp(-(source_well_position_arr_dimless+1.5)**2/(0.1))*np.sqrt(x_s)+np.exp(-(source_well_position_arr_dimless+2.5)**2/(0.1))*np.sqrt(x_s) #np.ones(N)
-# psi_initial_dimless = normalize_x(psi_initial_dimless)
+
+psi_initial_dimless = normalize_x(psi_initial_dimless)
 
 # Wavefunction is evolved in imaginary time to get the ground state.
 final_time_SI = 1.e-1 # In seconds unit.
