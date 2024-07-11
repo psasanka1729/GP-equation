@@ -65,16 +65,16 @@ N = 2**14
 #V_SS = 0.0 # In kHz units.
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
-gate_width_index = int(sys.argv[1])
-gate_well_width_lst = [2.8,3.8,4.8,5.8,6.8]
-gate_well_width = gate_well_width_lst[gate_width_index]
+#gate_width_index = int(sys.argv[1])
+#gate_well_width_lst = [2.8,3.8,4.8,5.8,6.8]
+#gate_well_width = gate_well_width_lst[gate_width_index]
 
 # Position parameters in micrometers.
 position_start      = -60
 position_end        = 1000
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = gate_well_width
+gate_well_end       = 4.8
 drain_well_end      = 990
 
 np.save("position_start.npy",position_start)
@@ -184,8 +184,11 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
-barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 32 # In kHz units.
+SG_GD_barrier_lst = [(31,29), (31,30),(31,31),(31,32),(31,33)]
+
+barrier_height_index = int(sys.argv[1])
+barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
+barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
