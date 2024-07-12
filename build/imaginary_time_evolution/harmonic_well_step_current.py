@@ -36,7 +36,13 @@ ATOM_MASS   = 1.4192261*10**(-25) # kg
 a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/PhysRevA.87.053614
 
 # Transistor trap parameters.
-TRAP_FREQUENCY = 2*PI*70 #918 # Hz
+trap_frequency_lst = [10,40,80,120,200]
+trap_frequency_index = int(sys.argv[1])
+
+TRAP_FREQUENCY = 2*PI*trap_frequency_lst[trap_frequency_index]
+
+#TRAP_FREQUENCY = 2*PI*70 #918 # Hz
+
 OMEGA_X = TRAP_FREQUENCY
 TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
 CROSS_SECTIONAL_AREA = PI*TRAP_LENGTH**2 # m*m
@@ -196,11 +202,11 @@ barrier_height_GD = 32
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = [21,22,23,24,25]
-source_bias_index = int(sys.argv[1])
-source_bias = source_bias_lst[source_bias_index]
+#source_bias_lst = [21,22,23,24,25]
+#source_bias_index = int(sys.argv[1])
+#source_bias = source_bias_lst[source_bias_index]
 
-#source_bias = 22.0
+source_bias = 21.0
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
