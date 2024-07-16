@@ -36,12 +36,12 @@ ATOM_MASS   = 1.4192261*10**(-25) # kg
 a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/PhysRevA.87.053614
 
 # Transistor trap parameters.
-trap_frequency_lst = [10,40,80,120,200]
-trap_frequency_index = int(sys.argv[1])
+#trap_frequency_lst = [10,40,80,120,200]
+#trap_frequency_index = int(sys.argv[1])
 
-TRAP_FREQUENCY = 2*PI*trap_frequency_lst[trap_frequency_index]
+#TRAP_FREQUENCY = 2*PI*trap_frequency_lst[trap_frequency_index]
 
-#TRAP_FREQUENCY = 2*PI*70 #918 # Hz
+TRAP_FREQUENCY = 850 # Hz from Caliga et. al. (2016)
 
 OMEGA_X = TRAP_FREQUENCY
 TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
@@ -74,6 +74,10 @@ V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 #gate_width_index = int(sys.argv[1])
 #gate_well_width_lst = [2.8,3.8,4.8,5.8,6.8]
 #gate_well_width = gate_well_width_lst[gate_width_index]
+
+#source_width_index = int(sys.argv[1])
+#source_width_lst = [10,20,30,40,50]
+
 
 # Position parameters in micrometers.
 position_start      = -60
@@ -190,14 +194,14 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
-#SG_GD_barrier_lst = [(31,29), (31,30),(31,31),(31,32),(31,33)]
+SG_GD_barrier_lst = [(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
 
-#barrier_height_index = int(sys.argv[1])
-#barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
-#barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
+barrier_height_index = int(sys.argv[1])
+barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
+barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
 
-barrier_height_SG = 31
-barrier_height_GD = 32
+#barrier_height_SG = 31
+#barrier_height_GD = 32
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
@@ -215,33 +219,19 @@ fig, ax = plt.subplots()
 fig.set_figwidth(14)
 fig.set_figheight(6)
 plt.plot(position_arr*1.e6, complete_transistor_potential/(10**3*H_BAR*2*PI), linewidth = 4, color = "tab:red")
-#plt.scatter(position_arr*1.e6, complete_transistor_potential/(10**3*H_BAR), color = "tab:red", s = 10)
-#plt.axhline(y=30 , color="k", linestyle='--')   
 plt.axhline(y=barrier_height_GD , color="k", linestyle='--', label = r"$V_{GD}$")   
 plt.axhline(y=0, color="k", linestyle='--')
-# plt.axvline(x=source_well_start, color="k", linestyle='--')
-# plt.axvline(x=gate_well_start, color="k", linestyle='--')
-# plt.axvline(x=gate_well_end, color="k", linestyle='--')
 plt.xlim([-30, 40])
-#plt.ylim([0,50*10**(3)*H_BAR*2*PI]) # In SI units.
 plt.ylim([0, barrier_height_GD*1.2]) # In kHz units.
 plt.ylabel(r"Potential, $V(x),\; (kHz)$",labelpad=10)
 plt.xlabel(r"Position, $x, \; (\mu m)$",labelpad=10)
 fig.tight_layout(pad=1.0)
-# path = "/Users/sasankadowarah/atomtronics/"
-# os.chdir(path)
-# np.save("transistor_position_gaussian.npy",  xs_SI)
-# np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
 plt.savefig("complete_transistor_potential_harmonic_gate_well.png", dpi=600)
 plt.close()
 
 # %%
 # Average density of the gas.
 n = NUMBER_OF_ATOMS/(CROSS_SECTIONAL_AREA*(position_end-position_start)*10**(-6))
-#print("Gross-Pitaevskii equation is valid if:", n*a_s**3 ,"<< 1") # Ref: Rev. Mod. Phys. 71, 463 (1999)
-
-# %% [markdown]
-# #### Source well potential
 
 # %%
 """ Like in the experiment; the simulation starts with a very high barrier on the right. 
@@ -266,10 +256,6 @@ transistor_position_arr_dimless = position_arr/x_s
 np.save("transistor_position_dimless.npy", transistor_position_arr_dimless)
 
 """ Extracting the source well position array from the original transistor potential."""
-# index_of_source_position_start = np.where(np.abs(transistor_position_arr_dimless*x_s - (position_start*1.e-6))< 1.e-7)[0][0]
-# index_of_source_position_end = np.where(np.abs(transistor_position_arr_dimless*x_s - (0.02*1.e-6))< 1.e-7)[0][0]
-# source_well_position_arr_dimless = transistor_position_arr_dimless[index_of_source_position_start:index_of_source_position_end]
-# source_well_potential = complete_transistor_potential[index_of_source_position_start:index_of_source_position_end]
 
 source_well_position_arr_dimless = (source_well_position_arr*1.e-6)/x_s
 source_well_potential = source_well_potential*10**3*H_BAR*2*PI
@@ -279,9 +265,7 @@ np.save("source_well_potential.npy", source_well_potential)
 
 f = plt.figure()    
 plt.plot(source_well_position_arr_dimless, source_well_potential,linewidth=5)
-#plt.ylim([0,barrier_height_GD*10**3*H_BAR*1.02])
 ax = f.gca()
-#ax.axhline(0, color="green",linestyle="--",linewidth = 2)
 plt.xlabel(r"Dimentionless position, $\tilde{x}$", labelpad = 20)
 plt.ylabel(r"Potential, $V_{\mathrm{Source}}\; (J)$", labelpad = 20)
 f.set_figwidth(10)
@@ -289,22 +273,6 @@ f.set_figheight(6)
 plt.savefig("source_well.jpg", dpi = 600)
 plt.close()
 
-# %%
-# f = plt.figure()    
-# plt.plot(source_well_position_arr_dimless, source_well_potential,linewidth=3)
-# #plt.ylim([0,barrier_height_GD*10**3*H_BAR*1.02])
-# ax = f.gca()
-# #ax.axhline(0, color="green",linestyle="--",linewidth = 2)
-# plt.xlabel(r"Dimentionless position, $\tilde{x}$", labelpad = 20)
-# plt.ylabel(r"Potential, $V_{\mathrm{Source}}\; (J)$", labelpad = 20)
-# f.set_figwidth(10)
-# f.set_figheight(6)
-# plt.show()
-
-# %% [markdown]
-# #### Single particle energy levels in the gate well
-
-# %%
 """ In this section we solve for the single particle energy levels of the harmonic gate well potential.
 This is necessary to test the coherence of the emitted matter wave in the drain well. """
 transistor_position_arr_dimless = position_arr/x_s
@@ -318,104 +286,18 @@ N = len(transistor_gate_well_position_dimless)
 # Discretizing the position space.
 dx_dimless = L_dimless/N
 np.save("dx_dimless.npy",dx_dimless)
-#print("dx (SI) = ", dx_dimless*x_s)
 transistor_gate_well_potential = complete_transistor_potential[len(source_well_position_arr_dimless):len(source_well_position_arr_dimless)+len(transistor_gate_well_position_dimless)]
-
-# Shifthing the minimum of the potential to zero.
-# index_of_V_minimum = np.argmin(transistor_gate_well_potential)
-# transistor_gate_well_potential = transistor_gate_well_potential - transistor_gate_well_potential[index_of_V_minimum]
-# transistor_gate_well_position_dimless = transistor_gate_well_position_dimless-transistor_gate_well_position_dimless[index_of_V_minimum]
-# plt.plot(transistor_gate_well_position_dimless*x_s, transistor_gate_well_potential)
-# OMEGA_HARMONIC = np.sqrt(2*barrier_height_GD*10**3*H_BAR/(ATOM_MASS*((transistor_gate_well_position_dimless*x_s)[-1])**2))
-# print("Angular frequency in the gate well  = ", OMEGA_HARMONIC, "Hz")
-# plt.plot(transistor_gate_well_position_dimless*x_s,(1/2)*ATOM_MASS*OMEGA_HARMONIC**2*(transistor_gate_well_position_dimless*x_s)**2)
-# plt.show()
-
-# %%
-# """ Perturbationt theory for the gate well. Calculations are done in SI units. """
-
-# from math import sqrt
-# from scipy import special
-
-# def perturbation(anharmonic_potential):
-#     return anharmonic_potential-(1/2)*ATOM_MASS*OMEGA_HARMONIC**2*(transistor_gate_well_position_dimless*x_s)**2
-#     #return 1.e-13*transistor_gate_well_position_dimless*x_s
-
-# def factorial(n):
-#     if n < 0:
-#         raise ValueError("Factorial is not defined for negative numbers.")
-#     elif n == 0:
-#         return 1
-#     else:
-#         result = 1
-#         for i in range(1, n+1):
-#             result *= i
-#         return result
-
-# # Generate the values of the Hermite polynomial for order n and array x.
-
-# def hermite_polynomial(n, x, monic=False):
-#      return special.hermite(n)(x)  
-    
-# # Returns the wavefunction of the quantum harmonic oscillator.    
-# def quantum_harmonic_oscillator_wavefunction(n):
-#     x = transistor_gate_well_position_dimless*x_s
-#     return (1/(sqrt((2**n)*factorial(n))))*(ATOM_MASS*OMEGA_HARMONIC/(PI*H_BAR))**(1/4)*np.exp(-(ATOM_MASS*OMEGA_HARMONIC/(2*H_BAR))*x**2)*hermite_polynomial(n,sqrt(ATOM_MASS*OMEGA_HARMONIC/H_BAR)*x)
-
-# # Returns the first order energy correction.
-# def energy_correction_first_order(n):
-#     psi_n = quantum_harmonic_oscillator_wavefunction(n) 
-#     return np.dot(psi_n,perturbation(transistor_gate_well_potential)*psi_n)*(dx_dimless*x_s)
-
-# # Energy of n^th energy level of the quantum harmonic oscillator.
-# def E(n):
-#     return (n+1/2)*H_BAR*OMEGA_HARMONIC
-
-# # Numerator of the sum in the correction.
-# def V_mn(m,n):
-#     psi_m = quantum_harmonic_oscillator_wavefunction(m)
-#     psi_n = quantum_harmonic_oscillator_wavefunction(n)
-#     return np.dot(psi_m,perturbation(transistor_gate_well_potential)*psi_n)*(dx_dimless*x_s)
-
-# # Returns the second order correction to the energy.
-# def energy_correction_second_order(n):
-#     correction = 0.0
-#     for m in range(100):
-#         if m == n:
-#             pass
-#         else:
-#             correction += np.abs(V_mn(m,n))**2/(E(n)-E(m))
-#     return correction    
-
-# def gate_well_energy_from_perturbation_theory(n,epsilon):
-#     return (n+1/2)*H_BAR*OMEGA_HARMONIC+epsilon*energy_correction_first_order(n)+epsilon**2*energy_correction_second_order(n)    
-
-# %%
-#gate_well_energy_from_perturbation_theory(10,epsilon)/(H_BAR) #/(10**3*H_BAR)
-
-# %%
-# Single particle energy levels in gate well.
 single_particle_omega = np.sqrt(8*barrier_height_GD*10**3*H_BAR*2*PI/(ATOM_MASS*(gate_well_end*1.e-6 - gate_well_start*1.e-6)**2))
-#print(r"Single particle energy level frequency = ", single_particle_omega, "(Hz)")
 # Number of single particle energy levels in the gate well.
 n_levels = int((barrier_height_GD*10**3*H_BAR*2*PI)/(H_BAR*single_particle_omega) - 1/2)
-#print("Number of single particle energy levels in the gate well = ", n_levels)
-
-# %% [markdown]
-# #### Time split code to solve the Gross-Pitaevskii equation
-
-# %%
 # Calculates the length of the source well.
 L_dimless  = np.ptp(source_well_position_arr_dimless)
 # Number of points in the source well.
 N = len(source_well_position_arr_dimless)
 # Discretizing the position space.
 dx_dimless = L_dimless/N
-
-#print("dx (SI) = ", dx_dimless*x_s)
 # Discretizing the momentum space. dk is dimensionless since the position (L) is dimensionless.
 dk_dimless = (2*PI)/L_dimless
-#print("dk = ", dk_dimless)
 # Total Hamiltonian H = H(k) + H(x) = momentum space part + real space part
 """ 
 Hamiltonian in position space. 
@@ -503,25 +385,8 @@ def time_split_suzukui_trotter(initial_wavefunction_dimless, potential_array, dt
     
     return psi_x_dimless
 
-# %% [markdown]
-# #### imaginary time evolution for ground state in the source well
-
-# %%
-
-# 
-
-# %%
-# psi_initial_dimless = np.exp(-(source_well_position_arr_dimless+1.5)**2/(0.1))*np.sqrt(x_s)+np.exp(-(source_well_position_arr_dimless+7.5)**2/(0.1))*np.sqrt(x_s)
-# psi_initial_dimless = normalize_x(psi_initial_dimless)
-# plt.plot(source_well_position_arr_dimless, np.abs(psi_initial_dimless)**2)
-# plt.show()
-
-# %%
 # start with an initial state
 psi_initial_dimless = np.ones(N)*np.sqrt(x_s)
-
-# psi_initial_dimless = np.exp(-(source_well_position_arr_dimless+1.5)**2/(0.1))*np.sqrt(x_s)+np.exp(-(source_well_position_arr_dimless+2.5)**2/(0.1))*np.sqrt(x_s) #np.ones(N)
-
 psi_initial_dimless = normalize_x(psi_initial_dimless)
 
 # Wavefunction is evolved in imaginary time to get the ground state.
@@ -531,12 +396,6 @@ final_time_dimless = OMEGA_X*final_time_SI # Dimensionless time units.
 time_step_dimless = OMEGA_X*time_step_SI # Dimensionless time units.
 
 psi_source_well_ITE_dimless = time_split_suzukui_trotter(psi_initial_dimless, source_well_potential, time_step_dimless,final_time_dimless, [])
-#print(r"Normalization of the wavefunction $|\psi |^{2}$= ",np.sqrt(np.sum(np.abs(psi_source_well_ITE_dimless)**2)*dx_dimless) )
-
-# %% [markdown]
-# #### plot ground state wavefunction  in the source well
-
-# %%
 data0 = source_well_position_arr_dimless*x_s
 data1 = np.abs(psi_source_well_ITE_dimless)**2*dx_dimless
 data3 = source_well_potential/(10**3*H_BAR*2*PI)
@@ -551,15 +410,12 @@ ax1.set_xlabel(r"Position, $x(m)$", labelpad=20)
 ax1.set_ylabel(r"Wavefunction, $|\psi|^{2}$", color="tab:red", labelpad=10)
 ax1.plot(data0, data1, color="tab:red",linewidth = 5)
 plt.title(r"Ground state wavefunction in the source well")
-#plt.legend()
 ax1.tick_params(axis="y", labelcolor="tab:red")
 ax2 = ax1.twinx()
 
 color = "tab:blue"
 ax2.set_ylabel(r"Potential, $\tilde{V}$ ", color=color,  labelpad=20)
 ax2.plot(data0, data3, color=color,linewidth = 5)
-#ax1.set_xlim([-5,0.1])
-#ax2.set_ylim([12,initial_SG_barrier_height*1.2]) 
 ax2.tick_params(axis="y", labelcolor=color)
 ax1.axhline(y=0, color="k", linestyle='--')
 fig.set_figwidth(12)
@@ -573,12 +429,8 @@ ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 plt.savefig("ground_state_in_source_well_"+str(NUMBER_OF_ATOMS)+".jpg", dpi=600)
 fig.tight_layout()
-
-# %%
 ground_state_in_source_well_k_space = fftpack.fft(np.abs(psi_source_well_ITE_dimless)**2)
-#ground_state_in_source_well_k_space = fftpack.fftshift(ground_state_in_source_well_k_space)
 initial_state_in_k_space_dimless = fftpack.fft(psi_initial_dimless)
-#initial_state_in_k_space_dimless = fftpack.fftshift(initial_state_in_k_space_dimless)
 fig = plt.figure()
 fig.set_figwidth(10)
 fig.set_figheight(6)
@@ -590,19 +442,9 @@ plt.legend()
 plt.title("Source well wavefunction in k space ")
 plt.savefig("ground_state_in_the_source_well_in_momentum_space_19.jpg", dpi=600)
 plt.close()
-
-# %% [markdown]
-# #### chemical potential of the BEC
-
-# %%
 psi = psi_source_well_ITE_dimless/np.sqrt(x_s)
 kinetic_energy_arr = -(H_BAR**2/(2*ATOM_MASS))*(psi[2:] - 2*psi[1:-1]+psi[:-2])/(dx_dimless*np.sqrt(x_s))**2
-#source_well_potential = complete_transistor_potential[index_of_source_position_start:index_of_source_position_end]
 potential_energy_arr = source_well_potential*psi+g_source*NUMBER_OF_ATOMS*(np.abs(psi)**2)*psi
-#print("Thomas-Fermi approximation is valid if: K.E. = ", np.abs(np.mean(kinetic_energy_arr)) ,"<< P.E. =", np.abs(np.mean(potential_energy_arr))) # Pethick & Smith
-#print("Thomas-Fermi approximation is valid if:", NUMBER_OF_ATOMS*a_s/a_0 ,">> 1") # Ref: arxiv: 2003:03590
-
-# %%
 data0 = source_well_position_arr_dimless
 source_well_potential = complete_transistor_potential[0:len(source_well_position_arr_dimless)]
 data1 = source_well_potential +g_source*NUMBER_OF_ATOMS*np.abs(psi_source_well_ITE_dimless/np.sqrt(x_s))**2
@@ -614,7 +456,6 @@ ax1.set_xlabel(r"Position, $\tilde{x}$", labelpad=20)
 ax1.set_ylabel(r"Chemical potential $\mu\; (Joules)$", color="tab:red", labelpad=20)
 ax1.plot(data0, data1, color="tab:red",linewidth = 5)
 plt.title(r"Chemical potential in the source well")
-#plt.legend()
 ax1.tick_params(axis="y", labelcolor="tab:red")
 ax2 = ax1.twinx()
 
@@ -636,23 +477,15 @@ ax1.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
-#print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
-#ax1.set_xlim([-4,0])
 plt.savefig("chemical_potential_in_source_well.jpg", dpi=600)
 fig.tight_layout()
 
-# %%
 """ This code prints our the end point of the gate well such that the chemical potential
 in the source well is equal to the energy of the last single particle energy level in the gate well."""
 data1 = source_well_potential +g_source*NUMBER_OF_ATOMS*np.abs(psi_source_well_ITE_dimless/np.sqrt(x_s))**2
 mu_s = data1[len(data1)//2]
 x_GD = gate_well_start + np.sqrt(8*(barrier_height_SG*10**3*H_BAR*2*PI)/ATOM_MASS)*(H_BAR*(29+1/2)/mu_s)
-#print("End point of the gate well = ",x_GD,"(m)")
 
-# %% [markdown]
-# #### time split for real time evolution
-
-# %%
 N = len(transistor_position_arr_dimless)
 L_dimless = np.abs((transistor_position_arr_dimless[-1]-transistor_position_arr_dimless[0]))
 dx_dimless = L_dimless/N
@@ -660,8 +493,6 @@ np.save("dx_dimless.npy",dx_dimless)
 # We do not have to non-dimensionalize dk since transistor position and hence L is already non-dimensional.
 dk_dimless = (2*PI)/L_dimless
 np.save("dk_dimless.npy",dk_dimless)
-#print("dx = ", dx_dimless*x_s)
-#print("dk = ", dk_dimless)
 # Momentum space discretization done for periodic boundary conditions.
 k_dimless = np.hstack([np.arange(0,N/2), np.arange(-N/2,0)])*dk_dimless
 # Kinetic energy operator.
@@ -673,12 +504,6 @@ while len(psi_initial_for_full_potential_dimless) < N:
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 """ We will put a gaussian wave packet in the gate well instead of zero."""
-#center_of_gate_well_dimless = ((gate_well_start + gate_well_end)*1.e-6/2)/x_s
-#psi_initial_gate_well_dimless = 0.8*1.e2*np.exp(-(transistor_position_arr_dimless - center_of_gate_well_dimless)**2/(0.1))*np.sqrt(x_s)  
-
-#NUMBER_OF_ATOMS = 20000
-#psi_initial_for_full_potential_dimless = psi_initial_for_full_potential_dimless+psi_initial_gate_well_dimless
-#print("Initial number of atoms in the gate well = ", np.sum(NUMBER_OF_ATOMS*np.abs(psi_initial_gate_well_dimless)**2)*dx_dimless)
 
 # Final time for the wavefunction evolution in units of seconds.
 final_time_SI = 100*10**(-3) # In seconds unit.
@@ -691,7 +516,6 @@ time_step_dimless = OMEGA_X*time_step_SI
 
 # List of time to save the snapshots of the wavefunction in miliseconds unit.
 time_lst = list(np.arange(0.0,int(final_time_SI*1.e3),0.01))
-#time_lst = []
 
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential_dimless,
                                         complete_transistor_potential,
