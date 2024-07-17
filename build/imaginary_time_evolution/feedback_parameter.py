@@ -194,7 +194,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
-SG_GD_barrier_lst = [(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
+SG_GD_barrier_lst = [(31, 31+i) for i in np.linspace(-1, 1, 20)] #[(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
 
 barrier_height_index = int(sys.argv[1])
 barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
@@ -348,7 +348,9 @@ def time_split_suzukui_trotter(initial_wavefunction_dimless, potential_array, dt
     
     total_iterations = int(np.abs(total_time_dimless)/np.abs(dt_dimless))
     print("Number of iterations =", total_iterations)
-    
+   
+    wavefunction_dimless_lst = []
+
     if snapshots_lst:
         current_time_index = 0
         next_snapshot_time = snapshots_lst[current_time_index]   
@@ -376,14 +378,15 @@ def time_split_suzukui_trotter(initial_wavefunction_dimless, potential_array, dt
         if snapshots_lst:
             # Check if the current time matches the next snapshot time
             if time >= next_snapshot_time:
-                np.save("time_evolved_wavefunction_"+str(np.around(time,2))+".npy",psi_x_dimless)
+                #np.save("time_evolved_wavefunction_"+str(np.around(time,2))+".npy",psi_x_dimless)
+                wavefunction_dimless_lst.append(psi_x_dimless)
                 current_time_index += 1
                 if current_time_index < len(time_lst):
                     next_snapshot_time = time_lst[current_time_index]                 
 
     psi_x_dimless = normalize_x(psi_x_dimless) # Returns the normalized wavefunction.
     
-    return psi_x_dimless
+    return psi_x_dimless, wavefunction_dimless_lst
 
 # start with an initial state
 psi_initial_dimless = np.ones(N)*np.sqrt(x_s)
@@ -395,7 +398,7 @@ time_step_SI  = -1j*10**(-6) # In seconds unit.
 final_time_dimless = OMEGA_X*final_time_SI # Dimensionless time units.
 time_step_dimless = OMEGA_X*time_step_SI # Dimensionless time units.
 
-psi_source_well_ITE_dimless = time_split_suzukui_trotter(psi_initial_dimless, source_well_potential, time_step_dimless,final_time_dimless, [])
+psi_source_well_ITE_dimless = time_split_suzukui_trotter(psi_initial_dimless, source_well_potential, time_step_dimless,final_time_dimless, [])[0]
 data0 = source_well_position_arr_dimless*x_s
 data1 = np.abs(psi_source_well_ITE_dimless)**2*dx_dimless
 data3 = source_well_potential/(10**3*H_BAR*2*PI)
@@ -517,7 +520,7 @@ time_step_dimless = OMEGA_X*time_step_SI
 # List of time to save the snapshots of the wavefunction in miliseconds unit.
 time_lst = list(np.arange(0.0,int(final_time_SI*1.e3),0.01))
 
-time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential_dimless,
+time_evolved_wavefunction_time_split, wavefunction_lst  = time_split_suzukui_trotter(psi_initial_for_full_potential_dimless,
                                         complete_transistor_potential,
                                         time_step_dimless, final_time_dimless, time_lst)
 
@@ -526,6 +529,56 @@ time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_fo
 # Analysis of the data.
 
 # Atom numbers in each well.
+
+"""
+Given a time and index of the source bias potential the following
+functions calculate the number of atoms in the source; gate and
+the drain well.
+
+"""
+def source_atom_number(final_time, wavefunction_dimless):
+     psi_lst_dimless = []
+     for i in range(N):
+          if position_start <= (position_arr*1.e6)[i] <= gate_well_start:
+               psi_lst_dimless.append(wavefunction_dimless[i])
+     return int(NUMBER_OF_ATOMS*np.sum(np.abs(psi_lst_dimless)**2)*dx_dimless)
+
+def gate_atom_number(final_time, wavefunction_dimless):
+     psi_lst_dimless = []
+     for i in range(N):
+          if gate_well_start <= (position_arr*1.e6)[i] <= gate_well_end:
+               psi_lst_dimless.append(wavefunction_dimless[i])
+     return int(NUMBER_OF_ATOMS*np.sum(np.abs(psi_lst_dimless)**2)*dx_dimless)   
+
+def drain_atom_number(final_time, wavefunction_dimless):
+     psi_lst_dimless = []
+     for i in range(N):
+          if gate_well_end <= (position_arr*1.e6)[i] <= drain_well_end:
+               psi_lst_dimless.append(wavefunction_dimless[i])
+     return int(NUMBER_OF_ATOMS*np.sum(np.abs(psi_lst_dimless)**2)*dx_dimless) 
+
+
+final_time_SI = 99.99*10**(-3) # In seconds unit.
+
+time_lst_for_atom_number = np.around(list(np.arange(0.0,int(final_time_SI*1.e3),0.01)),2)
+
+source_atom_number_lst = []
+gate_atom_number_lst = []
+drain_atom_number_lst = []
+
+for ii in range(len(time_lst_for_atom_number)):
+     
+    time = time_lst_for_atom_number[ii]
+    wavefunction_dimless = wavefunction_lst[ii]
+
+    source_atom_number_lst.append(source_atom_number(time), wavefunction_dimless)
+    gate_atom_number_lst.append(gate_atom_number(time, wavefunction_dimless))
+    drain_atom_number_lst.append(drain_atom_number(time, wavefunction_dimless))
+
+np.save("source_well_atom_number.npy", source_atom_number_lst)
+np.save("gate_well_atom_number.npy", gate_atom_number_lst)
+np.save("drain_well_atom_number.npy", drain_atom_number_lst)
+
 
 
 
