@@ -1,3 +1,15 @@
+commit 310ca255e1645a94baed106224a3b385af3c14b7
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Jul 17 15:01:09 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit c8c3242c1e3fd76b8ee5762295fcd948a653689b
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Jul 17 14:29:54 2024 -0500
+
+    varying feedback parameter
+
 commit 0fe79ad69121910df7536dfb0129a7904a60a330
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Wed Jul 17 14:01:24 2024 -0500
