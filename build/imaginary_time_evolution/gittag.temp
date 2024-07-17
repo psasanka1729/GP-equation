@@ -1,3 +1,84 @@
+commit 0fe79ad69121910df7536dfb0129a7904a60a330
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Jul 17 14:01:24 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 91b0666323138f3e109b5ed5ccd93db70b27d374
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Jul 17 09:55:02 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit e1ea95953e24c02fac764b767034429c98331242
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Jul 16 15:19:10 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 9386dea2050a09cf3d8694f163f7d100ebf3c4a7
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Jul 16 11:36:38 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 772a8244e3f55cdec126852d97b597b71e5c6371
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jul 11 22:26:35 2024 -0500
+
+    cluster backup
+
+commit 33a444c4232b11d3ec006e4330d95338c1614be1
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jul 11 22:24:37 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit c6ec6a57c9f5e70b8f220e14c2c77af7db660a3d
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jul 11 16:35:45 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit eb13c5f01d4af3bfedfd7d82e4b3aaf05ec6b054
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jul 11 14:03:29 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 85424e1b66feb38f782987be27a4166037e325ad
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jul 11 13:00:51 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit e7b898f899fd5361952b4f0db6b2702260532cdf
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Jul 11 11:58:05 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit e0934b8f97a491abad1aee5dcf94b093d6beb1a9
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jul 10 22:31:34 2024 -0500
+
+    working harmonic_well_step_current.py
+
+commit c459981e2329aeb4f4c35024f288ee58294e552a
+Merge: 8db381c 3fa2c65
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jul 10 22:30:48 2024 -0500
+
+    Merge pull request #3 from psasanka1729/master
+    
+    Master
+
+commit 3fa2c652abbf367bc86d0c330f997a1b1b29456d
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Jul 10 22:29:59 2024 -0500
+
+    harmonic well code fixed
+
 commit 5efccdb06b0ccaadd21036806921868f8d2591c1
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Wed Jul 10 22:29:31 2024 -0500

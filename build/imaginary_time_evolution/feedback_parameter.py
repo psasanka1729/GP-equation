@@ -520,3 +520,13 @@ time_lst = list(np.arange(0.0,int(final_time_SI*1.e3),0.01))
 time_evolved_wavefunction_time_split = time_split_suzukui_trotter(psi_initial_for_full_potential_dimless,
                                         complete_transistor_potential,
                                         time_step_dimless, final_time_dimless, time_lst)
+
+
+
+# Analysis of the data.
+
+# Atom numbers in each well.
+
+
+
+
