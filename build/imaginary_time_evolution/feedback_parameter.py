@@ -47,7 +47,7 @@ OMEGA_X = TRAP_FREQUENCY
 TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
 CROSS_SECTIONAL_AREA = PI*TRAP_LENGTH**2 # m*m
 
-NUMBER_OF_ATOMS = 50000
+NUMBER_OF_ATOMS = 20000
 
 # Interaction strength in the source well.
 g_source   = (4*PI*H_BAR**2*a_s)/(CROSS_SECTIONAL_AREA*ATOM_MASS)
@@ -210,7 +210,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 #source_bias_index = int(sys.argv[1])
 #source_bias = source_bias_lst[source_bias_index]
 
-source_bias = 15.0
+source_bias = 21.0
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
