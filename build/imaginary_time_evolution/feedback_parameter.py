@@ -571,7 +571,7 @@ for ii in range(len(time_lst_for_atom_number)):
     time = time_lst_for_atom_number[ii]
     wavefunction_dimless = wavefunction_lst[ii]
 
-    source_atom_number_lst.append(source_atom_number(time), wavefunction_dimless)
+    source_atom_number_lst.append(source_atom_number(time, wavefunction_dimless))
     gate_atom_number_lst.append(gate_atom_number(time, wavefunction_dimless))
     drain_atom_number_lst.append(drain_atom_number(time, wavefunction_dimless))
 
