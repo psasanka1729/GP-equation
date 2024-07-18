@@ -36,7 +36,7 @@ ATOM_MASS   = 1.4192261*10**(-25) # kg
 a_s = 98.006*5.29*10**(-11) # m https://journals.aps.org/pra/abstract/10.1103/PhysRevA.87.053614
 
 # Transistor trap parameters.
-TRAP_FREQUENCY = 2*PI*70 #918 # Hz
+TRAP_FREQUENCY = 850 #918 # Hz
 OMEGA_X = TRAP_FREQUENCY
 TRAP_LENGTH = np.sqrt(H_BAR/(ATOM_MASS*TRAP_FREQUENCY)) # m
 CROSS_SECTIONAL_AREA = PI*TRAP_LENGTH**2 # m*m
@@ -66,16 +66,16 @@ N = 2**14
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
 gate_width_index = int(sys.argv[1])
-gate_well_width_lst = [2.8,3.8,4.8,5.8,6.8]
+gate_well_width_lst = [3.0,6.0,9.0,100.0,500.0]
 gate_well_width = gate_well_width_lst[gate_width_index]
 
 # Position parameters in micrometers.
 position_start      = -60
-position_end        = 500
+position_end        = 1000
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = gate_well_width
-drain_well_end      = 490
+drain_well_end      = 990
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -185,12 +185,12 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 32 # In kHz units.
+barrier_height_GD = 33 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias = 22.0
+source_bias = 18.0
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
