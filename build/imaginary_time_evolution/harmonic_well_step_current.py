@@ -19,8 +19,8 @@ params = {'axes.titlesize': med,
           'xtick.labelsize': med ,
           'ytick.labelsize': med ,
           'figure.titlesize': med}
-plt.rcParams["font.family"] = "Helvetica"
-plt.rcParams["font.serif"] = ["Helvetica Neue"]          
+#plt.rcParams["font.family"] = "Helvetica"
+#plt.rcParams["font.serif"] = ["Helvetica Neue"]          
 #plt.rcParams['text.usetex'] = True # need LaTeX. Change it to False if LaTeX is not installed in the system
 plt.rcParams.update(params)
 
@@ -194,11 +194,11 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
-SG_GD_barrier_lst = [(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
+#SG_GD_barrier_lst = [(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
 
-barrier_height_index = int(sys.argv[1])
-barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
-barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
+#barrier_height_index = int(sys.argv[1])
+barrier_height_SG = 30 #SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
+barrier_height_GD = 33 #SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
 
 #barrier_height_SG = 31
 #barrier_height_GD = 32
@@ -210,7 +210,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 #source_bias_index = int(sys.argv[1])
 #source_bias = source_bias_lst[source_bias_index]
 
-source_bias = 15.0
+source_bias = 17.0
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
@@ -506,7 +506,7 @@ while len(psi_initial_for_full_potential_dimless) < N:
 """ We will put a gaussian wave packet in the gate well instead of zero."""
 
 # Final time for the wavefunction evolution in units of seconds.
-final_time_SI = 100*10**(-3) # In seconds unit.
+final_time_SI = 200*10**(-3) # In seconds unit.
 # Time step to be used in the Suzuki-Trotter decomposition in units of seconds.
 time_step_SI  = 10**(-7)  # In seconds unit.
 
