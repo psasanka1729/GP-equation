@@ -66,7 +66,7 @@ N = 2**14
 V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
 gate_width_index = int(sys.argv[1])
-gate_well_width_lst = [3.0,6.0,9.0,100.0,500.0]
+gate_well_width_lst = [3.0,4.8,6.0,9.0,100.0,500.0]
 gate_well_width = gate_well_width_lst[gate_width_index]
 
 # Position parameters in micrometers.
