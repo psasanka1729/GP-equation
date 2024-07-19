@@ -9,8 +9,9 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
+EXEC=harmonic_well_step_current.py
 #EXEC=dimensionless_step_potential_code.py #real_time_RK4.py
-EXEC=atomic_transistor_harmonic_gate.py
+#EXEC=atomic_transistor_harmonic_gate.py
 #EXEC=source_well_resonance_test.py
 #EXEC=harmonic_gate_well_cluster_code.py
 #EXEC=gaussian_source_well_resonance_test.py
