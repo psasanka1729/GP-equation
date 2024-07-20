@@ -80,9 +80,9 @@ V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 
 
 # Position parameters in micrometers.
-position_start      = -60
+position_start      = -100
 position_end        = 1000
-source_well_start   = -50
+source_well_start   = -90
 gate_well_start     = 0
 gate_well_end       = 4.8
 drain_well_end      = 990
@@ -197,7 +197,7 @@ np.save("transistor_position_arr.npy", position_arr)
 #SG_GD_barrier_lst = [(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
 
 #barrier_height_index = int(sys.argv[1])
-barrier_height_SG = 30 #SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
+barrier_height_SG = 31 #SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
 barrier_height_GD = 33 #SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
 
 #barrier_height_SG = 31
@@ -506,7 +506,7 @@ while len(psi_initial_for_full_potential_dimless) < N:
 """ We will put a gaussian wave packet in the gate well instead of zero."""
 
 # Final time for the wavefunction evolution in units of seconds.
-final_time_SI = 200*10**(-3) # In seconds unit.
+final_time_SI = 100*10**(-3) # In seconds unit.
 # Time step to be used in the Suzuki-Trotter decomposition in units of seconds.
 time_step_SI  = 10**(-7)  # In seconds unit.
 
