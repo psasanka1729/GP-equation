@@ -194,14 +194,14 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
-SG_GD_barrier_lst = [(31, 31+i) for i in np.linspace(-1, 1, 20)] #[(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
+#SG_GD_barrier_lst = [(31, 31+i) for i in np.linspace(-1, 1, 20)] #[(31,30), (31,30.5),(31,31),(31,31.5),(31,32)]
 
-barrier_height_index = int(sys.argv[1])
-barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
-barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
+#barrier_height_index = int(sys.argv[1])
+#barrier_height_SG = SG_GD_barrier_lst[barrier_height_index][0]  #31 # In kHz units.
+#barrier_height_GD = SG_GD_barrier_lst[barrier_height_index][1]  #32 # In kHz units.
 
-#barrier_height_SG = 31
-#barrier_height_GD = 32
+barrier_height_SG = 31
+barrier_height_GD = 33
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
@@ -210,7 +210,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 #source_bias_index = int(sys.argv[1])
 #source_bias = source_bias_lst[source_bias_index]
 
-source_bias = 17.0
+source_bias = 15.0
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
@@ -509,7 +509,7 @@ while len(psi_initial_for_full_potential_dimless) < N:
 """ We will put a gaussian wave packet in the gate well instead of zero."""
 
 # Final time for the wavefunction evolution in units of seconds.
-final_time_SI = 100*10**(-3) # In seconds unit.
+final_time_SI = 60*10**(-3) # In seconds unit.
 # Time step to be used in the Suzuki-Trotter decomposition in units of seconds.
 time_step_SI  = 10**(-7)  # In seconds unit.
 
@@ -518,7 +518,7 @@ final_time_dimless = OMEGA_X*final_time_SI
 time_step_dimless = OMEGA_X*time_step_SI
 
 # List of time to save the snapshots of the wavefunction in miliseconds unit.
-time_lst = list(np.arange(0.0,int(final_time_SI*1.e3),0.01))
+time_lst = list(np.arange(0.0,int(final_time_SI*1.e3),0.001))
 
 time_evolved_wavefunction_time_split, wavefunction_lst  = time_split_suzukui_trotter(psi_initial_for_full_potential_dimless,
                                         complete_transistor_potential,
@@ -558,9 +558,9 @@ def drain_atom_number(final_time, wavefunction_dimless):
      return int(NUMBER_OF_ATOMS*np.sum(np.abs(psi_lst_dimless)**2)*dx_dimless) 
 
 
-final_time_SI = 99.99*10**(-3) # In seconds unit.
+final_time_SI = 59*10**(-3) # In seconds unit.
 
-time_lst_for_atom_number = np.around(list(np.arange(0.0,int(final_time_SI*1.e3),0.01)),2)
+time_lst_for_atom_number = np.around(list(np.arange(0.0,int(final_time_SI*1.e3),0.001)),2)
 
 source_atom_number_lst = []
 gate_atom_number_lst = []
