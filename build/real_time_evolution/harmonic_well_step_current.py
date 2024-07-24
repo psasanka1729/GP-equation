@@ -69,9 +69,9 @@ V_INFINITE_BARRIER  = 1.e4 # In kHz units.
 #gate_well_width_lst = [3.0,4.8,6.0,9.0,100.0,500.0]
 #gate_well_width = gate_well_width_lst[gate_width_index]
 
-source_width_index = int(sys.argv[1])
-A_lst = [0.005,0.01,0.02,0.03]
-A_source_well = A_lst[source_width_index]
+#source_width_index = int(sys.argv[1])
+#A_lst = [0.005,0.01,0.02,0.03]
+#A_source_well = A_lst[source_width_index]
 
 # Position parameters in micrometers.
 position_start      = -100
@@ -148,7 +148,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      delta_right = 0.05
 
      # Creating the source well.
-     A = A_source_well #0.02 # Increasing A results in increase in left side of the source well.
+     A = 0.02 # Increasing A results in increase in left side of the source well.
      B = 0.3 # Increasing B results in increase in width of the source well.
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A,B, SG_barrier_height - V_SS,V_SS), potential)
@@ -194,7 +194,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias = 16.0
+source_bias = 23.0
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, bias_potential_in_gate)*10**3*H_BAR*2*PI # In SI units.
 
 np.save("complete_transistor_potential.npy",  complete_transistor_potential)
