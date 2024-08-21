@@ -1,9 +1,9 @@
 bash real_time_evolution_0.qsub
-bash real_time_evolution_1.qsub
-bash real_time_evolution_2.qsub
-bash real_time_evolution_3.qsub
-bash real_time_evolution_4.qsub
-bash real_time_evolution_5.qsub
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
 echo "Fake run"
 echo "Fake run"
 echo "Fake run"
