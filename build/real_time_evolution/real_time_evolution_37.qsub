@@ -2,9 +2,9 @@
 # Template for ".qsub" files that will be run as batch files by slurm
 
 RUN_NAME=real_time_evolution
-PROJECT_NAME=*project*
+PROJECT_NAME=GP-equation
 SCRATCH=$HOME/scratch
-SCRATCH_DIR=$SCRATCH/$RUN_NAME/b###
+SCRATCH_DIR=$SCRATCH/$RUN_NAME/b37
 LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
@@ -33,7 +33,7 @@ then
 fi
 cd $SCRATCH_DIR
 
-{ time python ./$EXEC *111*; } > temp.out 2> error.err
+{ time python ./$EXEC 37; } > temp.out 2> error.err
 
 if [ "$(pwd)" == $SCRATCH_DIR ]; then
     echo "Removing files"

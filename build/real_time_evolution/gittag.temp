@@ -1,3 +1,90 @@
+commit cfd14e86b6a9764d6ab3900b82de50d57ddb5a26
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Aug 27 22:35:24 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit 93110bc312eecee8b4e9306ca7c523d69e966a73
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Aug 27 22:31:31 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit f9facb2b4b27d85cfa53ddfcd3735300ad91386f
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Aug 27 11:37:37 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit 9909ab834cdd8f56cb0a0e6ccabca4e91f6c0a57
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Aug 27 09:31:31 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit eb4e3ad60cb5170f294a76e51c442d3eb91ecb61
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Aug 25 16:53:33 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit 554c95e74981f9db23c3d6a9e231a597ff02fdea
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Aug 25 14:21:57 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit ef15c335f2b285a7ab274f63fcfeb77573aec6a6
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Aug 25 12:41:49 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit 1f4c66050bbffbb7a8bce9c5e0a4325de42329bf
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Aug 25 11:06:53 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit ddf193b04603ddfeb9094efde7681aac1386cd0a
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Aug 25 11:04:45 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit 80ea7eddb58927443f4dc5c84d59b29967005a59
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Aug 21 18:17:26 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit deff91fa6e2c89fcbee60bdbf4ed1ce7da1c73ef
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Aug 21 18:15:45 2024 -0500
+
+    triple well simulation using class
+
+commit 28ef2b985678892425c054e3ee6d77343673018f
+Merge: 068bdff 4f38b83
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Aug 21 18:15:02 2024 -0500
+
+    Merge pull request #5 from psasanka1729/master
+    
+    Master
+
+commit 4f38b83b2f5fb8a53416b7d1599d1e01cbb65912
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Wed Aug 21 18:13:50 2024 -0500
+
+    cluster backup
+
+commit 068bdffb0245378a7d0e6f88794bc24165fe120e
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Tue Aug 20 22:48:01 2024 -0500
+
+    working double well potential
+
 commit fcf0dccb2f5d3b4a309148d844e3cfefadf3ea6c
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Thu Jul 25 12:25:14 2024 -0500
@@ -105,6 +192,15 @@ Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Wed Jul 17 15:01:09 2024 -0500
 
     Commit before run imaginary_time_evolution
+
+commit 6a851fa57853575197a8fd44b3d5a23470520437
+Merge: e0934b8 c8c3242
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Jul 17 14:30:31 2024 -0500
+
+    Merge pull request #4 from psasanka1729/master
+    
+    merged
 
 commit c8c3242c1e3fd76b8ee5762295fcd948a653689b
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
