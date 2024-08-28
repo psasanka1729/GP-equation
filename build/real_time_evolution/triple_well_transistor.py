@@ -386,8 +386,8 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 index = int(sys.argv[1])
-source_bias_start = 25.0 # In kHz units.
-source_bias_end = 27.0 # In kHz units.
+source_bias_start = 25.75 # In kHz units.
+source_bias_end = 26.25 # In kHz units.
 number_of_divisions = 64
 bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]
 
@@ -395,32 +395,6 @@ source_bias = bias_potential_arr[index]
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
 np.save("transistor_potential_arr.npy", complete_transistor_potential)
-fig, axs = plt.subplots()
-fig.set_figwidth(8.6)
-fig.set_figheight(8.6/1.618)
-plt.plot(position_arr*1.e6, complete_transistor_potential/(10**3*H_BAR*2*PI), linewidth = 2.5, color = "tab:blue")
-plt.xlim([-40, 40])
-plt.ylim([0, barrier_height_GD*1.2]) # In kHz units.
-plt.ylabel(r"Potential, $V(x),\; (kHz)$",labelpad=10)
-plt.xlabel(r"Position, $x, \; (\mu m)$",labelpad=10)
-fig.tight_layout(pad=1.0)
-for spine in axs.spines.values():
-    spine.set_linewidth(2)
-axs.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
-axs.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
-axs.xaxis.set_minor_locator(ticker.AutoMinorLocator())
-axs.yaxis.set_minor_locator(ticker.AutoMinorLocator())
-axs.tick_params(which="minor", length=5, width=1, direction='in')
-fig.tight_layout()    
-# path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well"
-# os.chdir(path)
-# np.save("transistor_position_gaussian.npy",  xs_SI)
-# np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
-#plt.savefig("complete_transistor_potential_harmonic_gate_well.pdf", dpi=600)
-plt.show()      
-
-# %% [markdown]
-# # Source well
 
 # %%
 dx = np.ptp(position_arr)/N
@@ -430,15 +404,10 @@ B = 0.05 # Increasing B results in increase in width of the source well.
 initial_SG_barrier_height = 100
 V_SS = source_bias
 source_well_potential = source_well_potential_function(source_well_position, A, B, initial_SG_barrier_height - V_SS,V_SS)*10**3*H_BAR*2*PI  # In SI units.
-plt.plot(source_well_position, source_well_potential, label = "Source well for ITE", color = "tab:blue", linewidth = 2.5)
-#plt.scatter(source_well_position, source_well_potential, color = "tab:blue", s = 20)
-plt.plot(source_well_position, complete_transistor_potential[:len(source_well_position)], label = "Original source well", color = "tab:red", linewidth = 2.5)
-#plt.scatter(source_well_position, complete_transistor_potential[:len(source_well_position)], color = "tab:red", s = 20)
-plt.legend()
-plt.savefig("source_well_potential.png",dpi=600)
-plt.close()
-# %% [markdown]
-# # Initial ground state in the source well
+np.save("source_well_position.npy", source_well_position)
+np.save("initial_source_well_potential.npy", source_well_potential)
+np.save("final_source_well_potential.npy", complete_transistor_potential[:len(source_well_position)])
+
 
 # %%
 number_of_atoms = 30000
@@ -487,7 +456,7 @@ ax2.xaxis.set_minor_locator(ticker.AutoMinorLocator())
 ax2.yaxis.set_minor_locator(ticker.AutoMinorLocator())
 ax2.tick_params(which="minor", length=5, width=1, direction='in')   
 plt.savefig("ground_state_in_source_well.png", dpi=600, bbox_inches='tight')
-
+plt.close()
 # %%
 data0 = source_well_position
 source_well_potential = complete_transistor_potential[0:len(source_well_position)]
@@ -525,7 +494,7 @@ ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
 plt.savefig("chemical_potential_in_source_well.jpg", dpi=600)
 fig.tight_layout()
-
+plt.close()
 # %% [markdown]
 # # Real time evolution
 
