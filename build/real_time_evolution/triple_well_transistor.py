@@ -405,8 +405,8 @@ initial_SG_barrier_height = 100
 V_SS = source_bias
 source_well_potential = source_well_potential_function(source_well_position, A, B, initial_SG_barrier_height - V_SS,V_SS)*10**3*H_BAR*2*PI  # In SI units.
 np.save("source_well_position.npy", source_well_position)
-np.save("initial_source_well_potential.npy", source_well_potential)
-np.save("final_source_well_potential.npy", complete_transistor_potential[:len(source_well_position)])
+np.save("initial_source_well_potential_"+str(source_bias)+".npy", source_well_potential)
+np.save("final_source_well_potential_"+str(source_bias)+".npy", complete_transistor_potential[:len(source_well_position)])
 
 
 # %%
@@ -455,7 +455,7 @@ ax1.tick_params(which="minor", length=5, width=1, direction='in')
 ax2.xaxis.set_minor_locator(ticker.AutoMinorLocator())
 ax2.yaxis.set_minor_locator(ticker.AutoMinorLocator())
 ax2.tick_params(which="minor", length=5, width=1, direction='in')   
-plt.savefig("ground_state_in_source_well.png", dpi=600, bbox_inches='tight')
+plt.savefig("ground_state_in_source_well_"+str(source_bias)+".png", dpi=600, bbox_inches='tight')
 plt.close()
 # %%
 data0 = source_well_position
@@ -492,7 +492,7 @@ ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
-plt.savefig("chemical_potential_in_source_well.jpg", dpi=600)
+plt.savefig("chemical_potential_in_source_well_"+str(source_bias)+".jpg", dpi=600)
 fig.tight_layout()
 plt.close()
 # %% [markdown]
