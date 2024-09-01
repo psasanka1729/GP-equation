@@ -149,8 +149,8 @@ position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = 4.8
-drain_well_end      = 480
-position_end        = 500
+drain_well_end      = 580
+position_end        = 600
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -386,8 +386,8 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 index = int(sys.argv[1])
-source_bias_start = 25.75 # In kHz units.
-source_bias_end = 26.25 # In kHz units.
+source_bias_start = 27 # In kHz units.
+source_bias_end = 23 # In kHz units.
 number_of_divisions = 64
 bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]
 

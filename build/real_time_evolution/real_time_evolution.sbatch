@@ -3,7 +3,7 @@
 #SBATCH --job-name=real_time_evolution
 #
 # Partition:
-#SBATCH --partition=normal
+#SBATCH --partition=gpu-preempt
 #
 # Processors:
 #SBATCH --ntasks=64
