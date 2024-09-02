@@ -1,4 +1,5 @@
 # %%
+import sys
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -148,8 +149,8 @@ position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = 4.8
-drain_well_end      = 960
-position_end        = 1000
+drain_well_end      = 580
+position_end        = 600
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -336,7 +337,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      delta_right = 0.05
 
      # Creating the source well.
-     A = 0.02 # Increasing A results in increase in left side of the source well.
+     A = 0.005 # Increasing A results in increase in left side of the source well.
      B = 0.3 # Increasing B results in increase in width of the SG barrier.
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A,B, SG_barrier_height - V_SS,V_SS), potential)
@@ -383,58 +384,34 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias = 18.0 # In kHz units.
+
+index = int(sys.argv[1])
+source_bias_start = 16 # In kHz units.
+source_bias_end = 28 # In kHz units.
+number_of_divisions = 64
+bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]
+
+source_bias = bias_potential_arr[index]
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
-fig, axs = plt.subplots()
-fig.set_figwidth(8.6)
-fig.set_figheight(8.6/1.618)
-plt.plot(position_arr*1.e6, complete_transistor_potential/(10**3*H_BAR*2*PI), linewidth = 2.5, color = "tab:blue")
-plt.xlim([-40, 40])
-plt.ylim([0, barrier_height_GD*1.2]) # In kHz units.
-plt.ylabel(r"Potential, $V(x),\; (kHz)$",labelpad=10)
-plt.xlabel(r"Position, $x, \; (\mu m)$",labelpad=10)
-fig.tight_layout(pad=1.0)
-for spine in axs.spines.values():
-    spine.set_linewidth(2)
-axs.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
-axs.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
-axs.xaxis.set_minor_locator(ticker.AutoMinorLocator())
-axs.yaxis.set_minor_locator(ticker.AutoMinorLocator())
-axs.tick_params(which="minor", length=5, width=1, direction='in')
-fig.tight_layout()    
-# path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well"
-# os.chdir(path)
-# np.save("transistor_position_gaussian.npy",  xs_SI)
-# np.save("transistor_potential_gaussian.npy", complete_transistor_potential_SI)
-#plt.savefig("complete_transistor_potential_harmonic_gate_well.pdf", dpi=600)
-plt.show()      
-
-# %% [markdown]
-# # Source well
+np.save("transistor_potential_arr.npy", complete_transistor_potential)
 
 # %%
 dx = np.ptp(position_arr)/N
 source_well_position = np.arange(position_start*1.e-6, (gate_well_start + 0.05)*1.e-6, dx)*1.e6
-A = 0.02 # Increasing A results in increase in left side of the source well.
-B = 0.5 # Increasing B results in increase in width of the source well.
+A = 0.005 # Increasing A results in increase in left side of the source well.
+B = 0.05 # Increasing B results in increase in width of the source well.
 initial_SG_barrier_height = 100
 V_SS = source_bias
 source_well_potential = source_well_potential_function(source_well_position, A, B, initial_SG_barrier_height - V_SS,V_SS)*10**3*H_BAR*2*PI  # In SI units.
-plt.plot(source_well_position, source_well_potential, label = "Source well for ITE", color = "tab:blue", linewidth = 2.5)
-#plt.scatter(source_well_position, source_well_potential, color = "tab:blue", s = 20)
-plt.plot(source_well_position, complete_transistor_potential[:len(source_well_position)], label = "Original source well", color = "tab:red", linewidth = 2.5)
-#plt.scatter(source_well_position, complete_transistor_potential[:len(source_well_position)], color = "tab:red", s = 20)
-plt.legend()
-plt.savefig("source_well_potential.png", dpi=600)
-plt.close()
+np.save("source_well_position.npy", source_well_position)
+np.save("initial_source_well_potential_"+str(source_bias)+".npy", source_well_potential)
+np.save("final_source_well_potential_"+str(source_bias)+".npy", complete_transistor_potential[:len(source_well_position)])
 
-# %% [markdown]
-# # Initial ground state in the source well
 
 # %%
-number_of_atoms = 100000
-
+number_of_atoms = 30000
+np.save("number_of_atoms.npy", number_of_atoms)
 # %%
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.e-1 # In seconds unit.
@@ -478,8 +455,8 @@ ax1.tick_params(which="minor", length=5, width=1, direction='in')
 ax2.xaxis.set_minor_locator(ticker.AutoMinorLocator())
 ax2.yaxis.set_minor_locator(ticker.AutoMinorLocator())
 ax2.tick_params(which="minor", length=5, width=1, direction='in')   
-plt.savefig("ground_state_in_source_well.png", dpi=600, bbox_inches='tight')
-
+plt.savefig("ground_state_in_source_well_"+str(source_bias)+".png", dpi=600, bbox_inches='tight')
+plt.close()
 # %%
 data0 = source_well_position
 source_well_potential = complete_transistor_potential[0:len(source_well_position)]
@@ -515,9 +492,9 @@ ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
-plt.savefig("chemical_potential_in_source_well.jpg", dpi=600)
+plt.savefig("chemical_potential_in_source_well_"+str(source_bias)+".jpg", dpi=600)
 fig.tight_layout()
-
+plt.close()
 # %% [markdown]
 # # Real time evolution
 
@@ -530,7 +507,9 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
 time_step = 10**(-7) # In seconds unit.
 tmax = 100*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,int(tmax*1.e3),0.01))
+time_lst = list(np.arange(0.0,int(tmax*1.e3),1))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
+np.save("x_s.npy", solver_complete_potential.x_s)
+np.save("dx_dimless.npy", solver_complete_potential.dx_dimless)
