@@ -93,3 +93,325 @@ Launcher: Task 26 running job 27 on compute-2-01-10 (bash real_time_evolution_26
 Launcher: Task 17 running job 18 on compute-2-01-10 (bash real_time_evolution_17.qsub)
 Launcher: Task 0 running job 1 on compute-2-01-09 (bash real_time_evolution_0.qsub)
 Launcher: Task 47 running job 48 on compute-2-01-11 (bash real_time_evolution_47.qsub)
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 19 completed in 3792 seconds.
+Launcher: Task 18 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 33 completed in 3819 seconds.
+Launcher: Task 32 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 3 completed in 3809 seconds.
+Launcher: Task 2 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 11 completed in 3809 seconds.
+Launcher: Task 10 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 6 completed in 3814 seconds.
+Launcher: Task 5 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 8 completed in 3815 seconds.
+Launcher: Task 7 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 22 completed in 3826 seconds.
+Launcher: Task 21 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 26 completed in 3818 seconds.
+Launcher: Task 25 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 9 completed in 3820 seconds.
+Launcher: Task 8 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 4 completed in 3826 seconds.
+Launcher: Task 3 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 5 completed in 3820 seconds.
+Launcher: Task 4 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 2 completed in 3834 seconds.
+Launcher: Task 1 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 28 completed in 3836 seconds.
+Launcher: Task 27 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 10 completed in 3837 seconds.
+Launcher: Task 9 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 14 completed in 3854 seconds.
+Launcher: Task 13 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Removing files
+Launcher: Job 23 completed in 3845 seconds.
+Launcher: Task 22 done. Exiting.
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 1 completed in 3835 seconds.
+Launcher: Task 0 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 24 completed in 3851 seconds.
+Launcher: Task 23 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 35 completed in 3861 seconds.
+Launcher: Task 34 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 7 completed in 3852 seconds.
+Launcher: Task 6 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 13 completed in 3850 seconds.
+Launcher: Task 12 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 17 completed in 3870 seconds.
+Launcher: Task 16 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 45 completed in 3862 seconds.
+Launcher: Task 44 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 18 completed in 3857 seconds.
+Launcher: Task 17 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 42 completed in 3882 seconds.
+Launcher: Task 41 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 12 completed in 3880 seconds.
+Launcher: Task 11 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 50 completed in 3869 seconds.
+Launcher: Task 49 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 15 completed in 3868 seconds.
+Launcher: Task 14 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 40 completed in 3884 seconds.
+Launcher: Task 39 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 16 completed in 3883 seconds.
+Launcher: Task 15 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 27 completed in 3873 seconds.
+Launcher: Task 26 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 51 completed in 3887 seconds.
+Launcher: Task 50 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 30 completed in 3875 seconds.
+Launcher: Task 29 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 39 completed in 3881 seconds.
+Launcher: Task 38 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 38 completed in 3908 seconds.
+Launcher: Task 37 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 34 completed in 3908 seconds.
+Launcher: Task 33 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 32 completed in 3904 seconds.
+Launcher: Task 31 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 48 completed in 3895 seconds.
+Launcher: Task 47 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 44 completed in 3905 seconds.
+Launcher: Task 43 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 41 completed in 3921 seconds.
+Launcher: Task 40 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 20 completed in 3905 seconds.
+Launcher: Task 19 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 52 completed in 3909 seconds.
+Launcher: Task 51 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 31 completed in 3909 seconds.
+Launcher: Task 30 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 21 completed in 3922 seconds.
+Launcher: Task 20 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 37 completed in 3918 seconds.
+Launcher: Task 36 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 29 completed in 3927 seconds.
+Launcher: Task 28 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 46 completed in 3927 seconds.
+Launcher: Task 45 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 53 completed in 3922 seconds.
+Launcher: Task 52 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 36 completed in 3945 seconds.
+Launcher: Task 35 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 43 completed in 3934 seconds.
+Launcher: Task 42 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 57 completed in 3952 seconds.
+Launcher: Task 56 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 47 completed in 3952 seconds.
+Launcher: Task 46 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 25 completed in 3952 seconds.
+Launcher: Task 24 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 60 completed in 3982 seconds.
+Launcher: Task 59 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 63 completed in 3968 seconds.
+Launcher: Task 62 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 54 completed in 3974 seconds.
+Launcher: Task 53 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 55 completed in 3974 seconds.
+Launcher: Task 54 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 56 completed in 3992 seconds.
+Launcher: Task 55 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 62 completed in 4028 seconds.
+Launcher: Task 61 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 64 completed in 4025 seconds.
+Launcher: Task 63 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 61 completed in 4032 seconds.
+Launcher: Task 60 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 59 completed in 4023 seconds.
+Launcher: Task 58 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 49 completed in 4063 seconds.
+Launcher: Task 48 done. Exiting.
+Removing files
+Removing files
+rm: cannot remove 'triple_well_transistor.py': No such file or directory
+Launcher: Job 58 completed in 4094 seconds.
+Launcher: Task 57 done. Exiting.
+Launcher: Done. Job exited without errors
+Job real_time_evolution complete
