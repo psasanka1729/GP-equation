@@ -391,7 +391,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 #number_of_divisions = 64
 #bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]
 
-source_bias = 27.0625 #bias_potential_arr[index]
+source_bias = 27.125 #bias_potential_arr[index]
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
 np.save("transistor_potential_arr.npy", complete_transistor_potential)
