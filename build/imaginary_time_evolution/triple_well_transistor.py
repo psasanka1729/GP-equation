@@ -386,7 +386,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 index = int(sys.argv[1])
-source_bias_start = 26 # In kHz units.
+source_bias_start = 25 # In kHz units.
 source_bias_end = 30 # In kHz units.
 number_of_divisions = 64
 bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]

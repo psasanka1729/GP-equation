@@ -4,7 +4,7 @@
 RUN_NAME=imaginary_time_evolution
 PROJECT_NAME=GP-equation
 SCRATCH=$HOME/scratch
-SCRATCH_DIR=$SCRATCH/$RUN_NAME/b0
+SCRATCH_DIR=$SCRATCH/$RUN_NAME/b24
 LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
@@ -23,7 +23,7 @@ then
 fi
 cd $SCRATCH_DIR/
 
-{ time python ./$EXEC 0; } > temp.out 2> error.err
+{ time python ./$EXEC 24; } > temp.out 2> error.err
 
 if [ "$(pwd)" == $SCRATCH_DIR ]; then
     echo "Removing files"

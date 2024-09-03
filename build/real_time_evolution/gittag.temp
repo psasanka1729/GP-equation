@@ -1,3 +1,36 @@
+commit cdcf7ce47a9a5dae78e8167c148a8e066705520d
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Mon Sep 2 10:55:46 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit ebfda6e9a244b8c08fd62ab507815711ee8c873e
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 1 22:06:48 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 8bb9bdbc14d3c8a519358b972b1ba8e4d1ec6b00
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sun Sep 1 22:02:44 2024 -0500
+
+    triple well code for different source bias
+
+commit 3db542f8430310b257b3e53b67f9d8930f93e182
+Merge: c3fac6c 54f264f
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sun Sep 1 22:01:57 2024 -0500
+
+    Merge pull request #7 from psasanka1729/master
+    
+    triple well code is run in imaginary time evolution
+
+commit 54f264fbc84adae1c44b27a6a68f88dbed87f750
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 1 22:00:19 2024 -0500
+
+    triple well code backup
+
 commit c0b8311b645c3ed9bb4b5e546a73e85d04bffa81
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Sun Sep 1 21:49:36 2024 -0500
@@ -57,6 +90,15 @@ Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Wed Aug 28 12:39:13 2024 -0500
 
     Commit before run real_time_evolution
+
+commit c3fac6c7eb75c7f91fe9ca998d8168a8514882eb
+Merge: deff91f f3fd663
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Aug 28 12:25:02 2024 -0500
+
+    Merge pull request #6 from psasanka1729/master
+    
+    Master
 
 commit f3fd6634bd4975388c9158531ffd6de2dbd6ebfc
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
