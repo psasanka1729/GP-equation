@@ -98,19 +98,19 @@ class GrossPitaevskiiSolver:
             current_time_index = 0
             next_snapshot_time = snapshots_lst[current_time_index]  
 
-        fixed_position_in_source_well = -4*1.e-6 # In micrometers unit.
-        fixed_position_in_gate_well = 3.0*1.e-6 # In micrometers unit.
-        fixed_position_in_drain_well = 15*1.e-6 # In micrometers unit.
+            fixed_position_in_source_well = -4*1.e-6 # In micrometers unit.
+            fixed_position_in_gate_well = 3.0*1.e-6 # In micrometers unit.
+            fixed_position_in_drain_well = 15*1.e-6 # In micrometers unit.
 
-        transistor_position_arr = self.position_arr
+            transistor_position_arr = self.position_arr
 
-        index_of_fixed_point_source_well = np.where(np.abs(transistor_position_arr - fixed_position_in_source_well) < 1.e-7)[0][0]
-        index_of_fixed_point_gate_well = np.where(np.abs(transistor_position_arr - fixed_position_in_gate_well) < 1.e-7)[0][0]
-        index_of_fixed_point_drain_well = np.where(np.abs(transistor_position_arr - fixed_position_in_drain_well) < 1.e-7)[0][0]
+            index_of_fixed_point_source_well = np.where(np.abs(transistor_position_arr - fixed_position_in_source_well) < 1.e-7)[0][0]
+            index_of_fixed_point_gate_well = np.where(np.abs(transistor_position_arr - fixed_position_in_gate_well) < 1.e-7)[0][0]
+            index_of_fixed_point_drain_well = np.where(np.abs(transistor_position_arr - fixed_position_in_drain_well) < 1.e-7)[0][0]
 
-        wavefunction_at_fixed_point_source_arr = []
-        wavefunction_at_fixed_point_gate_arr = []
-        wavefunction_at_fixed_point_drain_arr = []
+            wavefunction_at_fixed_point_source_arr = []
+            wavefunction_at_fixed_point_gate_arr = []
+            wavefunction_at_fixed_point_drain_arr = []
 
 
 
@@ -135,16 +135,16 @@ class GrossPitaevskiiSolver:
                         if current_time_index < len(time_lst):
                             next_snapshot_time = time_lst[current_time_index]                 
 
-            # Analysis for the coherence of the matter wave in the drain well.
-            time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless
-            wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
-            wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
-            wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])
+                # Analysis for the coherence of the matter wave in the drain well.
+                time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless
+                wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
+                wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
+                wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])
         
-
-        np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
-        np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
-        np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
+        if snapshots_lst:
+            np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
+            np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
+            np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
 
         return normalize(self.psi_x_dimless)
 
