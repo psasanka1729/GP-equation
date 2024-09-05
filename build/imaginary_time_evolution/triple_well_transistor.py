@@ -124,17 +124,19 @@ class GrossPitaevskiiSolver:
             self.psi_x_dimless = normalize(self.psi_x_dimless)
             self.psi_x_dimless = np.exp(-self.hamiltonian_x_dimless(self.potential_func, self.psi_x_dimless) * 1j * self.time_step_dimless / 2) * self.psi_x_dimless
             self.psi_x_dimless = normalize(self.psi_x_dimless)
-
+                
+            """    
             if snapshots_lst:
                 # Changing to SI units miliseconds for convenience.
                 time = (self.time_step_dimless*iteration/self.trap_frequency)*1.e3
                 # Check if the current time matches the next snapshot time
                 if time >= next_snapshot_time:
-                        #np.save("time_evolved_wavefunction_"+str(np.around(time,3))+".npy",self.psi_x_dimless)
+                        np.save("time_evolved_wavefunction_"+str(np.around(time,3))+".npy",self.psi_x_dimless)
                         current_time_index += 1
                         if current_time_index < len(time_lst):
-                            next_snapshot_time = time_lst[current_time_index]                 
-
+                            next_snapshot_time = time_lst[current_time_index] 
+            """
+            if snapshots_lst:
                 # Analysis for the coherence of the matter wave in the drain well.
                 time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless
                 wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
@@ -530,9 +532,9 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 40*1.e-3 # In seconds unit.
+tmax = 100*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,int(tmax*1.e3),0.001))
+time_lst = list(np.arange(0.0,int(tmax*1.e3),0.0001))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
