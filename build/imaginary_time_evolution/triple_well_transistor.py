@@ -102,6 +102,8 @@ class GrossPitaevskiiSolver:
         fixed_position_in_gate_well = 3.0*1.e-6 # In micrometers unit.
         fixed_position_in_drain_well = 15*1.e-6 # In micrometers unit.
 
+        transistor_position_arr = self.position_arr
+
         index_of_fixed_point_source_well = np.where(np.abs(transistor_position_arr - fixed_position_in_source_well) < 1.e-7)[0][0]
         index_of_fixed_point_gate_well = np.where(np.abs(transistor_position_arr - fixed_position_in_gate_well) < 1.e-7)[0][0]
         index_of_fixed_point_drain_well = np.where(np.abs(transistor_position_arr - fixed_position_in_drain_well) < 1.e-7)[0][0]
