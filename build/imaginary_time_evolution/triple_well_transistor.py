@@ -98,6 +98,20 @@ class GrossPitaevskiiSolver:
             current_time_index = 0
             next_snapshot_time = snapshots_lst[current_time_index]  
 
+        fixed_position_in_source_well = -4*1.e-6 # In micrometers unit.
+        fixed_position_in_gate_well = 3.0*1.e-6 # In micrometers unit.
+        fixed_position_in_drain_well = 15*1.e-6 # In micrometers unit.
+
+        index_of_fixed_point_source_well = np.where(np.abs(transistor_position_arr - fixed_position_in_source_well) < 1.e-7)[0][0]
+        index_of_fixed_point_gate_well = np.where(np.abs(transistor_position_arr - fixed_position_in_gate_well) < 1.e-7)[0][0]
+        index_of_fixed_point_drain_well = np.where(np.abs(transistor_position_arr - fixed_position_in_drain_well) < 1.e-7)[0][0]
+
+        wavefunction_at_fixed_point_source_arr = []
+        wavefunction_at_fixed_point_gate_arr = []
+        wavefunction_at_fixed_point_drain_arr = []
+
+
+
         for iteration in range(total_iterations):
             self.psi_x_dimless = np.exp(-self.hamiltonian_x_dimless(self.potential_func, self.psi_x_dimless) * 1j * self.time_step_dimless / 2) * self.psi_x_dimless
             self.psi_x_dimless = normalize(self.psi_x_dimless)
@@ -114,14 +128,23 @@ class GrossPitaevskiiSolver:
                 time = (self.time_step_dimless*iteration/self.trap_frequency)*1.e3
                 # Check if the current time matches the next snapshot time
                 if time >= next_snapshot_time:
-                        np.save("time_evolved_wavefunction_"+str(np.around(time,3))+".npy",self.psi_x_dimless)
+                        #np.save("time_evolved_wavefunction_"+str(np.around(time,3))+".npy",self.psi_x_dimless)
                         current_time_index += 1
                         if current_time_index < len(time_lst):
                             next_snapshot_time = time_lst[current_time_index]                 
 
-        print("Normalization of the final wavefunction: ", np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
-        print("Number of atoms in the trap = ", (self.number_of_atoms)*np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
-        return normalize(self.psi_x_dimless)
+            # Analysis for the coherence of the matter wave in the drain well.
+            time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless
+            wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
+            wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
+            wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])
+        
+
+    np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
+    np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
+    np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
+
+    return normalize(self.psi_x_dimless)
 
             
     def number_of_atoms_interval(self, psi_time_evolved, a, b):
@@ -511,5 +534,3 @@ time_lst = list(np.arange(0.0,int(tmax*1.e3),0.001))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
-np.save("x_s.npy", solver_complete_potential.x_s)
-np.save("dx_dimless.npy", solver_complete_potential.dx_dimless)
