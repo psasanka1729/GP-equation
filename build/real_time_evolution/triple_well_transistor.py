@@ -379,16 +379,16 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 33 # In kHz units.
+barrier_height_GD = 32 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 index = int(sys.argv[1])
-source_bias_start = 26.875 # In kHz units.
-source_bias_end = 27.375 # In kHz units.
-number_of_divisions = 64
+source_bias_start = 23 # In kHz units.
+source_bias_end = 28 # In kHz units.
+number_of_divisions = 16
 bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]
 
 source_bias = bias_potential_arr[index]
