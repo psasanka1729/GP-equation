@@ -1,2 +1,2 @@
-# GP-equation
-Code to solve the Gross-Pitaevskii equation for interacting Bosons
+# Atomtronic transistor using the GP equation.
+This repository contains code to investigate the atomtronic transistor using the Gross-Pitaevskii equation. Specifically I want to test the resonance tunneling and coherence of the matter wave in the drain well of the transistor (https://journals.aps.org/pra/abstract/10.1103/PhysRevA.104.033311). This repository is for personal use and is not maintained very well.
