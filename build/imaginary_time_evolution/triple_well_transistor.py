@@ -164,7 +164,7 @@ class GrossPitaevskiiSolver:
 
 # %%
 # Number of points in the grid.
-N = 2**14
+N = 2**15
 
 V_infinity  = 1.e4 # In kHz units.
 
@@ -437,7 +437,7 @@ np.save("final_source_well_potential_"+str(source_bias)+".npy", complete_transis
 number_of_atoms = 30000
 np.save("number_of_atoms.npy", number_of_atoms)
 # %%
-time_step = -1j*10**(-6) # In seconds unit.
+time_step = -1j*10**(-7) # In seconds unit.
 tmax = 1.e-1 # In seconds unit.
 solver_source_well = GrossPitaevskiiSolver(time_step, tmax, source_well_position*1.e-6, source_well_potential, number_of_atoms, None)
 psi_source_well_ITE_dimless = solver_source_well.solve([])
@@ -528,7 +528,7 @@ psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
-time_step = 10**(-7) # In seconds unit.
+time_step = 10**(-8) # In seconds unit.
 tmax = 100*1.e-3 # In seconds unit.
 
 time_lst = list(np.arange(0.0,int(tmax*1.e3),0.0001))
