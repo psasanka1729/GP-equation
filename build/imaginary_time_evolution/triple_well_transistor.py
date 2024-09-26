@@ -111,9 +111,9 @@ class GrossPitaevskiiSolver:
             wavefunction_at_fixed_point_source_arr = []
             wavefunction_at_fixed_point_gate_arr = []
             wavefunction_at_fixed_point_drain_arr = []
-
-
-
+            time_lst_to_save = []
+        
+            
         for iteration in range(total_iterations):
             self.psi_x_dimless = np.exp(-self.hamiltonian_x_dimless(self.potential_func, self.psi_x_dimless) * 1j * self.time_step_dimless / 2) * self.psi_x_dimless
             self.psi_x_dimless = normalize(self.psi_x_dimless)
@@ -133,7 +133,9 @@ class GrossPitaevskiiSolver:
                         #np.save("time_evolved_wavefunction_"+str(np.around(time,4))+".npy",self.psi_x_dimless)
                         current_time_index += 1
                         if current_time_index < len(time_lst):
-                            next_snapshot_time = time_lst[current_time_index] 
+                            next_snapshot_time = time_lst[current_time_index]
+
+                time_lst_to_save.append(next_snapshot_time)            
                 # Analysis for the coherence of the matter wave in the drain well.
                 time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless
                 wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
@@ -141,6 +143,7 @@ class GrossPitaevskiiSolver:
                 wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])
         
         if snapshots_lst:
+            np.save("time_lst.npy", next_snapshot_time)
             np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
