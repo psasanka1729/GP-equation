@@ -143,7 +143,7 @@ class GrossPitaevskiiSolver:
                 wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])
         
         if snapshots_lst:
-            np.save("time_lst.npy", next_snapshot_time)
+            np.save("time_lst.npy", time_lst_to_save)
             np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
