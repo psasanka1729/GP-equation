@@ -130,10 +130,10 @@ class GrossPitaevskiiSolver:
                 time = (self.time_step_dimless*iteration/self.trap_frequency)*1.e3
                 # Check if the current time matches the next snapshot time
                 if time >= next_snapshot_time:
-                        #np.save("time_evolved_wavefunction_"+str(np.around(time,4))+".npy",self.psi_x_dimless)
-                        current_time_index += 1
-                        if current_time_index < len(time_lst):
-                            next_snapshot_time = time_lst[current_time_index]
+                     #np.save("time_evolved_wavefunction_"+str(np.around(time,4))+".npy",self.psi_x_dimless)
+                    current_time_index += 1
+                    if current_time_index < len(time_lst):
+                        next_snapshot_time = time_lst[current_time_index]
 
                 time_lst_to_save.append(time)            
                 # Analysis for the coherence of the matter wave in the drain well.
