@@ -135,7 +135,7 @@ class GrossPitaevskiiSolver:
                         if current_time_index < len(time_lst):
                             next_snapshot_time = time_lst[current_time_index]
 
-                time_lst_to_save.append(next_snapshot_time)            
+                time_lst_to_save.append(time)            
                 # Analysis for the coherence of the matter wave in the drain well.
                 time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless
                 wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
