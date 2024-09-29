@@ -1,7 +1,7 @@
 bash imaginary_time_evolution_0.qsub
-echo "Fake run"
-echo "Fake run"
-echo "Fake run"
+bash imaginary_time_evolution_1.qsub
+bash imaginary_time_evolution_2.qsub
+bash imaginary_time_evolution_3.qsub
 echo "Fake run"
 echo "Fake run"
 echo "Fake run"
