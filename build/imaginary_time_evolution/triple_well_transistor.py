@@ -13,8 +13,8 @@ params = {'axes.titlesize': med,'axes.titlepad' : med,
           'legend.fontsize': med,'axes.labelsize': med ,
           'axes.titlesize': med ,'xtick.labelsize': med ,
           'ytick.labelsize': med ,'figure.titlesize': med}
-plt.rcParams["font.family"] = "Helvetica"
-plt.rcParams["font.serif"] = ["Helvetica Neue"]          
+#plt.rcParams["font.family"] = "Helvetica"
+#plt.rcParams["font.serif"] = ["Helvetica Neue"]          
 #plt.rcParams['text.usetex'] = True # need LaTeX. Change it to False if LaTeX is not installed in the system
 plt.rcParams.update(params)
 
@@ -98,6 +98,22 @@ class GrossPitaevskiiSolver:
             current_time_index = 0
             next_snapshot_time = snapshots_lst[current_time_index]  
 
+            fixed_position_in_source_well = -4*1.e-6 # In micrometers unit.
+            fixed_position_in_gate_well = 3.0*1.e-6 # In micrometers unit.
+            fixed_position_in_drain_well = 15*1.e-6 # In micrometers unit.
+
+            transistor_position_arr = self.position_arr
+
+            index_of_fixed_point_source_well = np.where(np.abs(transistor_position_arr - fixed_position_in_source_well) < 1.e-7)[0][0]
+            index_of_fixed_point_gate_well = np.where(np.abs(transistor_position_arr - fixed_position_in_gate_well) < 1.e-7)[0][0]
+            index_of_fixed_point_drain_well = np.where(np.abs(transistor_position_arr - fixed_position_in_drain_well) < 1.e-7)[0][0]
+
+            wavefunction_at_fixed_point_source_arr = []
+            wavefunction_at_fixed_point_gate_arr = []
+            wavefunction_at_fixed_point_drain_arr = []
+            time_lst_to_save = []
+        
+            
         for iteration in range(total_iterations):
             self.psi_x_dimless = np.exp(-self.hamiltonian_x_dimless(self.potential_func, self.psi_x_dimless) * 1j * self.time_step_dimless / 2) * self.psi_x_dimless
             self.psi_x_dimless = normalize(self.psi_x_dimless)
@@ -108,19 +124,30 @@ class GrossPitaevskiiSolver:
             self.psi_x_dimless = normalize(self.psi_x_dimless)
             self.psi_x_dimless = np.exp(-self.hamiltonian_x_dimless(self.potential_func, self.psi_x_dimless) * 1j * self.time_step_dimless / 2) * self.psi_x_dimless
             self.psi_x_dimless = normalize(self.psi_x_dimless)
-
+                
             if snapshots_lst:
                 # Changing to SI units miliseconds for convenience.
                 time = (self.time_step_dimless*iteration/self.trap_frequency)*1.e3
                 # Check if the current time matches the next snapshot time
                 if time >= next_snapshot_time:
-                        np.save("time_evolved_wavefunction_"+str(np.around(time,2))+".npy",self.psi_x_dimless)
-                        current_time_index += 1
-                        if current_time_index < len(time_lst):
-                            next_snapshot_time = time_lst[current_time_index]                 
+                     #np.save("time_evolved_wavefunction_"+str(np.around(time,4))+".npy",self.psi_x_dimless)
+                    current_time_index += 1
+                    if current_time_index < len(time_lst):
+                        next_snapshot_time = time_lst[current_time_index]
 
-        print("Normalization of the final wavefunction: ", np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
-        print("Number of atoms in the trap = ", (self.number_of_atoms)*np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
+                time_lst_to_save.append(time)            
+                # Analysis for the coherence of the matter wave in the drain well.
+                time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless
+                wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
+                wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
+                wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])
+        
+        if snapshots_lst:
+            np.save("time_lst.npy", time_lst_to_save)
+            np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
+            np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
+            np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
+
         return normalize(self.psi_x_dimless)
 
             
@@ -379,19 +406,20 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 33 # In kHz units.
+barrier_height_GD = 32 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-index = int(sys.argv[1])
-source_bias_start = 25 # In kHz units.
-source_bias_end = 30 # In kHz units.
-number_of_divisions = 64
-bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]
+#index = int(sys.argv[1])
+#source_bias_start = 25 # In kHz units.
+#source_bias_end = 30 # In kHz units.
+#number_of_divisions = 64
+#bias_potential_arr = [source_bias_start + (source_bias_end - source_bias_start)*i/number_of_divisions for i in range(number_of_divisions)]
 
-source_bias = bias_potential_arr[index]
+source_bias = 27.1171875
+#source_bias = 27.1015625 #bias_potential_arr[index]
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
 np.save("transistor_potential_arr.npy", complete_transistor_potential)
@@ -413,7 +441,7 @@ np.save("final_source_well_potential_"+str(source_bias)+".npy", complete_transis
 number_of_atoms = 30000
 np.save("number_of_atoms.npy", number_of_atoms)
 # %%
-time_step = -1j*10**(-6) # In seconds unit.
+time_step = -1j*10**(-7) # In seconds unit.
 tmax = 1.e-1 # In seconds unit.
 solver_source_well = GrossPitaevskiiSolver(time_step, tmax, source_well_position*1.e-6, source_well_potential, number_of_atoms, None)
 psi_source_well_ITE_dimless = solver_source_well.solve([])
@@ -505,11 +533,9 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 100*1.e-3 # In seconds unit.
+tmax = 60*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,int(tmax*1.e3),1))
+time_lst = list(np.arange(0.0,int(tmax*1.e3),0.001))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
-np.save("x_s.npy", solver_complete_potential.x_s)
-np.save("dx_dimless.npy", solver_complete_potential.dx_dimless)
