@@ -157,7 +157,7 @@ class GrossPitaevskiiSolver:
                     # Saving the atom number in each well at each time t in the list.
                     number_of_atoms_in_source_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, source_well_start, gate_well_start)
                     number_of_atoms_in_gate_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_start, gate_well_end)  
-                    number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, position_end)
+                    number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, drain_well_end)
 
                     source_well_atom_number_arr.append(number_of_atoms_in_source_well)
                     gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
@@ -427,7 +427,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_arr = np.linspace(25, 29, 64)
+source_bias_arr = np.linspace(27, 27.5, 64)
 
 source_bias = source_bias_arr[int(sys.argv[1])] # In kHz units.
 np.save("source_bias.npy", source_bias)
