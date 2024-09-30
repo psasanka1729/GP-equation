@@ -9,7 +9,8 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-EXEC=triple_well_transistor.py
+EXEC=coherence_test.py
+#EXEC=triple_well_transistor.py
 #HELPER_1="alan_potential_landscape.txt" 
 #HELPER_2="potential_landscape_original.txt"
 
