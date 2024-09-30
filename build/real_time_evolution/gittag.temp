@@ -1,3 +1,120 @@
+commit b81bec18b984c04f8dcc9de7660b2301ad49fcb0
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 29 19:32:51 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit 9c18a80fb7c495d358c8a92acf0fa47fe1824afa
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 29 19:31:07 2024 -0500
+
+    Commit before run real_time_evolution
+
+commit 7c574ae9f83a7b25cf565d8d749ec3859acd6f26
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 29 17:57:13 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit b1957fdb40f213c6a10a557a108887fd7395164a
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 29 17:55:17 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 4eef1da46329b7fc97a5a577d431675892bf8c2d
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 29 17:52:50 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 52bbfaac6ca0db109fe26cae0b8adb939eaadab6
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sun Sep 29 17:43:52 2024 -0500
+
+    frequency in drain well around gate frequency
+
+commit de7e011afbfd628fc2ae673dfd4e1ea8a9063383
+Merge: 911cc8d 72271da
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sun Sep 29 17:41:33 2024 -0500
+
+    Merge pull request #9 from psasanka1729/master
+    
+    Master
+
+commit 72271da3a06bc801f3c204145b6a02edb8df46e9
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 29 17:40:58 2024 -0500
+
+    cluster backup
+
+commit 911cc8d52e6105e3ca73e4465740678fca3a4bab
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sat Sep 28 21:11:29 2024 -0500
+
+    correct code gives coherence around gate frequency
+
+commit 1b89477cd36a69129e3f98d07faf0b391570fc85
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Fri Sep 27 12:53:49 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit dc561d8611aa0d8bd8ab75a8d57c00ad8ce71cdc
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Fri Sep 27 10:31:52 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit bd37aa52a07ed019df5a2b509871093f33edda75
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Fri Sep 27 09:39:43 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit b2fa01d2552d12339ed96f9b31fffce2636a7920
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Fri Sep 27 09:39:24 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 205e07593dbe977bf988150154e632778ee4c6ea
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Sep 26 22:42:51 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit d34fd67b458a1631ca482be85419f104814b9088
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Thu Sep 26 12:37:46 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit c622d1d4e650e108fce6db7dac453a7d2e17a437
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Mon Sep 23 12:33:31 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 106e5b19ea207e0cb88cf283ff6635aff55c2940
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Mon Sep 23 12:32:59 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit d5ef1278edc67e2b801492d80e5f202c43c54806
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Sun Sep 22 14:02:18 2024 -0500
+
+    Commit before run imaginary_time_evolution
+
+commit 95afae1f3e65c6694df2643f97db8e8fc874b6d6
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sun Sep 15 23:15:33 2024 -0500
+
+    Update README.md
+
 commit 964f1d9f782f70e907445c99949864df0f27fe06
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Mon Sep 9 17:41:30 2024 -0500
@@ -117,6 +234,15 @@ Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Mon Sep 2 22:52:39 2024 -0500
 
     Commit before run real_time_evolution
+
+commit 33c499caa43ab71e209b02be46418be3b7c40eda
+Merge: 8bb9bdb 135175c
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Mon Sep 2 22:39:46 2024 -0500
+
+    Merge pull request #8 from psasanka1729/master
+    
+    Master
 
 commit 135175c1f15d0fdc0027591f133b998ddf105dea
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
