@@ -93,8 +93,8 @@ class GrossPitaevskiiSolver:
                 return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
                 
         psi_time_evolved = normalize(psi_time_evolved)
-        a_dimless = a / self.x_s
-        b_dimless = b / self.x_s
+        a_dimless = a*1.e-6 / self.x_s
+        b_dimless = b*1.e-6 / oself.x_s
         psi_from_a_to_b_dimless = psi_time_evolved[np.logical_and(self.position_arr_dimless >= a_dimless, self.position_arr_dimless <= b_dimless)]
         return (self.number_of_atoms)*np.sum(np.abs(psi_from_a_to_b_dimless)**2)*self.dx_dimless
 
