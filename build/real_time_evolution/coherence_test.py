@@ -427,7 +427,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_arr = np.linspace(27, 27.5, 64)
+source_bias_arr = np.linspace(25, 29, 64)
 
 source_bias = source_bias_arr[int(sys.argv[1])] # In kHz units.
 np.save("source_bias.npy", source_bias)
