@@ -407,8 +407,8 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = [26.875, 27.0625, 27.109375, 27.3671875]
-
+#source_bias_lst = [26.875, 27.0625, 27.109375, 27.3671875]
+source_bias_lst = [27.24603175]
 source_bias_index = int(sys.argv[1])
 
 source_bias = source_bias_lst[source_bias_index]  # In kHz units.
