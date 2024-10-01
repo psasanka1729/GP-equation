@@ -86,6 +86,18 @@ class GrossPitaevskiiSolver:
             k_dimless = np.hstack([np.arange(0, self.N / 2), np.arange(-self.N / 2 + 1, 0)]) * self.dk_dimless
         return k_dimless ** 2 * self.epsilon / 2
 
+
+    def number_of_atoms_interval(self, psi_time_evolved, a, b):
+
+        def normalize(psi_x_dimless):
+                return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
+
+        psi_time_evolved = normalize(psi_time_evolved)
+        a_dimless = a*1.e-6 / self.x_s
+        b_dimless = b*1.e-6 / self.x_s
+        psi_from_a_to_b_dimless = psi_time_evolved[np.logical_and(self.position_arr_dimless >= a_dimless, self.position_arr_dimless <= b_dimless)]
+        return (self.number_of_atoms)*np.sum(np.abs(psi_from_a_to_b_dimless)**2)*self.dx_dimless
+
     def solve(self, snapshots_lst):
 
         total_iterations = int(np.abs(self.tmax_dimless) / np.abs(self.time_step_dimless))
@@ -95,8 +107,8 @@ class GrossPitaevskiiSolver:
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
 
         fixed_position_in_source_well = -4*1.e-6 # In micrometers unit.
-        fixed_position_in_gate_well = 3.0*1.e-6 # In micrometers unit.
-        fixed_position_in_drain_well = 15*1.e-6 # In micrometers unit.
+        fixed_position_in_gate_well = 3.4*1.e-6 # In micrometers unit.
+        fixed_position_in_drain_well = 20*1.e-6 # In micrometers unit.
 
         transistor_position_arr = self.position_arr
         if snapshots_lst:
@@ -108,6 +120,10 @@ class GrossPitaevskiiSolver:
             wavefunction_at_fixed_point_gate_arr = []
             wavefunction_at_fixed_point_drain_arr = []    
             time_lst_to_save = []
+
+            source_well_atom_number_arr = []
+            gate_well_atom_number_arr = []
+            drain_well_atom_number_arr = []
 
         if snapshots_lst:
             snapshot_index = 0
@@ -134,6 +150,15 @@ class GrossPitaevskiiSolver:
                     wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
                     wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
                     wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
+                   
+                   
+                    number_of_atoms_in_source_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, source_well_start, gate_well_start)
+                    number_of_atoms_in_gate_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_start, gate_well_end)  
+                    number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, drain_well_end)
+
+                    source_well_atom_number_arr.append(number_of_atoms_in_source_well)
+                    gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
+                    drain_well_atom_number_arr.append(number_of_atoms_in_drain_well)
 
                     if snapshot_index >= len(snapshots_lst):
                         break             
@@ -144,18 +169,13 @@ class GrossPitaevskiiSolver:
             np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
+            
+            np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
+            np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
+            np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
+        
         return normalize(self.psi_x_dimless)
             
-    def number_of_atoms_interval(self, psi_time_evolved, a, b):
-
-        def normalize(psi_x_dimless):
-                return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
-                
-        psi_time_evolved = normalize(psi_time_evolved)
-        a_dimless = a / self.x_s
-        b_dimless = b / self.x_s
-        psi_from_a_to_b_dimless = psi_time_evolved[np.logical_and(self.position_arr_dimless >= a_dimless, self.position_arr_dimless <= b_dimless)]
-        return (self.number_of_atoms)*np.sum(np.abs(psi_from_a_to_b_dimless)**2)*self.dx_dimless
 
 # %% [markdown]
 # # Setting up the triple well potential landscape
@@ -407,8 +427,8 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = [26.875, 27.0625, 27.109375, 27.3671875]
-
+source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
+#source_bias_lst = [27.24603175]
 source_bias_index = int(sys.argv[1])
 
 source_bias = source_bias_lst[source_bias_index]  # In kHz units.

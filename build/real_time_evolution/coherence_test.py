@@ -13,8 +13,8 @@ params = {'axes.titlesize': med,'axes.titlepad' : med,
           'legend.fontsize': med,'axes.labelsize': med ,
           'axes.titlesize': med ,'xtick.labelsize': med ,
           'ytick.labelsize': med ,'figure.titlesize': med}
-plt.rcParams["font.family"] = "Helvetica"
-plt.rcParams["font.serif"] = ["Helvetica Neue"]          
+#plt.rcParams["font.family"] = "Helvetica"
+#plt.rcParams["font.serif"] = ["Helvetica Neue"]          
 #plt.rcParams['text.usetex'] = True # need LaTeX. Change it to False if LaTeX is not installed in the system
 plt.rcParams.update(params)
 
@@ -93,8 +93,8 @@ class GrossPitaevskiiSolver:
                 return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
                 
         psi_time_evolved = normalize(psi_time_evolved)
-        a_dimless = a / self.x_s
-        b_dimless = b / self.x_s
+        a_dimless = a*1.e-6 / self.x_s
+        b_dimless = b*1.e-6 / self.x_s
         psi_from_a_to_b_dimless = psi_time_evolved[np.logical_and(self.position_arr_dimless >= a_dimless, self.position_arr_dimless <= b_dimless)]
         return (self.number_of_atoms)*np.sum(np.abs(psi_from_a_to_b_dimless)**2)*self.dx_dimless
 
@@ -427,7 +427,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_arr = np.linspace(27, 27.5, 64)
+source_bias_arr = np.linspace(25, 29, 64)
 
 source_bias = source_bias_arr[int(sys.argv[1])] # In kHz units.
 np.save("source_bias.npy", source_bias)
