@@ -87,7 +87,7 @@ class GrossPitaevskiiSolver:
         return k_dimless ** 2 * self.epsilon / 2
 
 
-   def number_of_atoms_interval(self, psi_time_evolved, a, b):
+    def number_of_atoms_interval(self, psi_time_evolved, a, b):
 
         def normalize(psi_x_dimless):
                 return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
