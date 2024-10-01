@@ -121,6 +121,10 @@ class GrossPitaevskiiSolver:
             wavefunction_at_fixed_point_drain_arr = []    
             time_lst_to_save = []
 
+            source_well_atom_number_arr = []
+            gate_well_atom_number_arr = []
+            drain_well_atom_number_arr = []
+
         if snapshots_lst:
             snapshot_index = 0
             time = snapshots_lst[snapshot_index]  # Starting time.
