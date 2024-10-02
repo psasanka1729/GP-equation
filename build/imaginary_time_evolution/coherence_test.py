@@ -28,7 +28,7 @@ H_BAR = 1.0545718 * 10 ** (-34)
 class GrossPitaevskiiSolver:
     def __init__(self, time_step, tmax, position_arr, potential_func, number_of_atoms, initial_wavefunction):
         self.h_bar = 1.0545718 * 10 ** (-34)
-        self.trap_frequency = 2 * np.pi * 70  # Hz
+        self.trap_frequency = 2 * np.pi * 70  # rad/s
         self.number_of_atoms = number_of_atoms
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg
         self.a_s = 98.006 * 5.29 * 10 ** (-11)  # m
@@ -584,7 +584,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
 time_step = 10**(-7) # In seconds unit.
 tmax = 200*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
+time_lst = list(np.arange(0.0,tmax,0.001*1.e-3))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
