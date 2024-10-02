@@ -106,8 +106,8 @@ class GrossPitaevskiiSolver:
         def normalize(psi_x_dimless):
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
 
-        fixed_position_in_source_well = -4*1.e-6 # In micrometers unit.
-        fixed_position_in_gate_well = 3.4*1.e-6 # In micrometers unit.
+        fixed_position_in_source_well = -10*1.e-6 # In micrometers unit.
+        fixed_position_in_gate_well = 4*1.e-6 # In micrometers unit.
         fixed_position_in_drain_well = 20*1.e-6 # In micrometers unit.
 
         transistor_position_arr = self.position_arr
@@ -427,8 +427,8 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
-#source_bias_lst = [27.24603175]
+#source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
+source_bias_lst = np.linspace(26.5,28.5,64)
 source_bias_index = int(sys.argv[1])
 
 source_bias = source_bias_lst[source_bias_index]  # In kHz units.
