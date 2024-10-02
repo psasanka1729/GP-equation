@@ -66,3 +66,17 @@ Launcher: Task 10 running job 11 on compute-2-01-09 (echo "Fake run")
 Fake run
 Launcher: Job 11 completed in 0 seconds.
 Launcher: Task 10 done. Exiting.
+Removing files
+Launcher: Job 4 completed in 7731 seconds.
+Launcher: Task 3 done. Exiting.
+Removing files
+Launcher: Job 1 completed in 7792 seconds.
+Launcher: Task 0 done. Exiting.
+Removing files
+Launcher: Job 2 completed in 7892 seconds.
+Launcher: Task 1 done. Exiting.
+Removing files
+Launcher: Job 3 completed in 7947 seconds.
+Launcher: Task 2 done. Exiting.
+Launcher: Done. Job exited without errors
+Job imaginary_time_evolution complete

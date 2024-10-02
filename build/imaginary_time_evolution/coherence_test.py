@@ -584,7 +584,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
 time_step = 10**(-7) # In seconds unit.
 tmax = 200*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.001*1.e-3))
+time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
