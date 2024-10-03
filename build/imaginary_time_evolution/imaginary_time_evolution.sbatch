@@ -3,7 +3,7 @@
 #SBATCH --job-name=imaginary_time_evolution
 #
 # Partition:
-#SBATCH --partition=cmt
+#SBATCH --partition=gpu-preempt
 #
 # Processors:
 #SBATCH --ntasks=64

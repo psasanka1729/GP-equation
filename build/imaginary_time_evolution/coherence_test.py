@@ -428,7 +428,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 #source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
-source_bias_lst = np.linspace(26.5,28.5,64)
+source_bias_lst = np.linspace(25,29,64)
 source_bias_index = int(sys.argv[1])
 
 source_bias = source_bias_lst[source_bias_index]  # In kHz units.
@@ -584,7 +584,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
 time_step = 10**(-7) # In seconds unit.
 tmax = 200*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.001*1.e-3))
+time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
