@@ -109,6 +109,10 @@ class GrossPitaevskiiSolver:
         fixed_position_in_source_well = -10*1.e-6 # In micrometers unit.
         fixed_position_in_gate_well = 4*1.e-6 # In micrometers unit.
         fixed_position_in_drain_well = 20*1.e-6 # In micrometers unit.
+        np.save("fixed_position_in_source_well.npy",fixed_position_in_source_well)
+        np.save("fixed_position_in_gate_well.npy",fixed_position_in_gate_well)
+        np.save("fixed_position_in_drain_well.npy",fixed_position_in_drain_well)
+
 
         transistor_position_arr = self.position_arr
         if snapshots_lst:
@@ -183,8 +187,10 @@ class GrossPitaevskiiSolver:
 # %%
 # Number of points in the grid.
 N = 2**14
+np.save("N.npy",N)
 
 V_infinity  = 1.e4 # In kHz units.
+np.save("V_infinity.npy",V_infinity)
 
 # Position parameters in micrometers.
 position_start      = -60
@@ -429,6 +435,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 #source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
 source_bias_lst = np.linspace(25,29,64)
+np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
 source_bias = source_bias_lst[source_bias_index]  # In kHz units.
@@ -483,7 +490,7 @@ plt.close()
 
 # %%
 number_of_atoms = 30000
-
+np.save("number_of_atoms.npy", number_of_atoms)
 # %%
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.e-1 # In seconds unit.
@@ -585,6 +592,6 @@ time_step = 10**(-7) # In seconds unit.
 tmax = 200*1.e-3 # In seconds unit.
 
 time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
-
+np.save("time_lst.npy",time_lst)
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
