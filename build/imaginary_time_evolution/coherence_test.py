@@ -434,7 +434,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 #source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
-source_bias_lst = np.linspace(26.5,28.5,16*6)
+source_bias_lst = np.linspace(27,28.5,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
