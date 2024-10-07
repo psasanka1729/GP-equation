@@ -155,16 +155,16 @@ class GrossPitaevskiiSolver:
                     #wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
                     #wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
                   
-                    
+                    """ 
                     position_expectation_values_lst = []
                     mask = (position_arr >= 0*1.e-6) & (position_arr <= 4.8*1.e-6)
                     x_gate = position_arr[mask]
                     x_gate_dimless = x_gate/self.x_s
                     psi_t_dimless_gate = time_evolved_wavefunction_time_split_dimless[mask]
                     position_expectation_values_lst.append(np.trapz(np.conj(psi_t_dimless_gate) * x_gate_dimless * psi_t_dimless_gate))
-                    
-
                     """
+
+                    #"""
                     number_of_atoms_in_source_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, source_well_start, gate_well_start)
                     number_of_atoms_in_gate_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_start, gate_well_end)  
                     number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, drain_well_end)
@@ -172,7 +172,7 @@ class GrossPitaevskiiSolver:
                     source_well_atom_number_arr.append(number_of_atoms_in_source_well)
                     gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
                     drain_well_atom_number_arr.append(number_of_atoms_in_drain_well)
-                    """
+                    #"""
                     if snapshot_index >= len(snapshots_lst):
                         break             
                            
@@ -184,12 +184,12 @@ class GrossPitaevskiiSolver:
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
             """
-            np.save("position_expectation_values.npy", position_expectation_values_lst)
+            #np.save("position_expectation_values.npy", position_expectation_values_lst)
             
             
-            #np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
-            #np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
-            #np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
+            np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
+            np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
+            np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
         
         return normalize(self.psi_x_dimless)
             
@@ -209,7 +209,7 @@ np.save("V_infinity.npy",V_infinity)
 position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = 4.8
+gate_well_end       = 6.8
 drain_well_end      = 980
 position_end        = 1000
 
@@ -447,7 +447,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 #source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
-source_bias_lst = np.linspace(27,28.5,64)
+source_bias_lst = np.linspace(25,29,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -602,9 +602,9 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 200*1.e-3 # In seconds unit.
+tmax = 100*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
+time_lst = list(np.arange(0.0,tmax,0.1*1.e-3))
 np.save("time_lst.npy",time_lst)
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
