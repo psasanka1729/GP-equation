@@ -156,7 +156,7 @@ class GrossPitaevskiiSolver:
                     #wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
                   
                     
-                    position_expectation_values_lst = np.zeros(len(time_lst), dtype = complex)
+                    position_expectation_values_lst = []
                     mask = (position_arr >= 0*1.e-6) & (position_arr <= 4.8*1.e-6)
                     x_gate = position_arr[mask]
                     x_gate_dimless = x_gate/self.x_s
