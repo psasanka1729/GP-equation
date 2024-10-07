@@ -146,37 +146,50 @@ class GrossPitaevskiiSolver:
             self.psi_x_dimless = normalize(self.psi_x_dimless)
 
             if snapshots_lst:
-                
+                position_expectation_values = []
                 if np.isclose(time, snapshots_lst[snapshot_index]):
                     snapshot_index += 1
                     time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless                                            
                     #np.save(f"wavefunction_time_evolved_{time*1e3:.3f}ms.npy", time_evolved_wavefunction_time_split_dimless)
-                    wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
-                    wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
-                    wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
-                   
-                   
+                    #wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
+                    #wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
+                    #wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
+                  
+                    
+                    position_expectation_values_lst = np.zeros(len(time_lst), dtype = complex)
+                    mask = (position_arr >= 0*1.e-6) & (position_arr <= 4.8*1.e-6)
+                    x_gate = position_arr[mask]
+                    x_gate_dimless/self.x_s
+                    psi_t_dimless_gate = time_evolved_wavefunction_time_split_dimless[mask]
+                    position_expectation_values_lst.append(np.trapz(np.conj(psi_t_dimless_gate) * x_gate_dimless * psi_t_dimless_gate))
+                    
+
+                    """
                     number_of_atoms_in_source_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, source_well_start, gate_well_start)
                     number_of_atoms_in_gate_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_start, gate_well_end)  
                     number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, drain_well_end)
-
+                    
                     source_well_atom_number_arr.append(number_of_atoms_in_source_well)
                     gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
                     drain_well_atom_number_arr.append(number_of_atoms_in_drain_well)
-
+                    """
                     if snapshot_index >= len(snapshots_lst):
                         break             
                            
                 time += self.time_step  
 
         if snapshots_lst:
+            """
             np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
+            """
+            np.save("position_expectation_values.npy", position_expectation_values_lst)
             
-            np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
-            np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
-            np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
+            
+            #np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
+            #np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
+            #np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
         
         return normalize(self.psi_x_dimless)
             
