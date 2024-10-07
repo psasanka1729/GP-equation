@@ -159,7 +159,7 @@ class GrossPitaevskiiSolver:
                     position_expectation_values_lst = np.zeros(len(time_lst), dtype = complex)
                     mask = (position_arr >= 0*1.e-6) & (position_arr <= 4.8*1.e-6)
                     x_gate = position_arr[mask]
-                    x_gate_dimless/self.x_s
+                    x_gate_dimless = x_gate/self.x_s
                     psi_t_dimless_gate = time_evolved_wavefunction_time_split_dimless[mask]
                     position_expectation_values_lst.append(np.trapz(np.conj(psi_t_dimless_gate) * x_gate_dimless * psi_t_dimless_gate))
                     
