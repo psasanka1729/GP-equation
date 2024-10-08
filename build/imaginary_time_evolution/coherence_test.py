@@ -446,8 +446,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-#source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
-source_bias_lst = np.linspace(25,30,64)
+source_bias_lst = np.linspace(20,28,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -557,18 +556,18 @@ plt.close()
 data0 = source_well_position
 source_well_potential = complete_transistor_potential[0:len(source_well_position)]
 data1 = source_well_potential + solver_source_well.g*number_of_atoms*np.abs(psi_source_well_ITE_dimless/np.sqrt(solver_source_well.x_s))**2
+
+np.save("chemical_potential_in_source_well.npy", data1)
+
 data3 = source_well_potential 
 
 fig, ax1 = plt.subplots()
-
 ax1.set_xlabel(r"Position, $\tilde{x}$", labelpad=20)
 ax1.set_ylabel(r"Chemical potential $\mu\; (Joules)$", color="tab:red", labelpad=20)
 ax1.plot(data0, data1, color="tab:red",linewidth = 5)
 plt.title(r"Chemical potential in the source well")
-#plt.legend()
 ax1.tick_params(axis="y", labelcolor="tab:red")
 ax2 = ax1.twinx()
-
 color = "tab:blue"
 ax2.set_ylabel(r"$V(x)\; (Joules)$ ", color=color,  labelpad=20)
 ax2.plot(data0, data3, color=color,linewidth = 5)
