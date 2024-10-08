@@ -447,7 +447,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
 #source_bias_lst = [27.02380952, 27.19047619, 27.24603175, 27.37301587]
-source_bias_lst = np.linspace(25,35,64)
+source_bias_lst = np.linspace(25,30,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -502,11 +502,11 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 30000
+number_of_atoms = 60000
 np.save("number_of_atoms.npy", number_of_atoms)
 # %%
-time_step = -1j*10**(-6) # In seconds unit.
-tmax = 1.e-1 # In seconds unit.
+time_step = -1j*10**(-7) # In seconds unit.
+tmax = 1 # In seconds unit.
 solver_source_well = GrossPitaevskiiSolver(time_step, tmax, source_well_position*1.e-6, source_well_potential, number_of_atoms, None)
 psi_source_well_ITE_dimless = solver_source_well.solve([])
 
