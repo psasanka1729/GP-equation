@@ -193,13 +193,8 @@ class GrossPitaevskiiSolver:
         
         return normalize(self.psi_x_dimless)
             
-
-# %% [markdown]
-# # Setting up the triple well potential landscape
-
-# %%
 # Number of points in the grid.
-N = 2**14
+N = 2**16
 np.save("N.npy",N)
 
 V_infinity  = 1.e4 # In kHz units.
