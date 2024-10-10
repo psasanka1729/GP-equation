@@ -179,7 +179,7 @@ class GrossPitaevskiiSolver:
         return normalize(self.psi_x_dimless)
             
 # Number of points in the grid.
-N = 2**16
+N = 2**15
 np.save("N.npy",N)
 
 V_infinity  = 1.e4 # In kHz units.
@@ -426,7 +426,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = np.linspace(26.5,28.5,64)
+source_bias_lst = np.linspace(26,29,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
