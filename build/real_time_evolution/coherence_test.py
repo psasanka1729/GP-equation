@@ -151,20 +151,9 @@ class GrossPitaevskiiSolver:
                     snapshot_index += 1
                     time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless                                            
                     #np.save(f"wavefunction_time_evolved_{time*1e3:.3f}ms.npy", time_evolved_wavefunction_time_split_dimless)
-                    #wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
-                    #wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
-                    #wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
-                  
-                    """ 
-                    position_expectation_values_lst = []
-                    mask = (position_arr >= 0*1.e-6) & (position_arr <= 4.8*1.e-6)
-                    x_gate = position_arr[mask]
-                    x_gate_dimless = x_gate/self.x_s
-                    psi_t_dimless_gate = time_evolved_wavefunction_time_split_dimless[mask]
-                    position_expectation_values_lst.append(np.trapz(np.conj(psi_t_dimless_gate) * x_gate_dimless * psi_t_dimless_gate))
-                    """
-
-                    #"""
+                    wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
+                    wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
+                    wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
                     number_of_atoms_in_source_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, source_well_start, gate_well_start)
                     number_of_atoms_in_gate_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_start, gate_well_end)  
                     number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, drain_well_end)
@@ -179,13 +168,9 @@ class GrossPitaevskiiSolver:
                 time += self.time_step  
 
         if snapshots_lst:
-            """
             np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
-            """
-            #np.save("position_expectation_values.npy", position_expectation_values_lst)
-            
             
             np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
             np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
@@ -204,7 +189,7 @@ np.save("V_infinity.npy",V_infinity)
 position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = 6.8
+gate_well_end       = 4.8
 drain_well_end      = 980
 position_end        = 1000
 
@@ -354,7 +339,7 @@ def harmonic_well(x1,y1,x2,y2,x3,y3):
 def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_barrier_height, gate_bias_potential,
      SIGMA_1 = 0.6,
      SIGMA_2 = 0.8,
-     SIGMA_3 = 0.6,
+     SIGMA_3 = 1.0,
      SIGMA_4 = 0.6,
      ):
 
@@ -389,12 +374,12 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      """
 
      # These are two offsets that makes the top of the V_SG and V_GD barriers smooth.
-     delta_left = 0.05
-     delta_right = 0.05
+     delta_left = 0.2
+     delta_right = 0.2
 
      # Creating the source well.
      A = 0.005 # Increasing A results in increase in width of the source well.
-     B = 0.3 # Increasing B results in increase in width of the SG barrier.
+     B = 0.6 # Increasing B results in increase in width of the SG barrier.
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A,B, SG_barrier_height - V_SS,V_SS), potential)
 
@@ -441,7 +426,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = np.linspace(20,28,64)
+source_bias_lst = np.linspace(26.5,28.5,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -496,11 +481,11 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 60000
+number_of_atoms = 30000
 np.save("number_of_atoms.npy", number_of_atoms)
 # %%
 time_step = -1j*10**(-7) # In seconds unit.
-tmax = 1 # In seconds unit.
+tmax = 10 # In seconds unit.
 solver_source_well = GrossPitaevskiiSolver(time_step, tmax, source_well_position*1.e-6, source_well_potential, number_of_atoms, None)
 psi_source_well_ITE_dimless = solver_source_well.solve([])
 
@@ -598,7 +583,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
 time_step = 10**(-7) # In seconds unit.
 tmax = 100*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.1*1.e-3))
+time_lst = list(np.arange(0.0,tmax,0.001*1.e-3))
 np.save("time_lst.npy",time_lst)
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
