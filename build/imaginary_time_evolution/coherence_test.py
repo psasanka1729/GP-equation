@@ -204,7 +204,7 @@ np.save("V_infinity.npy",V_infinity)
 position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = 5.8
+gate_well_end       = 4.0
 drain_well_end      = 980
 position_end        = 1000
 
@@ -598,7 +598,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
 time_step = 10**(-7) # In seconds unit.
 tmax = 100*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.01*1.e-3))
+time_lst = list(np.arange(0.0,tmax,0.001*1.e-3))
 np.save("time_lst.npy",time_lst)
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
