@@ -354,7 +354,7 @@ def harmonic_well(x1,y1,x2,y2,x3,y3):
 def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_barrier_height, gate_bias_potential,
      SIGMA_1 = 0.6,
      SIGMA_2 = 0.8,
-     SIGMA_3 = 0.6,
+     SIGMA_3 = 1.0,
      SIGMA_4 = 0.6,
      ):
 
@@ -389,12 +389,12 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      """
 
      # These are two offsets that makes the top of the V_SG and V_GD barriers smooth.
-     delta_left = 0.05
-     delta_right = 0.05
+     delta_left = 0.2
+     delta_right = 0.2
 
      # Creating the source well.
      A = 0.005 # Increasing A results in increase in width of the source well.
-     B = 0.3 # Increasing B results in increase in width of the SG barrier.
+     B = 0.6 # Increasing B results in increase in width of the SG barrier.
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A,B, SG_barrier_height - V_SS,V_SS), potential)
 
@@ -441,7 +441,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = np.linspace(20,28,64)
+source_bias_lst = np.linspace(25.5,26.5,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -596,7 +596,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 100*1.e-3 # In seconds unit.
+tmax = 200*1.e-3 # In seconds unit.
 
 time_lst = list(np.arange(0.0,tmax,0.001*1.e-3))
 np.save("time_lst.npy",time_lst)
