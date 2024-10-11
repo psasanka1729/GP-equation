@@ -8,7 +8,8 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-EXEC=double_well_alan_potential_cluster_code.py
+EXEC=coherence_test.py
+#EXEC=double_well_alan_potential_cluster_code.py
 HELPER=""
 
 cd $LOCAL_DIR/$RUN_NAME

@@ -194,7 +194,7 @@ class GrossPitaevskiiSolver:
         return normalize(self.psi_x_dimless)
             
 # Number of points in the grid.
-N = 2**16
+N = 2**14
 np.save("N.npy",N)
 
 V_infinity  = 1.e4 # In kHz units.
@@ -204,7 +204,7 @@ np.save("V_infinity.npy",V_infinity)
 position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = 4.0
+gate_well_end       = 4.8
 drain_well_end      = 980
 position_end        = 1000
 
@@ -441,7 +441,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = np.linspace(25.5,26.5,64)
+source_bias_lst = np.linspace(25,29,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -496,7 +496,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 60000
+number_of_atoms = 30000
 np.save("number_of_atoms.npy", number_of_atoms)
 # %%
 time_step = -1j*10**(-7) # In seconds unit.

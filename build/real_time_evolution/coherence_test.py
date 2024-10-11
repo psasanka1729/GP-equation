@@ -179,7 +179,7 @@ class GrossPitaevskiiSolver:
         return normalize(self.psi_x_dimless)
             
 # Number of points in the grid.
-N = 2**15
+N = 2**14
 np.save("N.npy",N)
 
 V_infinity  = 1.e4 # In kHz units.
