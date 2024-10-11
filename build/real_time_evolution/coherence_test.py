@@ -189,7 +189,7 @@ np.save("V_infinity.npy",V_infinity)
 position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = 4.8
+gate_well_end       = 4.0
 drain_well_end      = 980
 position_end        = 1000
 
@@ -426,7 +426,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = np.linspace(26,29,64)
+source_bias_lst = np.linspace(25,29,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -485,7 +485,7 @@ number_of_atoms = 30000
 np.save("number_of_atoms.npy", number_of_atoms)
 # %%
 time_step = -1j*10**(-7) # In seconds unit.
-tmax = 10 # In seconds unit.
+tmax = 1 # In seconds unit.
 solver_source_well = GrossPitaevskiiSolver(time_step, tmax, source_well_position*1.e-6, source_well_potential, number_of_atoms, None)
 psi_source_well_ITE_dimless = solver_source_well.solve([])
 
