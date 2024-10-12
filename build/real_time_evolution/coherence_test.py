@@ -154,13 +154,13 @@ class GrossPitaevskiiSolver:
                     wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
                     wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
                     wavefunction_at_fixed_point_drain_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_drain_well])  
-                    number_of_atoms_in_source_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, source_well_start, gate_well_start)
-                    number_of_atoms_in_gate_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_start, gate_well_end)  
-                    number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, drain_well_end)
+                    #number_of_atoms_in_source_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, source_well_start, gate_well_start)
+                    #number_of_atoms_in_gate_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_start, gate_well_end)  
+                    #number_of_atoms_in_drain_well = self.number_of_atoms_interval(time_evolved_wavefunction_time_split_dimless, gate_well_end, drain_well_end)
                     
-                    source_well_atom_number_arr.append(number_of_atoms_in_source_well)
-                    gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
-                    drain_well_atom_number_arr.append(number_of_atoms_in_drain_well)
+                    #source_well_atom_number_arr.append(number_of_atoms_in_source_well)
+                    #gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
+                    #drain_well_atom_number_arr.append(number_of_atoms_in_drain_well)
                     #"""
                     if snapshot_index >= len(snapshots_lst):
                         break             
@@ -172,9 +172,9 @@ class GrossPitaevskiiSolver:
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
             
-            np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
-            np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
-            np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
+            #np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
+            #np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
+            #np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
         
         return normalize(self.psi_x_dimless)
             
@@ -426,7 +426,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = np.linspace(24,27,64)
+source_bias_lst = [25, 25.8, 26, 27] #np.linspace(24,27,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -581,7 +581,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 100*1.e-3 # In seconds unit.
+tmax = 200*1.e-3 # In seconds unit.
 
 time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
 np.save("time_lst.npy",time_lst)
