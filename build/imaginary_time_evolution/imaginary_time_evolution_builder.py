@@ -5,7 +5,8 @@ import numpy
 import os
 
 #partition_info=['cmt',16] # = [partition,ncores]
-partition_info=['gpu-preempt',16] # = [partition,ncores]
+#partition_info=['gpu-preempt',16] # = [partition,ncores]
+partition_info=['cpu-preempt',16]
 time_str='7-00:00:00'
 project_name=os.getcwd().split('/')[-3]
 myemail=os.environ["MYEMAIL"]
