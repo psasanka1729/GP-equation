@@ -441,7 +441,7 @@ np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
 
-source_bias_lst = np.linspace(25,29,64)
+source_bias_lst = np.linspace(24,27,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -496,7 +496,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 30000
+number_of_atoms = 60000
 np.save("number_of_atoms.npy", number_of_atoms)
 # %%
 time_step = -1j*10**(-7) # In seconds unit.
@@ -596,9 +596,9 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 200*1.e-3 # In seconds unit.
+tmax = 100*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.001*1.e-3))
+time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
 np.save("time_lst.npy",time_lst)
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
