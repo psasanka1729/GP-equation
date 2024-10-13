@@ -178,7 +178,7 @@ class GrossPitaevskiiSolver:
         return normalize(self.psi_x_dimless)
             
 # Number of points in the grid.
-N = 2**14
+N = 2**16
 np.save("N.npy",N)
 
 V_infinity  = 1.e4 # In kHz units.
@@ -189,8 +189,8 @@ position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = 4.8
-drain_well_end      = 980
-position_end        = 1000
+drain_well_end      = 1490
+position_end        = 1500
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -419,7 +419,7 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 32 # In kHz units.
+barrier_height_GD = 33 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
@@ -579,10 +579,10 @@ psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
-time_step = 10**(-7) # In seconds unit.
-tmax = 200*1.e-3 # In seconds unit.
+time_step = 10**(-8) # In seconds unit.
+tmax = 300*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,0.0001*1.e-3))
+time_lst = list(np.arange(0.0,tmax,1.e-8))
 np.save("time_lst.npy",time_lst)
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
