@@ -2,8 +2,8 @@
 # Template for ".qsub" files that will be run as batch files by slurm
 
 RUN_NAME=double_well_potential
-PROJECT_NAME=*project*
-SCRATCH_DIR=$SCRATCH/$RUN_NAME/b###
+PROJECT_NAME=GP-equation
+SCRATCH_DIR=$SCRATCH/$RUN_NAME/b0
 LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
@@ -20,7 +20,7 @@ then
 fi
 cd $SCRATCH_DIR/
 
-{ time python ./$EXEC *111*; } > temp.out 2> error.err
+{ time python ./$EXEC 0; } > temp.out 2> error.err
 
 if [ "$(pwd)" == $SCRATCH_DIR ]; then
     echo "Removing files"

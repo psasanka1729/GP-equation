@@ -1,13 +1,13 @@
 #!/bin/bash
 # Job name:
-#SBATCH --job-name=real_time_evolution
+#SBATCH --job-name=double_well_potential
 #
 # Partition:
 #SBATCH --partition=gpu-preempt
 #
 # Processors:
-#SBATCH --ntasks=64
-#SBATCH --nodes=4
+#SBATCH --ntasks=16
+#SBATCH --nodes=1
 #
 # Wall clock limit:
 #SBATCH --time=7-00:00:00
@@ -17,18 +17,18 @@
 #SBATCH --mail-type=END
 #
 # Specify output files:
-#SBATCH -o real_time_evolution.o%j
+#SBATCH -o double_well_potential.o%j
 #------------------------------------------------------
 
-echo "Starting job real_time_evolution"
+echo "Starting job double_well_potential"
 
 module load launcher
 
 export LAUNCHER_PLUGIN_DIR=$LAUNCHER_DIR/plugins
 export LAUNCHER_RMI=SLURM
-export LAUNCHER_JOB_FILE=real_time_evolution.task
+export LAUNCHER_JOB_FILE=double_well_potential.task
 export LAUNCHER_SCHED=interleaved
 
 $LAUNCHER_DIR/paramrun
 
-echo "Job real_time_evolution complete"
+echo "Job double_well_potential complete"
