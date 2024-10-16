@@ -1,0 +1,16 @@
+bash double_well_potential_0.qsub
+bash double_well_potential_1.qsub
+bash double_well_potential_2.qsub
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
+echo "Fake run"
