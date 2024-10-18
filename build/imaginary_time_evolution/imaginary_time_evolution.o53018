@@ -225,3 +225,4 @@ Launcher: Task 57 done. Exiting.
 Removing files
 Launcher: Job 56 completed in 9954 seconds.
 Launcher: Task 55 done. Exiting.
+slurmstepd-compute-2-01-09: error: *** JOB 53018 ON compute-2-01-09 CANCELLED AT 2024-10-17T18:37:27 ***
