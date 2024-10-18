@@ -444,12 +444,12 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 31 # In kHz units.
+barrier_height_GD = 32 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(20,27,64)
+source_bias_lst = np.linspace(15.5,24.5,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -504,7 +504,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 30000
+number_of_atoms = 60000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
