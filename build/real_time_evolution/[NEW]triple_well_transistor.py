@@ -31,8 +31,8 @@ class GrossPitaevskiiSolver:
         self.h_bar = 1.0545718 * 10 ** (-34)
 
         # Transistor parameters.
-        self.omega_r = 2 * np.pi * 1700  # rad/s # Radial trapping frequency.
-        self.omega_l = 2 * np.pi * 1128.2482167456858  # rad/s # Longitudinal trapping frequency.
+        self.omega_r = 2 * np.pi * 1500  # rad/s # Radial trapping frequency.
+        self.omega_l = 2 * np.pi * 850  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
         self.a_s = 98.006*5.29177210544*1.e-11 # m # Scattering length of Rubidium-87 atom.
