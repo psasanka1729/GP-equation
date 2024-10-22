@@ -31,11 +31,11 @@ class GrossPitaevskiiSolver:
         self.h_bar = 1.0545718 * 10 ** (-34)
 
         # Transistor parameters.
-        self.omega_r = 2 * np.pi * 300  # rad/s # Radial trapping frequency.
-        self.omega_l = 2 * np.pi * 20  # rad/s # Longitudinal trapping frequency.
+        self.omega_r = 2 * np.pi * 3000  # rad/s # Radial trapping frequency.
+        self.omega_l = 2 * np.pi * 1128  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-        self.a_s = 5.82*1.e-9 # m # Scattering length of Rubidium-87 atom.
+        self.a_s = 98.006*5.29177210544*1.e-11 # m # Scattering length of Rubidium-87 atom.
 
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
@@ -122,8 +122,8 @@ class GrossPitaevskiiSolver:
 
 
         fixed_position_in_source_well = -20*1.e-6 # In micrometers unit.
-        fixed_position_in_gate_well = 4*1.e-6 # In micrometers unit.
-        fixed_position_in_drain_well = 30*1.e-6 # In micrometers unit.
+        fixed_position_in_gate_well = 4.3*1.e-6 # In micrometers unit.
+        fixed_position_in_drain_well = 40*1.e-6 # In micrometers unit.
         np.save("fixed_position_in_source_well.npy",fixed_position_in_source_well)
         np.save("fixed_position_in_gate_well.npy",fixed_position_in_gate_well)
         np.save("fixed_position_in_drain_well.npy",fixed_position_in_drain_well)
@@ -403,7 +403,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
 
      # Creating the source well.
      A = 0.004 # Increasing A results in decrease in width of the source well.
-     B = 0.15 # Increasing B results in increase in width of the SG barrier.
+     B = 0.18 # Increasing B results in increase in width of the SG barrier.
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A, B, SG_barrier_height - V_SS,V_SS), potential)
 
@@ -449,7 +449,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(16,21,64)
+source_bias_lst = np.linspace(12,20,48)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -486,10 +486,10 @@ plt.close()
 
 # %%
 dx = np.ptp(position_arr)/N
-source_well_position = np.arange(position_start*1.e-6, (gate_well_start)*1.e-6, dx)*1.e6
+source_well_position = np.arange(position_start*1.e-6, (gate_well_start+0.4)*1.e-6, dx)*1.e6
 A = 0.004 # Increasing A results in increase in left side of the source well.
-B = 0.15 # Increasing B results in increase in width of the source well.
-initial_SG_barrier_height = 50
+B = 0.18 # Increasing B results in increase in width of the source well.
+initial_SG_barrier_height = 35
 V_SS = source_bias
 initial_source_well_potential = source_well_potential_function(source_well_position, A, B, initial_SG_barrier_height - V_SS,V_SS)*10**3*H_BAR*2*PI  # In SI units.
 plt.plot(source_well_position, initial_source_well_potential, label = "Source well for ITE", color = "tab:blue", linewidth = 2.5)
@@ -504,7 +504,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 100000
+number_of_atoms = 10000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
