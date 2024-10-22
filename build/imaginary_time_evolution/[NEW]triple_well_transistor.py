@@ -402,7 +402,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      delta_right = 0.2
 
      # Creating the source well.
-     A = 0.004 # Increasing A results in decrease in width of the source well.
+     A = 0.009 # Increasing A results in decrease in width of the source well.
      B = 0.18 # Increasing B results in increase in width of the SG barrier.
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A, B, SG_barrier_height - V_SS,V_SS), potential)
@@ -449,7 +449,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(14,23,48)
+source_bias_lst = np.linspace(12,20,48)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -487,7 +487,7 @@ plt.close()
 # %%
 dx = np.ptp(position_arr)/N
 source_well_position = np.arange(position_start*1.e-6, (gate_well_start+0.4)*1.e-6, dx)*1.e6
-A = 0.004 # Increasing A results in increase in left side of the source well.
+A = 0.009 # Increasing A results in increase in left side of the source well.
 B = 0.18 # Increasing B results in increase in width of the source well.
 initial_SG_barrier_height = 100
 V_SS = source_bias
