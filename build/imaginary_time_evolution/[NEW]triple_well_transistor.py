@@ -31,7 +31,7 @@ class GrossPitaevskiiSolver:
         self.h_bar = 1.0545718 * 10 ** (-34)
 
         # Transistor parameters.
-        self.omega_r = 2 * np.pi * 3000  # rad/s # Radial trapping frequency.
+        self.omega_r = 2 * np.pi * 2000  # rad/s # Radial trapping frequency.
         self.omega_l = 2 * np.pi * 1128  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
@@ -214,8 +214,8 @@ position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = 4.8
-drain_well_end      = 990
-position_end        = 1000
+drain_well_end      = 590
+position_end        = 600
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -408,7 +408,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      #A = 0.009 # Increasing A results in decrease in width of the source well.
      #B = 0.18 # Increasing B results in increase in width of the SG barrier.
      A = 0.5
-     B = 0.2
+     B = 0.15
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A, B, SG_barrier_height - V_SS,V_SS), potential)
 
@@ -454,7 +454,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(6,10,32)
+source_bias_lst = np.linspace(10,18,48)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -493,7 +493,7 @@ plt.close()
 dx = np.ptp(position_arr)/N
 source_well_position = np.arange(position_start*1.e-6, (gate_well_start+0.4)*1.e-6, dx)*1.e6
 A = 0.5 # Increasing A results in increase in left side of the source well.
-B = 0.2 # Increasing B results in increase in width of the source well.
+B = 0.15 # Increasing B results in increase in width of the source well.
 initial_SG_barrier_height = 100
 V_SS = source_bias
 initial_source_well_potential = source_well_potential_function(source_well_position, A, B, initial_SG_barrier_height - V_SS,V_SS)*10**3*H_BAR*2*PI  # In SI units.
