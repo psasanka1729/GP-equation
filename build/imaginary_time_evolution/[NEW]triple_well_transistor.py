@@ -505,7 +505,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 10000
+number_of_atoms = 20000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
