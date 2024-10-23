@@ -214,8 +214,8 @@ position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = 5.8
-drain_well_end      = 790
-position_end        = 800
+drain_well_end      = 990
+position_end        = 1000
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
