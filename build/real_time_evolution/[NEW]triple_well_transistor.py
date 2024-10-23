@@ -325,7 +325,8 @@ def source_well_potential_function(x, A, B, C, bias_potential_in_source_well):
                The source well potential.
      
      """
-     return A*x**2+C*np.exp(-x**2/B)+bias_potential_in_source_well     
+     D = 1.e-6
+     return A*x**2 + D*x**4  + C*np.exp(-x**2/B)+bias_potential_in_source_well     
 
 def harmonic_well(x1,y1,x2,y2,x3,y3):
 
@@ -363,7 +364,7 @@ def harmonic_well(x1,y1,x2,y2,x3,y3):
 def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_barrier_height, gate_bias_potential,
      SIGMA_1 = 0.6,
      SIGMA_2 = 0.8,
-     SIGMA_3 = 1.0,
+     SIGMA_3 = 0.6,
      SIGMA_4 = 0.6,
      ):
 
@@ -398,8 +399,8 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      """
 
      # These are two offsets that makes the top of the V_SG and V_GD barriers smooth.
-     delta_left = 0.2
-     delta_right = 0.2
+     delta_left = 0.1
+     delta_right = 0.1
 
      # Creating the source well.
      A = 0.009 # Increasing A results in decrease in width of the source well.
@@ -444,12 +445,12 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 32 # In kHz units.
+barrier_height_GD = 33 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(12,20,64)
+source_bias_lst = np.linspace(6,12,48)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -504,7 +505,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 10000
+number_of_atoms = 20000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%

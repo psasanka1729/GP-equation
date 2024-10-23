@@ -325,8 +325,10 @@ def source_well_potential_function(x, A, B, C, bias_potential_in_source_well):
                The source well potential.
      
      """
-     D = 1.e-6
-     return A*x**2 + D*x**4  + C*np.exp(-x**2/B)+bias_potential_in_source_well     
+     #D = 1.e-6
+     #return A*x**2 + D*x**4  + C*np.exp(-x**2/B)+bias_potential_in_source_well   
+     D = 10
+     return bias_potential_in_source_well + C*np.exp(-x**2/B) + A*(np.cosh(x/D)-1)
 
 def harmonic_well(x1,y1,x2,y2,x3,y3):
 
@@ -403,8 +405,10 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      delta_right = 0.1
 
      # Creating the source well.
-     A = 0.009 # Increasing A results in decrease in width of the source well.
-     B = 0.18 # Increasing B results in increase in width of the SG barrier.
+     #A = 0.009 # Increasing A results in decrease in width of the source well.
+     #B = 0.18 # Increasing B results in increase in width of the SG barrier.
+     A = 0.5
+     B = 0.2
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A, B, SG_barrier_height - V_SS,V_SS), potential)
 
@@ -450,7 +454,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(6,12,48)
+source_bias_lst = np.linspace(6,10,32)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -488,8 +492,8 @@ plt.close()
 # %%
 dx = np.ptp(position_arr)/N
 source_well_position = np.arange(position_start*1.e-6, (gate_well_start+0.4)*1.e-6, dx)*1.e6
-A = 0.009 # Increasing A results in increase in left side of the source well.
-B = 0.18 # Increasing B results in increase in width of the source well.
+A = 0.5 # Increasing A results in increase in left side of the source well.
+B = 0.2 # Increasing B results in increase in width of the source well.
 initial_SG_barrier_height = 100
 V_SS = source_bias
 initial_source_well_potential = source_well_potential_function(source_well_position, A, B, initial_SG_barrier_height - V_SS,V_SS)*10**3*H_BAR*2*PI  # In SI units.
