@@ -31,8 +31,8 @@ class GrossPitaevskiiSolver:
         self.h_bar = 1.0545718 * 10 ** (-34)
 
         # Transistor parameters.
-        self.omega_r = 2 * np.pi * 2*1170  # rad/s # Radial trapping frequency.
-        self.omega_l = 2 * np.pi * 1170  # rad/s # Longitudinal trapping frequency.
+        self.omega_r = 2 * np.pi * 5825  # rad/s # Radial trapping frequency.
+        self.omega_l = 2 * np.pi * 1165  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
         self.a_s = 98.006*5.29177210544*1.e-11 # m # Scattering length of Rubidium-87 atom.
@@ -449,16 +449,18 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 33 # In kHz units.
+GD_lst = np.linspace(29,33,64) 
+GD_index = int(sys.argv[1])
+barrier_height_GD = GD_lst[GD_index] # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(10,18,64)
-np.save("source_bias_lst.npy", source_bias_lst)
-source_bias_index = int(sys.argv[1])
+#source_bias_lst = np.linspace(10,18,64)
+#np.save("source_bias_lst.npy", source_bias_lst)
+#source_bias_index = int(sys.argv[1])
 
-source_bias = source_bias_lst[source_bias_index]  # In kHz units.
+source_bias = 14.127 #source_bias_lst[source_bias_index]  # In kHz units.
 np.save("source_bias.npy", source_bias)
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
@@ -509,7 +511,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 20000
+number_of_atoms = 7000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
@@ -611,7 +613,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 400*1.e-3 # In seconds unit.
+tmax = 200*1.e-3 # In seconds unit.
 
 time_lst = list(np.arange(0.0,tmax,1.e-7))
 
