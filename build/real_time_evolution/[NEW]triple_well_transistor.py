@@ -31,8 +31,8 @@ class GrossPitaevskiiSolver:
         self.h_bar = 1.0545718 * 10 ** (-34)
 
         # Transistor parameters.
-        self.omega_r = 2 * np.pi * 1700  # rad/s # Radial trapping frequency.
-        self.omega_l = 2 * np.pi * 966  # rad/s # Longitudinal trapping frequency.
+        self.omega_r = 2 * np.pi * 660  # rad/s # Radial trapping frequency.
+        self.omega_l = 2 * np.pi * 6.7  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
         self.a_s = 98.006*5.29177210544*1.e-11 # m # Scattering length of Rubidium-87 atom.
@@ -213,9 +213,9 @@ V_infinity  = 1.e4 # In kHz units.
 position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
-gate_well_end       = 5.8
-drain_well_end      = 490
-position_end        = 500
+gate_well_end       = 4.8
+drain_well_end      = 990
+position_end        = 1000
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -454,7 +454,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(10,20,64)
+source_bias_lst = np.linspace(12,21,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -509,7 +509,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 20000
+number_of_atoms = 40000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
