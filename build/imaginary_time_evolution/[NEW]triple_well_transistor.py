@@ -454,7 +454,7 @@ barrier_height_GD = 32 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(10,20,64)
+source_bias_lst = np.linspace(10,18,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -509,7 +509,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 7000
+number_of_atoms = 20000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
