@@ -460,7 +460,7 @@ np.save("barrier_height_GD.npy", barrier_height_GD)
 #np.save("source_bias_lst.npy", source_bias_lst)
 #source_bias_index = int(sys.argv[1])
 
-source_bias = 14.127 #source_bias_lst[source_bias_index]  # In kHz units.
+source_bias = 15 #source_bias_lst[source_bias_index]  # In kHz units.
 np.save("source_bias.npy", source_bias)
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
