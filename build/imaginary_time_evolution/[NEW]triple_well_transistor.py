@@ -601,17 +601,72 @@ fig.tight_layout()
 plt.close()
 
 
-# %% [markdown]
-# # Real time evolution
 
-# %%
+# Initial state in the gate well.
+gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
+gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
+plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
+
+number_of_atoms_gate_well = 500
+time_step = -1j*10**(-6) # In seconds unit.
+tmax = 1.0 # In seconds unit.
+solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
+psi_gate_well_ITE_dimless = solver_gate_well.solve([])
+
+# Plotting the initial 1D wavefunction in the gate well.
+
+data0 = gate_well_position
+data1 = psi_gate_well_ITE_dimless
+data3 = gate_well_potential
+fig, ax1 = plt.subplots()
+ax1.set_xlabel(r"Position, $x$", labelpad=10)
+ax1.set_ylabel(r"Wavefunction, $|\tilde{\psi}|^{2}$", color="tab:red", labelpad=10)
+ax1.plot(data0, np.abs(data1)**2*solver_gate_well.dx_dimless, color="tab:red", linewidth=3.2)
+ax1.tick_params(axis="y", labelcolor="tab:red")
+ax2 = ax1.twinx()
+color = "tab:blue"
+ax2.set_ylabel(r"Potential, $\tilde{V}$ ", color=color, labelpad=10)
+ax2.plot(data0, data3/(H_BAR*10**3*2*PI), linewidth=3.1, color = "tab:blue", linestyle="--")
+ax2.tick_params(axis="y", labelcolor=color)
+ax1.axhline(y=0, color="k", linestyle='--')
+fig.set_figwidth(8.6)
+fig.set_figheight(8.6/1.618)
+fig.tight_layout(pad=1.0)  # Adjust padding to ensure labels are not cut off
+for spine in ax1.spines.values():
+     spine.set_linewidth(2)
+ax1.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
+ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
+ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
+ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
+ax1.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax1.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax1.tick_params(which="minor", length=5, width=1, direction='in')
+ax2.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax2.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax2.tick_params(which="minor", length=5, width=1, direction='in')
+# Change the directory to save the PDF
+# path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well"
+# os.chdir(path)
+# Save the figure
+plt.savefig("ground_state_in_gate_well.pdf", dpi=600, bbox_inches='tight')
+plt.close()
+
+
+
+initial_state = np.zeros(len(position_arr), dtype=complex)
+initial_state[:len(source_well_position)] = (np.sqrt(number_of_atoms/(number_of_atoms + number_of_atoms_gate_well)))*psi_source_well_ITE_dimless
+initial_state[len(source_well_position):len(source_well_position)+len(gate_well_position)] = (np.sqrt(number_of_atoms_gate_well/(number_of_atoms + number_of_atoms_gate_well)))*psi_gate_well_ITE_dimless
+initial_state = initial_state/np.sqrt(np.sum(np.abs(initial_state)**2)*solver_gate_well.dx_dimless)
+
+psi_initial_for_full_potential_dimless = initial_state
+
 # Put the initial ground state in the source well of the transistor.
-psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
-while len(psi_initial_for_full_potential_dimless) < len(position_arr):
-    psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
+#psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
+#while len(psi_initial_for_full_potential_dimless) < len(position_arr):
+#    psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
-tmax = 400*1.e-3 # In seconds unit.
+tmax = 200*1.e-3 # In seconds unit.
 
 time_lst = list(np.arange(0.0,tmax,1.e-7))
 
