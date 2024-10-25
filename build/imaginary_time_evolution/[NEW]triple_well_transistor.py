@@ -31,11 +31,11 @@ class GrossPitaevskiiSolver:
         self.h_bar = 1.0545718 * 10 ** (-34)
 
         # Transistor parameters.
-        self.omega_r = 2 * np.pi * 5*1167  # rad/s # Radial trapping frequency.
-        self.omega_l = 2 * np.pi * 1167  # rad/s # Longitudinal trapping frequency.
+        self.omega_r = 2 * np.pi * 10*1178  # rad/s # Radial trapping frequency.
+        self.omega_l = 2 * np.pi * 1178  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-        self.a_s = 98.006*5.29177210544*1.e-11 # m # Scattering length of Rubidium-87 atom.
+        self.a_s = 98.006*5.29177210544*1.e-11 * (10*1.e-3) # m # Scattering length of Rubidium-87 atom.
 
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
@@ -407,7 +407,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      # Creating the source well.
      #A = 0.009 # Increasing A results in decrease in width of the source well.
      #B = 0.18 # Increasing B results in increase in width of the SG barrier.
-     A = 0.5
+     A = 0.3
      B = 0.15
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A, B, SG_barrier_height - V_SS,V_SS), potential)
@@ -454,7 +454,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(8,18,64)
+source_bias_lst = np.linspace(21,29,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -492,7 +492,7 @@ plt.close()
 # %%
 dx = np.ptp(position_arr)/N
 source_well_position = np.arange(position_start*1.e-6, (gate_well_start+0.4)*1.e-6, dx)*1.e6
-A = 0.5 # Increasing A results in increase in left side of the source well.
+A = 0.3 # Increasing A results in increase in left side of the source well.
 B = 0.15 # Increasing B results in increase in width of the source well.
 initial_SG_barrier_height = 100
 V_SS = source_bias
@@ -509,7 +509,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 7000
+number_of_atoms = 40000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
@@ -601,7 +601,7 @@ fig.tight_layout()
 plt.close()
 
 
-
+"""
 # Initial state in the gate well.
 gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
@@ -659,11 +659,12 @@ initial_state[len(source_well_position):len(source_well_position)+len(gate_well_
 initial_state = initial_state/np.sqrt(np.sum(np.abs(initial_state)**2)*solver_gate_well.dx_dimless)
 
 psi_initial_for_full_potential_dimless = initial_state
+"""
 
 # Put the initial ground state in the source well of the transistor.
-#psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
-#while len(psi_initial_for_full_potential_dimless) < len(position_arr):
-#    psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
+psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
+while len(psi_initial_for_full_potential_dimless) < len(position_arr):
+    psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
 time_step = 10**(-7) # In seconds unit.
 tmax = 200*1.e-3 # In seconds unit.
