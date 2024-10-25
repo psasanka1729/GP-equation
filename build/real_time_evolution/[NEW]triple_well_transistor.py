@@ -31,11 +31,11 @@ class GrossPitaevskiiSolver:
         self.h_bar = 1.0545718 * 10 ** (-34)
 
         # Transistor parameters.
-        self.omega_r = 2 * np.pi * 5825  # rad/s # Radial trapping frequency.
-        self.omega_l = 2 * np.pi * 1165  # rad/s # Longitudinal trapping frequency.
+        self.omega_r = 2 * np.pi * 10*1178  # rad/s # Radial trapping frequency.
+        self.omega_l = 2 * np.pi * 1178  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-        self.a_s = 98.006*5.29177210544*1.e-11 # m # Scattering length of Rubidium-87 atom.
+        self.a_s = 98.006*5.29177210544*1.e-11 * (10*1.e-3) # m # Scattering length of Rubidium-87 atom.
 
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
@@ -123,7 +123,7 @@ class GrossPitaevskiiSolver:
 
         fixed_position_in_source_well = -20*1.e-6 # In micrometers unit.
         fixed_position_in_gate_well = 4.3*1.e-6 # In micrometers unit.
-        fixed_position_in_drain_well = 30*1.e-6 # In micrometers unit.
+        fixed_position_in_drain_well = 40*1.e-6 # In micrometers unit.
         np.save("fixed_position_in_source_well.npy",fixed_position_in_source_well)
         np.save("fixed_position_in_gate_well.npy",fixed_position_in_gate_well)
         np.save("fixed_position_in_drain_well.npy",fixed_position_in_drain_well)
@@ -407,7 +407,7 @@ def transistor_potential_landscape(V_SS,  position_arr, SG_barrier_height, GD_ba
      # Creating the source well.
      #A = 0.009 # Increasing A results in decrease in width of the source well.
      #B = 0.18 # Increasing B results in increase in width of the SG barrier.
-     A = 0.5
+     A = 0.3
      B = 0.15
      potential = np.zeros(len(position_arr))
      potential = np.where(position_arr <= gate_well_start + delta_left, source_well_potential_function(position_arr, A, B, SG_barrier_height - V_SS,V_SS), potential)
@@ -449,18 +449,16 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-GD_lst = np.linspace(29,33,64) 
-GD_index = int(sys.argv[1])
-barrier_height_GD = GD_lst[GD_index] # In kHz units.
+barrier_height_GD = 33 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-#source_bias_lst = np.linspace(10,18,64)
-#np.save("source_bias_lst.npy", source_bias_lst)
-#source_bias_index = int(sys.argv[1])
+source_bias_lst = np.linspace(21,29,64)
+np.save("source_bias_lst.npy", source_bias_lst)
+source_bias_index = int(sys.argv[1])
 
-source_bias = 15 #source_bias_lst[source_bias_index]  # In kHz units.
+source_bias = source_bias_lst[source_bias_index]  # In kHz units.
 np.save("source_bias.npy", source_bias)
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
@@ -494,7 +492,7 @@ plt.close()
 # %%
 dx = np.ptp(position_arr)/N
 source_well_position = np.arange(position_start*1.e-6, (gate_well_start+0.4)*1.e-6, dx)*1.e6
-A = 0.5 # Increasing A results in increase in left side of the source well.
+A = 0.3 # Increasing A results in increase in left side of the source well.
 B = 0.15 # Increasing B results in increase in width of the source well.
 initial_SG_barrier_height = 100
 V_SS = source_bias
@@ -511,7 +509,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 7000
+number_of_atoms = 60000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
@@ -603,10 +601,66 @@ fig.tight_layout()
 plt.close()
 
 
-# %% [markdown]
-# # Real time evolution
+"""
+# Initial state in the gate well.
+gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
+gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
+plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-# %%
+number_of_atoms_gate_well = 500
+time_step = -1j*10**(-6) # In seconds unit.
+tmax = 1.0 # In seconds unit.
+solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
+psi_gate_well_ITE_dimless = solver_gate_well.solve([])
+
+# Plotting the initial 1D wavefunction in the gate well.
+
+data0 = gate_well_position
+data1 = psi_gate_well_ITE_dimless
+data3 = gate_well_potential
+fig, ax1 = plt.subplots()
+ax1.set_xlabel(r"Position, $x$", labelpad=10)
+ax1.set_ylabel(r"Wavefunction, $|\tilde{\psi}|^{2}$", color="tab:red", labelpad=10)
+ax1.plot(data0, np.abs(data1)**2*solver_gate_well.dx_dimless, color="tab:red", linewidth=3.2)
+ax1.tick_params(axis="y", labelcolor="tab:red")
+ax2 = ax1.twinx()
+color = "tab:blue"
+ax2.set_ylabel(r"Potential, $\tilde{V}$ ", color=color, labelpad=10)
+ax2.plot(data0, data3/(H_BAR*10**3*2*PI), linewidth=3.1, color = "tab:blue", linestyle="--")
+ax2.tick_params(axis="y", labelcolor=color)
+ax1.axhline(y=0, color="k", linestyle='--')
+fig.set_figwidth(8.6)
+fig.set_figheight(8.6/1.618)
+fig.tight_layout(pad=1.0)  # Adjust padding to ensure labels are not cut off
+for spine in ax1.spines.values():
+     spine.set_linewidth(2)
+ax1.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
+ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
+ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
+ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
+ax1.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax1.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax1.tick_params(which="minor", length=5, width=1, direction='in')
+ax2.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax2.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax2.tick_params(which="minor", length=5, width=1, direction='in')
+# Change the directory to save the PDF
+# path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well"
+# os.chdir(path)
+# Save the figure
+plt.savefig("ground_state_in_gate_well.pdf", dpi=600, bbox_inches='tight')
+plt.close()
+
+
+
+initial_state = np.zeros(len(position_arr), dtype=complex)
+initial_state[:len(source_well_position)] = (np.sqrt(number_of_atoms/(number_of_atoms + number_of_atoms_gate_well)))*psi_source_well_ITE_dimless
+initial_state[len(source_well_position):len(source_well_position)+len(gate_well_position)] = (np.sqrt(number_of_atoms_gate_well/(number_of_atoms + number_of_atoms_gate_well)))*psi_gate_well_ITE_dimless
+initial_state = initial_state/np.sqrt(np.sum(np.abs(initial_state)**2)*solver_gate_well.dx_dimless)
+
+psi_initial_for_full_potential_dimless = initial_state
+"""
+
 # Put the initial ground state in the source well of the transistor.
 psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
