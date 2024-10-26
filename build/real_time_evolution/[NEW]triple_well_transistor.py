@@ -35,7 +35,7 @@ class GrossPitaevskiiSolver:
         self.omega_l = 2 * np.pi * 1178  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-        self.a_s = 98.006*5.29177210544*1.e-11 * (10*1.e-3) # m # Scattering length of Rubidium-87 atom.
+        self.a_s = 98.006*5.29177210544*1.e-11 * (30*1.e-3) # m # Scattering length of Rubidium-87 atom.
 
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
@@ -180,12 +180,8 @@ class GrossPitaevskiiSolver:
                     gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
                     drain_well_atom_number_arr.append(number_of_atoms_in_drain_well)
 
-
-
-
                     if snapshot_index >= len(snapshots_lst):
                         break             
-                               
                            
                 time += self.time_step  
 
@@ -454,7 +450,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(21,29,64)
+source_bias_lst = np.linspace(23,29,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -509,7 +505,7 @@ plt.close()
 # # Initial ground state in the source well
 
 # %%
-number_of_atoms = 60000
+number_of_atoms = 40000
 np.save("number_of_atoms.npy", number_of_atoms)
 
 # %%
