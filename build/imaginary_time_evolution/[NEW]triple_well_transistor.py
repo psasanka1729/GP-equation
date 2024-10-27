@@ -446,9 +446,9 @@ np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
 
-V_GD_lst = 33 #np.linspace(29,34,64)
-V_GD_index = int(sys.argv[1])
-barrier_height_GD =  V_GD_lst[V_GD_index]# In kHz units.
+#V_GD_lst = #np.linspace(29,34,64)
+#V_GD_index = int(sys.argv[1])
+barrier_height_GD =  33 #V_GD_lst[V_GD_index]# In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
