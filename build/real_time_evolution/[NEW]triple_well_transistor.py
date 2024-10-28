@@ -201,7 +201,7 @@ class GrossPitaevskiiSolver:
 
 # %%
 # Number of points in the grid.
-N = 2**14
+N = 2**15
 
 V_infinity  = 1.e4 # In kHz units.
 
@@ -662,10 +662,10 @@ psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
 
-time_step = 10**(-7) # In seconds unit.
-tmax = 300*1.e-3 # In seconds unit.
+time_step = 10**(-8) # In seconds unit.
+tmax = 100*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,1.e-7))
+time_lst = list(np.arange(0.0,tmax,1.e-8))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
