@@ -36,7 +36,6 @@ class GrossPitaevskiiSolver:
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
         self.a_s = 98.006*5.29177210544*1.e-11 * 0.0 # m # Scattering length of Rubidium-87 atom.
-        self.g_dimless = 2*(self.omega_r/self.omega_l)*(self.a_s/self.l_0)*self.number_of_atoms
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
         self.t_0 = 1 / self.omega_l
@@ -73,6 +72,7 @@ class GrossPitaevskiiSolver:
         self.dk_dimless = (2 * np.pi) / self.L_dimless
         self.time_step_dimless = self.time_step / self.t_0
         self.tmax_dimless = self.tmax / self.t_0
+        self.g_dimless = 2*(self.omega_r/self.omega_l)*(self.a_s/self.l_0)*self.number_of_atoms
 
         def normalize(psi_x_dimless):
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
