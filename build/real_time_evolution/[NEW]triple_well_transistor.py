@@ -42,7 +42,7 @@ class GrossPitaevskiiSolver:
         self.t_0 = 1 / self.omega_l
 
         self.a = self.a_s/self.l_0
-
+        """
         if self.a_s > self.l_0: # Ref: PRL 85, 3745 (2000).
             raise ValueError(f"a_s ({self.a_s}) must be less than l_0 ({self.l_0}).")
 
@@ -51,14 +51,14 @@ class GrossPitaevskiiSolver:
         if 4 * np.pi * self.a_s * self.number_of_atoms < self.l_0:
             raise ValueError(f"4*np.pi*a_s*number_of_atoms ({4 * np.pi * self.a_s * self.number_of_atoms}) must be greater than a_0 ({self.l_0}).")
 
-        number_density = self.number_of_atoms / (np.pi * self.l_0 ** 2 * (np.ptp(position_arr)))
+        number_density = self.number_of_atoms / (np.pi * self.l_0 ** 2 * (np.ptp(position_arr)))    
 
         # Dilue gas condition for the Gross-Pitaevskii equation.
         if number_density * self.a_s ** 3 > 1:
             raise ValueError(f"Gross-Pitaevskii equation is valid if: {number_density * self.a_s ** 3} << 1")
         else:
             print(f"Gross-Pitaevskii equation is valid: {number_density * self.a_s ** 3} << 1")
-
+        """
         self.time_step = time_step
         self.tmax = tmax
         self.position_arr = position_arr
