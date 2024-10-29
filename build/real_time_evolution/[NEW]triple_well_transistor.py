@@ -602,7 +602,7 @@ gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (pos
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-number_of_atoms_gate_well = 100
+number_of_atoms_gate_well = 1000
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.0 # In seconds unit.
 solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
@@ -655,6 +655,10 @@ initial_state = initial_state/np.sqrt(np.sum(np.abs(initial_state)**2)*solver_ga
 
 psi_initial_for_full_potential_dimless = initial_state
 
+number_of_atoms = number_of_atoms + number_of_atoms_gate_well
+np.save("total_number_of_atoms.npy", number_of_atoms)
+
+
 """
 
 # Put the initial ground state in the source well of the transistor.
@@ -670,4 +674,3 @@ time_lst = list(np.arange(0.0,tmax,1.e-7))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
-
