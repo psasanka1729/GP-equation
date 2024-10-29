@@ -740,6 +740,7 @@ def create_wavefunction_animation(x_axis_limit, y_axis_limit):
 
     # Update function for each frame
     def update(frame):
+        path = "/home/sxd190113/scratch/imaginary_time_evolution/b" + str(source_bias_index)
         wavefunction = np.load(wavefunction_files[frame])
         line_wavefunction.set_data(position_arr * 1.e6, np.abs(wavefunction)**2 * solver_complete_potential.dx_dimless)  # Adjust scaling
         return line_wavefunction,
