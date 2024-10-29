@@ -35,7 +35,7 @@ class GrossPitaevskiiSolver:
         self.omega_l = 2 * np.pi * 1178  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-        self.a_s = 98.006*5.29177210544*1.e-11 * 0.0 # m # Scattering length of Rubidium-87 atom.
+        self.a_s = 98.006*5.29177210544*1.e-11 * 0.01 # m # Scattering length of Rubidium-87 atom.
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
         self.t_0 = 1 / self.omega_l
@@ -201,7 +201,7 @@ class GrossPitaevskiiSolver:
 
 # %%
 # Number of points in the grid.
-N = 2**15
+N = 2**14
 
 V_infinity  = 1.e4 # In kHz units.
 
@@ -450,7 +450,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(25,29,64)
+source_bias_lst = np.linspace(24,30,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -597,13 +597,12 @@ fig.tight_layout()
 plt.close()
 
 
-"""
 # Initial state in the gate well.
 gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-number_of_atoms_gate_well = 500
+number_of_atoms_gate_well = 100
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.0 # In seconds unit.
 solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
@@ -655,17 +654,19 @@ initial_state[len(source_well_position):len(source_well_position)+len(gate_well_
 initial_state = initial_state/np.sqrt(np.sum(np.abs(initial_state)**2)*solver_gate_well.dx_dimless)
 
 psi_initial_for_full_potential_dimless = initial_state
+
 """
 
 # Put the initial ground state in the source well of the transistor.
 psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
+"""
 
-time_step = 10**(-8) # In seconds unit.
-tmax = 100*1.e-3 # In seconds unit.
+time_step = 10**(-7) # In seconds unit.
+tmax = 300*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,1.e-8))
+time_lst = list(np.arange(0.0,tmax,1.e-7))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
