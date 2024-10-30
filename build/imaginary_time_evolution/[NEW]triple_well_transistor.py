@@ -683,7 +683,8 @@ time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
 
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+#from matplotlib.animation import FuncAnimation
+from matplotlib.animation import PillowWriter
 import glob
 import matplotlib.ticker as ticker
 
@@ -749,12 +750,10 @@ def create_wavefunction_animation(x_axis_limit, y_axis_limit):
     ani = FuncAnimation(fig, update, frames=len(wavefunction_files), init_func=init, blit=True)
 
     # Save the movie with a reduced frame rate for a slower animation
-    ani.save("wavefunction_evolutio_10.mp4", fps=10, extra_args=['-vcodec', 'libx264'])
-    ani.save("wavefunction_evolution_60.mp4", fps=60, extra_args=['-vcodec', 'libx264'])
-    # Show the animation
-    fig.set_figwidth(14)
-    fig.set_figheight(5)
-    fig.tight_layout(pad=1.0)
+    ani.save("wavefunction_evolution_10.gif", fps=10, writer=PillowWriter())
+    ani.save("wavefunction_evolution_60.gif", fps=60, writer=PillowWriter())
+    #ani.save("wavefunction_evolutio_10.mp4", fps=10, extra_args=['-vcodec', 'libx264'])
+    #ani.save("wavefunction_evolution_60.mp4", fps=60, extra_args=['-vcodec', 'libx264'])
     plt.close()
 
 # Example usage
