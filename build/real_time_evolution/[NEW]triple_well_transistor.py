@@ -602,7 +602,7 @@ gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (pos
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-number_of_atoms_gate_well = 1000
+number_of_atoms_gate_well = 10000
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.0 # In seconds unit.
 solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
