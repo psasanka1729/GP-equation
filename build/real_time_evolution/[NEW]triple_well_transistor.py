@@ -201,7 +201,7 @@ class GrossPitaevskiiSolver:
 
 # %%
 # Number of points in the grid.
-N = 2**14
+N = 2**16
 
 V_infinity  = 1.e4 # In kHz units.
 
@@ -210,8 +210,8 @@ position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = 4.8
-drain_well_end      = 990
-position_end        = 1000
+drain_well_end      = 2990
+position_end        = 3000
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
