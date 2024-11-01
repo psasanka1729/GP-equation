@@ -210,8 +210,8 @@ position_start      = -60
 source_well_start   = -50
 gate_well_start     = 0
 gate_well_end       = 4.8
-drain_well_end      = 2990
-position_end        = 3000
+drain_well_end      = 3990
+position_end        = 4000
 
 np.save("position_start.npy",position_start)
 np.save("position_end.npy",position_end)
@@ -450,7 +450,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(25,29,64)
+source_bias_lst = np.linspace(24,29,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
