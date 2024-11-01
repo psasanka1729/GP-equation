@@ -167,7 +167,7 @@ class GrossPitaevskiiSolver:
                     snapshot_index += 1
                     
                     time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless                                            
-                    #np.save(f"wavefunction_time_evolved_{time*1e3:.1f}ms.npy", time_evolved_wavefunction_time_split_dimless)
+                    np.save(f"wavefunction_time_evolved_{time*1e3:.1f}ms.npy", time_evolved_wavefunction_time_split_dimless)
 
                     #"""
                     # Saving the atom number in each well at each time t in the list.
@@ -610,7 +610,7 @@ while len(psi_initial_for_full_potential_dimless) < len(position_arr):
 time_step = 10**(-7) # In seconds unit.
 tmax = 300*1.e-3 # In seconds unit.
 
-time_lst = list(np.arange(0.0,tmax,1.e-5))
+time_lst = list(np.arange(0.0,tmax,1.e-7))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
