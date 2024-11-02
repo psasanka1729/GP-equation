@@ -9,6 +9,7 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
+#EXEC=wavefunction_animation.py
 #EXEC=coherence_test.py
 #EXEC=feedback_parameter.py
 EXEC=[NEW]triple_well_transistor.py
