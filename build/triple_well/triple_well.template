@@ -9,9 +9,9 @@ LOCAL_DIR=$HOME/$PROJECT_NAME/build
 
 mkdir -p $SCRATCH_DIR
 
-#EXEC=coherence_test.py
+EXEC=wavefunction_animation.py
 #EXEC=feedback_parameter.py
-EXEC=[NEW]triple_well_transistor.py
+#EXEC=[NEW]triple_well_transistor.py
 #EXEC=harmonic_well_step_current.py
 #EXEC=atomtronics_time_split_RK4.py #ground-state-source-well-atomtronic-transistor.py
 #HELPER="alan_potential_landscape.txt"
