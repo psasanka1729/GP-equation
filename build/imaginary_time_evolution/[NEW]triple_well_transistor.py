@@ -167,7 +167,7 @@ class GrossPitaevskiiSolver:
                     snapshot_index += 1
                     
                     time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless                                            
-                    np.save(f"wavefunction_time_evolved_{time*1e3:.1f}ms.npy", time_evolved_wavefunction_time_split_dimless)
+                    #np.save(f"wavefunction_time_evolved_{time*1e3:.1f}ms.npy", time_evolved_wavefunction_time_split_dimless)
 
                     #"""
                     # Saving the atom number in each well at each time t in the list.
