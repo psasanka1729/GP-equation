@@ -35,14 +35,13 @@ class GrossPitaevskiiSolver:
         self.omega_l = 2 * np.pi * 1178  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-        self.a_s = 98.006*5.29177210544*1.e-11 * 0.03 # m # Scattering length of Rubidium-87 atom.
-
+        self.a_s = 98.006*5.29177210544*1.e-11 * 0.01 # m # Scattering length of Rubidium-87 atom.
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
         self.t_0 = 1 / self.omega_l
 
         self.a = self.a_s/self.l_0
-
+        """
         if self.a_s > self.l_0: # Ref: PRL 85, 3745 (2000).
             raise ValueError(f"a_s ({self.a_s}) must be less than l_0 ({self.l_0}).")
 
@@ -51,14 +50,14 @@ class GrossPitaevskiiSolver:
         if 4 * np.pi * self.a_s * self.number_of_atoms < self.l_0:
             raise ValueError(f"4*np.pi*a_s*number_of_atoms ({4 * np.pi * self.a_s * self.number_of_atoms}) must be greater than a_0 ({self.l_0}).")
 
-        number_density = self.number_of_atoms / (np.pi * self.l_0 ** 2 * (np.ptp(position_arr)))
+        number_density = self.number_of_atoms / (np.pi * self.l_0 ** 2 * (np.ptp(position_arr)))    
 
         # Dilue gas condition for the Gross-Pitaevskii equation.
         if number_density * self.a_s ** 3 > 1:
             raise ValueError(f"Gross-Pitaevskii equation is valid if: {number_density * self.a_s ** 3} << 1")
         else:
             print(f"Gross-Pitaevskii equation is valid: {number_density * self.a_s ** 3} << 1")
-
+        """
         self.time_step = time_step
         self.tmax = tmax
         self.position_arr = position_arr
@@ -73,6 +72,7 @@ class GrossPitaevskiiSolver:
         self.dk_dimless = (2 * np.pi) / self.L_dimless
         self.time_step_dimless = self.time_step / self.t_0
         self.tmax_dimless = self.tmax / self.t_0
+        self.g_dimless = 2*(self.omega_r/self.omega_l)*(self.a_s/self.l_0)*self.number_of_atoms
 
         def normalize(psi_x_dimless):
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
@@ -165,11 +165,9 @@ class GrossPitaevskiiSolver:
                 
                 if np.isclose(time, snapshots_lst[snapshot_index]):
                     snapshot_index += 1
-                    
                     time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless                                            
                     #np.save(f"wavefunction_time_evolved_{time*1e3:.1f}ms.npy", time_evolved_wavefunction_time_split_dimless)
 
-                    #"""
                     # Saving the atom number in each well at each time t in the list.
                     wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
                     wavefunction_at_fixed_point_gate_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_gate_well])
@@ -181,14 +179,13 @@ class GrossPitaevskiiSolver:
                     source_well_atom_number_arr.append(number_of_atoms_in_source_well)
                     gate_well_atom_number_arr.append(number_of_atoms_in_gate_well)
                     drain_well_atom_number_arr.append(number_of_atoms_in_drain_well)
-                    #"""
+
                     if snapshot_index >= len(snapshots_lst):
                         break             
                            
                 time += self.time_step  
 
         if snapshots_lst:
-            #"""
             np.save("wavefunction_at_fixed_point_source_arr.npy",wavefunction_at_fixed_point_source_arr) 
             np.save("wavefunction_at_fixed_point_gate_arr.npy",wavefunction_at_fixed_point_gate_arr)
             np.save("wavefunction_at_fixed_point_drain_arr.npy",wavefunction_at_fixed_point_drain_arr)
@@ -196,7 +193,7 @@ class GrossPitaevskiiSolver:
             np.save("source_well_atom_number_arr.npy",source_well_atom_number_arr)
             np.save("gate_well_atom_number_arr.npy",gate_well_atom_number_arr)
             np.save("drain_well_atom_number_arr.npy",drain_well_atom_number_arr)
-            #"""
+
         return normalize(self.psi_x_dimless)
 
 # %% [markdown]
@@ -448,19 +445,16 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-
-#V_GD_lst = #np.linspace(29,34,64)
-#V_GD_index = int(sys.argv[1])
-barrier_height_GD = 33 #V_GD_lst[V_GD_index]# In kHz units.
+barrier_height_GD = 33 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(24,29,64)
-np.save("source_bias_lst.npy", source_bias_lst)
-source_bias_index = int(sys.argv[1])
+#source_bias_lst = np.linspace(24,29,64)
+#np.save("source_bias_lst.npy", source_bias_lst)
+#source_bias_index = int(sys.argv[1])
 
-source_bias = source_bias_lst[source_bias_index]  # In kHz units.
+source_bias = 26.86 #source_bias_lst[source_bias_index]  # In kHz units.
 np.save("source_bias.npy", source_bias)
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
@@ -602,10 +596,76 @@ plt.savefig("chemical_potential_in_source_well.png", dpi=600)
 fig.tight_layout()
 plt.close()
 
+
+# Initial state in the gate well.
+gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
+gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
+plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
+
+number_of_atoms_gate_well = 30
+time_step = -1j*10**(-6) # In seconds unit.
+tmax = 1.0 # In seconds unit.
+solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
+psi_gate_well_ITE_dimless = solver_gate_well.solve([])
+
+# Plotting the initial 1D wavefunction in the gate well.
+
+data0 = gate_well_position
+data1 = psi_gate_well_ITE_dimless
+data3 = gate_well_potential
+fig, ax1 = plt.subplots()
+ax1.set_xlabel(r"Position, $x$", labelpad=10)
+ax1.set_ylabel(r"Wavefunction, $|\tilde{\psi}|^{2}$", color="tab:red", labelpad=10)
+ax1.plot(data0, np.abs(data1)**2*solver_gate_well.dx_dimless, color="tab:red", linewidth=3.2)
+ax1.tick_params(axis="y", labelcolor="tab:red")
+ax2 = ax1.twinx()
+color = "tab:blue"
+ax2.set_ylabel(r"Potential, $\tilde{V}$ ", color=color, labelpad=10)
+ax2.plot(data0, data3/(H_BAR*10**3*2*PI), linewidth=3.1, color = "tab:blue", linestyle="--")
+ax2.tick_params(axis="y", labelcolor=color)
+ax1.axhline(y=0, color="k", linestyle='--')
+fig.set_figwidth(8.6)
+fig.set_figheight(8.6/1.618)
+fig.tight_layout(pad=1.0)  # Adjust padding to ensure labels are not cut off
+for spine in ax1.spines.values():
+     spine.set_linewidth(2)
+ax1.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
+ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
+ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
+ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
+ax1.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax1.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax1.tick_params(which="minor", length=5, width=1, direction='in')
+ax2.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax2.yaxis.set_minor_locator(ticker.AutoMinorLocator())
+ax2.tick_params(which="minor", length=5, width=1, direction='in')
+# Change the directory to save the PDF
+# path = "/Users/sasankadowarah/atomtronics/cluster-codes/harmonic_gate_well"
+# os.chdir(path)
+# Save the figure
+plt.savefig("ground_state_in_gate_well.pdf", dpi=600, bbox_inches='tight')
+plt.close()
+
+
+
+initial_state = np.zeros(len(position_arr), dtype=complex)
+initial_state[:len(source_well_position)] = (np.sqrt(number_of_atoms/(number_of_atoms + number_of_atoms_gate_well)))*psi_source_well_ITE_dimless
+initial_state[len(source_well_position):len(source_well_position)+len(gate_well_position)] = (np.sqrt(number_of_atoms_gate_well/(number_of_atoms + number_of_atoms_gate_well)))*psi_gate_well_ITE_dimless
+initial_state = initial_state/np.sqrt(np.sum(np.abs(initial_state)**2)*solver_gate_well.dx_dimless)
+
+psi_initial_for_full_potential_dimless = initial_state
+
+number_of_atoms = number_of_atoms + number_of_atoms_gate_well
+np.save("total_number_of_atoms.npy", number_of_atoms)
+
+
+"""
+
 # Put the initial ground state in the source well of the transistor.
 psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
+"""
 
 time_step = 10**(-7) # In seconds unit.
 tmax = 300*1.e-3 # In seconds unit.
@@ -614,86 +674,3 @@ time_lst = list(np.arange(0.0,tmax,1.e-7))
 
 solver_complete_potential = GrossPitaevskiiSolver(time_step, tmax, position_arr, complete_transistor_potential, number_of_atoms, psi_initial_for_full_potential_dimless)
 time_evolved_wavefunction_time_split = solver_complete_potential.solve(time_lst)
-
-
-"""
-" This section creates an animation of the wavefunction. "
-
-import numpy as np
-import matplotlib.pyplot as plt
-#from matplotlib.animation import FuncAnimation
-from matplotlib.animation import PillowWriter
-import glob
-import matplotlib.ticker as ticker
-
-def create_wavefunction_animation(x_axis_limit, y_axis_limit):
-    # Parameters
-    tmax = 299  # Final time in milliseconds
-    dt = 0.1  # Time interval in milliseconds
-
-    # Load potential data
-    global complete_transistor_potential  # Potential data, defined elsewhere
-
-    # Get sorted list of wavefunction files
-    wavefunction_files = ["wavefunction_time_evolved_{:.3f}ms.npy".format(t) for t in np.arange(0, tmax, dt)]
-
-    # Set up the figure and the axes
-    fig, ax1 = plt.subplots()
-    fig.set_figwidth(20)
-    fig.set_figheight(10)
-    ax1.set_xlabel(r"Position, $x$ (μm)", labelpad=10)
-    ax1.set_ylabel(r"Wavefunction, $|\psi|^{2}$", color="tab:red", labelpad=10)
-    ax1.set_xlim([-40, 30])
-
-    # Secondary axis for potential
-    ax2 = ax1.twinx()
-    ax2.set_ylabel(r"Potential, $V(x)$", color="tab:blue", labelpad=10)
-    ax2.plot(position_arr * 1.e6, complete_transistor_potential / (10**3 * 2 * PI * H_BAR), color="tab:blue", linewidth=3.1)
-    ax2.set_xlim(x_axis_limit)
-    ax1.set_ylim(y_axis_limit)
-    ax2.set_ylim([0, barrier_height_GD * 1.2])  # In kHz units.
-    ax2.tick_params(axis="y", labelcolor=color)
-    ax1.axhline(y=0, color="k", linestyle='--')
-
-    # Initialize wavefunction line object
-    line_wavefunction, = ax1.plot([], [], color="tab:red", linewidth=3.2, label="Wavefunction")
-    ax2.tick_params(axis="y", labelcolor="tab:blue")
-    ax1.tick_params(axis="y", labelcolor="tab:red")
-
-    # Axis styling for minor ticks
-    for spine in ax1.spines.values():
-        spine.set_linewidth(2)
-    ax1.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
-    ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
-    ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
-    ax1.xaxis.set_minor_locator(ticker.AutoMinorLocator())
-    ax1.yaxis.set_minor_locator(ticker.AutoMinorLocator())
-    ax2.yaxis.set_minor_locator(ticker.AutoMinorLocator())
-    ax1.tick_params(which="minor", length=5, width=1, direction="in")
-    ax2.tick_params(which="minor", length=5, width=1, direction="in")
-
-    # Initialize animation function
-    def init():
-        line_wavefunction.set_data([], [])
-        return line_wavefunction,
-
-    # Update function for each frame
-    def update(frame):
-        path = "/home/sxd190113/scratch/imaginary_time_evolution/b" + str(source_bias_index)
-        wavefunction = np.load(wavefunction_files[frame])
-        line_wavefunction.set_data(position_arr * 1.e6, np.abs(wavefunction)**2 * solver_complete_potential.dx_dimless)  # Adjust scaling
-        return line_wavefunction,
-
-    # Create the animation with a longer display time per frame
-    ani = FuncAnimation(fig, update, frames=len(wavefunction_files), init_func=init, blit=True)
-
-    # Save the movie with a reduced frame rate for a slower animation
-    ani.save("wavefunction_evolution_10.gif", fps=10, writer=PillowWriter())
-    ani.save("wavefunction_evolution_60.gif", fps=60, writer=PillowWriter())
-    #ani.save("wavefunction_evolutio_10.mp4", fps=10, extra_args=['-vcodec', 'libx264'])
-    #ani.save("wavefunction_evolution_60.mp4", fps=60, extra_args=['-vcodec', 'libx264'])
-    plt.close()
-
-# Example usage
-create_wavefunction_animation([4.8, 1000], [0, 1.e-6])  # Adjust limits as needed
-create_wavefunction_animation([-40,10],[0,0.004])"""
