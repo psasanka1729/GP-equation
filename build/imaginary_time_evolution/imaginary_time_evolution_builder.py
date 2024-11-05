@@ -6,7 +6,7 @@ import os
 
 #partition_info=['cmt',16] # = [partition,ncores]
 #partition_info=['gpu-preempt',16] # = [partition,ncores]
-partition_info=['256i',16]
+partition_info=['256h',16]
 time_str='4-00:00:00'
 project_name=os.getcwd().split('/')[-3]
 myemail=os.environ["MYEMAIL"]
