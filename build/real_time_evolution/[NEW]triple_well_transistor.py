@@ -78,7 +78,7 @@ class GrossPitaevskiiSolver:
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
             
         if initial_wavefunction is None:
-            print("Initial wavefunction is not provided. Using a Gaussian wavefunction as the initial wavefunction.")
+            #print("Initial wavefunction is not provided. Using a Gaussian wavefunction as the initial wavefunction.")
             amplitude = 1.0
             mean = np.mean(self.position_arr_dimless)
             std_dev = 0.1
@@ -88,7 +88,7 @@ class GrossPitaevskiiSolver:
             # The wavefunction must have dimensions of [1/length]^(1/2).
             initial_wavefunction_dimless = initial_wavefunction * np.sqrt(self.l_0)
             self.psi_x_dimless = normalize(initial_wavefunction_dimless)
-            print("Normalization of the initial wavefunction = ", np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
+            #print("Normalization of the initial wavefunction = ", np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
 
     def hamiltonian_x_dimless(self, potential_func, psi_x_dimless):
         return potential_func/(self.h_bar * self.omega_l) + self.g_dimless * np.abs(psi_x_dimless) ** 2
@@ -114,7 +114,7 @@ class GrossPitaevskiiSolver:
     def solve(self, snapshots_lst):
 
         total_iterations = int(np.abs(self.tmax_dimless) / np.abs(self.time_step_dimless))
-        print('Total iterations: ', total_iterations)
+        #print('Total iterations: ', total_iterations)
 
         def normalize(psi_x_dimless):
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
@@ -591,7 +591,7 @@ ax1.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
-print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
+#print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
 plt.savefig("chemical_potential_in_source_well.png", dpi=600)
 fig.tight_layout()
 plt.close()
