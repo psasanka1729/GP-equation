@@ -450,11 +450,11 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-#source_bias_lst = np.linspace(24,29,64)
-#np.save("source_bias_lst.npy", source_bias_lst)
-#source_bias_index = int(sys.argv[1])
+source_bias_lst = np.linspace(24,29,64)
+np.save("source_bias_lst.npy", source_bias_lst)
+source_bias_index = int(sys.argv[1])
 
-source_bias = 26.86 #source_bias_lst[source_bias_index]  # In kHz units.
+source_bias = source_bias_lst[source_bias_index]  # In kHz units.
 np.save("source_bias.npy", source_bias)
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
