@@ -166,7 +166,7 @@ class GrossPitaevskiiSolver:
                 if np.isclose(time, snapshots_lst[snapshot_index]):
                     snapshot_index += 1
                     time_evolved_wavefunction_time_split_dimless = self.psi_x_dimless                                            
-                    np.save(f"wavefunction_time_evolved_{time*1e3:.1f}ms.npy", time_evolved_wavefunction_time_split_dimless)
+                    #np.save(f"wavefunction_time_evolved_{time*1e3:.1f}ms.npy", time_evolved_wavefunction_time_split_dimless)
 
                     # Saving the atom number in each well at each time t in the list.
                     wavefunction_at_fixed_point_source_arr.append(time_evolved_wavefunction_time_split_dimless[index_of_fixed_point_source_well])
@@ -602,7 +602,7 @@ gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (pos
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-number_of_atoms_gate_well = 500
+number_of_atoms_gate_well = 600
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.0 # In seconds unit.
 solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
