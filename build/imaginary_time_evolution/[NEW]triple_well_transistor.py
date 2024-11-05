@@ -37,7 +37,7 @@ class GrossPitaevskiiSolver:
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
         self.a_s = 98.006*5.29177210544*1.e-11 * 0.01 # m # Scattering length of Rubidium-87 atom.
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
-        self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
+	self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
         self.t_0 = 1 / self.omega_l
 
         self.a = self.a_s/self.l_0
@@ -445,7 +445,7 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 33 # In kHz units.
+barrier_height_GD = 31 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
@@ -597,12 +597,13 @@ fig.tight_layout()
 plt.close()
 
 
+"""
 # Initial state in the gate well.
 gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-number_of_atoms_gate_well = 30
+number_of_atoms_gate_well = 50
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.0 # In seconds unit.
 solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
@@ -657,15 +658,13 @@ psi_initial_for_full_potential_dimless = initial_state
 
 number_of_atoms = number_of_atoms + number_of_atoms_gate_well
 np.save("total_number_of_atoms.npy", number_of_atoms)
-
-
 """
+
 
 # Put the initial ground state in the source well of the transistor.
 psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
-"""
 
 time_step = 10**(-7) # In seconds unit.
 tmax = 300*1.e-3 # In seconds unit.
