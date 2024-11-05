@@ -1,3 +1,36 @@
+commit b755b64cf3a84682f6cef593b4340ada41392b88
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Tue Nov 5 15:21:49 2024 -0600
+
+    Commit before run real_time_evolution
+
+commit 6410ae194337fc7c7d6d24a8b377e6b36bbccd85
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Tue Nov 5 15:13:49 2024 -0600
+
+    Commit before run imaginary_time_evolution
+
+commit 04eb714a7c6b2cd8730c915474d9bc6490763873
+Merge: 540cddb c5ce9ed
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Tue Nov 5 15:09:20 2024 -0600
+
+    Merge pull request #17 from psasanka1729/master
+    
+    Master
+
+commit c5ce9ed0f25fe4ee4bca6389173e01528899df0a
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Nov 5 15:05:21 2024 -0600
+
+    cluster backup
+
+commit 782a8404602a5d53835064c0caa3e2492228353c
+Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
+Date:   Tue Nov 5 10:27:58 2024 -0600
+
+    Commit before run imaginary_time_evolution
+
 commit d8d0d21c1645b0ebd3dda73b6b1fe4ff889b0127
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Tue Nov 5 09:30:45 2024 -0600
@@ -81,6 +114,15 @@ Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Sat Nov 2 11:54:25 2024 -0500
 
     Commit before run triple_well
+
+commit 540cddbb8a763bb45386c2c6f8ac0118a7e5ee99
+Merge: 764472e 0911763
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Sat Nov 2 11:51:30 2024 -0500
+
+    Merge pull request #16 from psasanka1729/master
+    
+    Master
 
 commit 0911763dd934de948fb53d4d44d0b289c7325ce3
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
@@ -568,6 +610,21 @@ Date:   Thu Oct 17 18:36:06 2024 -0500
 
     Commit before run real_time_evolution
 
+commit 764472e4439116b8ce485cbc4cc43d3cf73b28b5
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Oct 17 18:20:12 2024 -0500
+
+    backup before adding condensate to the gate well
+
+commit 313e17c14dadfa690709afc01c4816ac7f4e4b9d
+Merge: b8ee541 cee02ae
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Thu Oct 17 18:19:33 2024 -0500
+
+    Merge pull request #15 from psasanka1729/master
+    
+    Master
+
 commit cee02ae7b16bee4206823985338d7867d980a111
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Thu Oct 17 18:18:57 2024 -0500
@@ -591,6 +648,12 @@ Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
 Date:   Thu Oct 17 10:30:18 2024 -0500
 
     Commit before run real_time_evolution
+
+commit b8ee541b0c1fd0d7e6f40dccee463fc78f5e6da6
+Author: Sasanka <31107620+psasanka1729@users.noreply.github.com>
+Date:   Wed Oct 16 22:16:35 2024 -0500
+
+    correct g_1d value for GP equation
 
 commit a867c0fea75ab44b34cf0146670fa162647257cf
 Author: Sasanka Dowarah <sxd190113@login-01.localdomain>
