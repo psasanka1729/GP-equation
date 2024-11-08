@@ -121,7 +121,7 @@ class GrossPitaevskiiSolver:
 
 
 
-        fixed_position_in_source_well = -30*1.e-6 # In micrometers unit.
+        fixed_position_in_source_well = -20*1.e-6 # In micrometers unit.
         fixed_position_in_gate_well = 4.3*1.e-6 # In micrometers unit.
         fixed_position_in_drain_well = 40*1.e-6 # In micrometers unit.
         np.save("fixed_position_in_source_well.npy",fixed_position_in_source_well)
