@@ -3,7 +3,7 @@
 #SBATCH --job-name=imaginary_time_evolution
 #
 # Partition:
-#SBATCH --partition=256h
+#SBATCH --partition=normal
 #
 # Processors:
 #SBATCH --ntasks=64
