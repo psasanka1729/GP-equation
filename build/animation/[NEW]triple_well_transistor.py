@@ -35,7 +35,7 @@ class GrossPitaevskiiSolver:
         self.omega_l = 2 * np.pi * 1178  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-        self.a_s = 98.006*5.29177210544*1.e-11 * 0.01 # m # Scattering length of Rubidium-87 atom.
+       	self.a_s = 98.006*5.29177210544*1.e-11 * 0.01 * 0.25 # m # Scattering length of Rubidium-87 atom.
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
         self.t_0 = 1 / self.omega_l
@@ -67,6 +67,7 @@ class GrossPitaevskiiSolver:
         self.dx = np.ptp(self.position_arr) / self.N
 
         self.position_arr_dimless = self.position_arr / self.l_0
+
         self.dx_dimless = self.dx / self.l_0
         self.L_dimless = np.ptp(self.position_arr_dimless)
         self.dk_dimless = (2 * np.pi) / self.L_dimless
@@ -78,7 +79,7 @@ class GrossPitaevskiiSolver:
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
             
         if initial_wavefunction is None:
-            print("Initial wavefunction is not provided. Using a Gaussian wavefunction as the initial wavefunction.")
+            #print("Initial wavefunction is not provided. Using a Gaussian wavefunction as the initial wavefunction.")
             amplitude = 1.0
             mean = np.mean(self.position_arr_dimless)
             std_dev = 0.1
@@ -88,7 +89,7 @@ class GrossPitaevskiiSolver:
             # The wavefunction must have dimensions of [1/length]^(1/2).
             initial_wavefunction_dimless = initial_wavefunction * np.sqrt(self.l_0)
             self.psi_x_dimless = normalize(initial_wavefunction_dimless)
-            print("Normalization of the initial wavefunction = ", np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
+            #print("Normalization of the initial wavefunction = ", np.sum(np.abs(self.psi_x_dimless) ** 2) * self.dx_dimless)
 
     def hamiltonian_x_dimless(self, potential_func, psi_x_dimless):
         return potential_func/(self.h_bar * self.omega_l) + self.g_dimless * np.abs(psi_x_dimless) ** 2
@@ -114,7 +115,7 @@ class GrossPitaevskiiSolver:
     def solve(self, snapshots_lst):
 
         total_iterations = int(np.abs(self.tmax_dimless) / np.abs(self.time_step_dimless))
-        print('Total iterations: ', total_iterations)
+        #print('Total iterations: ', total_iterations)
 
         def normalize(psi_x_dimless):
             return psi_x_dimless / np.sqrt(np.sum(np.abs(psi_x_dimless) ** 2) * self.dx_dimless)
@@ -450,7 +451,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(24,29,64)
+source_bias_lst = np.linspace(23,30,64)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
@@ -591,18 +592,19 @@ ax1.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax1.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="x", direction="inout", length=10, width=2, color="k")
 ax2.tick_params(axis="y", direction="inout", length=10, width=2, color="k")
-print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
+#print("Chemical potential in the source well = ", data1[len(data1)//2],"(J) or",data1[int(len(data1)/1.1)]/(H_BAR*10**3*2*PI), "(kHz)")
 plt.savefig("chemical_potential_in_source_well.png", dpi=600)
 fig.tight_layout()
 plt.close()
 
 
+"""
 # Initial state in the gate well.
 gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-number_of_atoms_gate_well = 4000
+number_of_atoms_gate_well = 50
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.0 # In seconds unit.
 solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
@@ -657,15 +659,13 @@ psi_initial_for_full_potential_dimless = initial_state
 
 number_of_atoms = number_of_atoms + number_of_atoms_gate_well
 np.save("total_number_of_atoms.npy", number_of_atoms)
-
-
 """
+
 
 # Put the initial ground state in the source well of the transistor.
 psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
 while len(psi_initial_for_full_potential_dimless) < len(position_arr):
     psi_initial_for_full_potential_dimless = np.hstack((psi_initial_for_full_potential_dimless, np.array([0])))
-"""
 
 time_step = 10**(-7) # In seconds unit.
 tmax = 300*1.e-3 # In seconds unit.
