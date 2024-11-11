@@ -1,3 +1,21 @@
+commit 6d1b12a37781af60508d615ba814e684606d6798
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sat Nov 9 17:10:20 2024 -0600
+
+    Commit before run real_time_evolution
+
+commit 49b2b10458ddfe5a9a46cfeecb6eaeb6a862a021
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sat Nov 9 17:08:49 2024 -0600
+
+    Commit before run imaginary_time_evolution
+
+commit f07ac7c9596da731ccd201d73c0657af1df11cab
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Fri Nov 8 12:01:56 2024 -0600
+
+    Commit before run animation
+
 commit 68ae4af350724423b94ec169a5982d1baf34a9fd
 Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
 Date:   Fri Nov 8 11:53:26 2024 -0600
