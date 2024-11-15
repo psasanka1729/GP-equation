@@ -25,7 +25,7 @@ plt.rcParams.update(params)
 PI = np.pi
 H_BAR = 1.0545718 * 10 ** (-34)
 
-a_s_lst = np.linspace(0, 4, 64)
+a_s_lst = np.linspace(0, 1, 64)
 np.save("a_s_lst.npy", a_s_lst)
 a_s_index = int(sys.argv[1])
 a_s_factor = a_s_lst[a_s_index]
@@ -452,7 +452,7 @@ position_arr = np.linspace(position_start,position_end,N)*1.e-6
 np.save("transistor_position_arr.npy", position_arr)
 
 barrier_height_SG = 31 # In kHz units.
-barrier_height_GD = 32 # In kHz units.
+barrier_height_GD = 33 # In kHz units.
 
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
