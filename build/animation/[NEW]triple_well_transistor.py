@@ -25,6 +25,13 @@ plt.rcParams.update(params)
 PI = np.pi
 H_BAR = 1.0545718 * 10 ** (-34)
 
+a_s_lst = np.linspace(0, 50, 64)
+np.save("a_s_lst.npy", a_s_lst)
+a_s_index = int(sys.argv[1])
+a_s_factor = a_s_lst[a_s_index]
+np.save("a_s_factor.npy", a_s_factor)
+
+
 class GrossPitaevskiiSolver:
     def __init__(self, time_step, tmax, position_arr, potential_func, number_of_atoms, initial_wavefunction):
 
@@ -35,7 +42,7 @@ class GrossPitaevskiiSolver:
         self.omega_l = 2 * np.pi * 1178  # rad/s # Longitudinal trapping frequency.
         self.number_of_atoms = number_of_atoms # Number of atoms in the trap.
         self.atom_mass = 1.4192261 * 10 ** (-25)  # kg # Mass of Rubidium-87 atom.
-       	self.a_s = 98.006*5.29177210544*1.e-11 * 0.01 * 0.25 # m # Scattering length of Rubidium-87 atom.
+        self.a_s = 98.006*5.29177210544*1.e-11 * 0.01 * a_s_factor # m # Scattering length of Rubidium-87 atom.
         # Parameters for the dimensionless form of the Gross-Pitaevskii equation.
         self.l_0 = np.sqrt(self.h_bar / (self.atom_mass * self.omega_l))
         self.t_0 = 1 / self.omega_l
@@ -67,7 +74,6 @@ class GrossPitaevskiiSolver:
         self.dx = np.ptp(self.position_arr) / self.N
 
         self.position_arr_dimless = self.position_arr / self.l_0
-
         self.dx_dimless = self.dx / self.l_0
         self.L_dimless = np.ptp(self.position_arr_dimless)
         self.dk_dimless = (2 * np.pi) / self.L_dimless
@@ -451,11 +457,11 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(23,30,64)
-np.save("source_bias_lst.npy", source_bias_lst)
-source_bias_index = int(sys.argv[1])
+#source_bias_lst = np.linspace(23,30,64)
+#np.save("source_bias_lst.npy", source_bias_lst)
+#source_bias_index = int(sys.argv[1])
 
-source_bias = source_bias_lst[source_bias_index]  # In kHz units.
+source_bias = 0 #source_bias_lst[source_bias_index]  # In kHz units.
 np.save("source_bias.npy", source_bias)
 
 complete_transistor_potential = transistor_potential_landscape(source_bias, position_arr*1.e6, barrier_height_SG, barrier_height_GD, 0.0)*10**3*H_BAR*2*PI # In SI units.
@@ -604,7 +610,7 @@ gate_well_position = position_arr[(position_arr >= gate_well_start*1.e-6) & (pos
 gate_well_potential = complete_transistor_potential[(position_arr >= gate_well_start*1.e-6) & (position_arr <= gate_well_end*1.e-6)]
 plt.plot(gate_well_position, gate_well_potential/(H_BAR*10**3*2*PI), label = "Gate well potential", color = "tab:blue", linewidth = 2.5)
 
-number_of_atoms_gate_well = 50
+number_of_atoms_gate_well = 500
 time_step = -1j*10**(-6) # In seconds unit.
 tmax = 1.0 # In seconds unit.
 solver_gate_well = GrossPitaevskiiSolver(time_step, tmax, gate_well_position, gate_well_potential, number_of_atoms_gate_well, None)
@@ -660,7 +666,6 @@ psi_initial_for_full_potential_dimless = initial_state
 number_of_atoms = number_of_atoms + number_of_atoms_gate_well
 np.save("total_number_of_atoms.npy", number_of_atoms)
 """
-
 
 # Put the initial ground state in the source well of the transistor.
 psi_initial_for_full_potential_dimless = psi_source_well_ITE_dimless
