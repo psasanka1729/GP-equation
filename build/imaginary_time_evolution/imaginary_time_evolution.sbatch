@@ -3,11 +3,11 @@
 #SBATCH --job-name=imaginary_time_evolution
 #
 # Partition:
-#SBATCH --partition=normal
+#SBATCH --partition=256i
 #
 # Processors:
-#SBATCH --ntasks=64
-#SBATCH --nodes=4
+#SBATCH --ntasks=32
+#SBATCH --nodes=2
 #
 # Wall clock limit:
 #SBATCH --time=4-00:00:00

@@ -1,3 +1,33 @@
+commit 6e9c8b4df33c961047c8530e7f5920aa884e3631
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Mon Nov 18 23:22:26 2024 -0600
+
+    Commit before run imaginary_time_evolution
+
+commit f71ea0255814e67ebdd91558db5d192a3b19be8a
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Mon Nov 18 22:44:58 2024 -0600
+
+    Commit before run animation
+
+commit 9e274855297214833158604e458eb03431e8ba0e
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Mon Nov 18 22:40:07 2024 -0600
+
+    Commit before run transistor
+
+commit 933db4fda2238381bcf756d1766e72b25f647598
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Mon Nov 18 17:17:12 2024 -0600
+
+    Commit before run real_time_evolution
+
+commit b08f1f12e5120031c664355f9114a28f42e0f074
+Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
+Date:   Sun Nov 17 18:23:35 2024 -0600
+
+    Commit before run coherence
+
 commit 33cb67457e8c335a1263f9f211e0881f5205e123
 Author: Sasanka Dowarah <sxd190113@ganymede.utdallas.edu>
 Date:   Sun Nov 17 18:04:49 2024 -0600
