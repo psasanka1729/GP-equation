@@ -25,11 +25,13 @@ plt.rcParams.update(params)
 PI = np.pi
 H_BAR = 1.0545718 * 10 ** (-34)
 
+"""
 a_s_lst = np.linspace(0, 30, 64)
 np.save("a_s_lst.npy",a_s_lst)
 a_s_index = int(sys.argv[1])
 a_s_factor = a_s_lst[a_s_index]
 np.save("a_s_factor.npy",a_s_factor)
+"""
 
 class GrossPitaevskiiSolver:
     def __init__(self, time_step, tmax, position_arr, potential_func, number_of_atoms, initial_wavefunction):
@@ -457,7 +459,7 @@ barrier_height_GD = 33 # In kHz units.
 np.save("barrier_height_SG.npy", barrier_height_SG)
 np.save("barrier_height_GD.npy", barrier_height_GD)
 
-source_bias_lst = np.linspace(24,29,64)
+source_bias_lst = np.linspace(24,30,32)
 np.save("source_bias_lst.npy", source_bias_lst)
 source_bias_index = int(sys.argv[1])
 
